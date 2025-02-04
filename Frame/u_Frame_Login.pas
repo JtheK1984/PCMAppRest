@@ -1,0 +1,156 @@
+unit u_Frame_Login;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, System.Messaging,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts,
+  DW.Biometric;
+
+type
+  TfrmFingerAuth = class(TForm)
+    BiometricImage: TImage;
+    TouchMeLabel: TLabel;
+    ContentLayout: TLayout;
+    CancelButton: TButton;
+    ResetButton: TButton;
+    KindLabel: TLabel;
+    procedure BiometricImageClick(Sender: TObject);
+    procedure CancelButtonClick(Sender: TObject);
+    procedure ResetButtonClick(Sender: TObject);
+  private
+    procedure ApplicationEventMessageHandler(const Sender: TObject; const M: TMessage);
+    procedure Listening(const AIsListening: Boolean);
+    procedure VerificationFailResultHandler(const AFailResult: TBiometricFailResult; const AResultMessage: string);
+    procedure VerificationSuccessResultHandler;
+    procedure Verify;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+  end;
+
+var
+  frmFingerAuth: TfrmFingerAuth;
+
+
+implementation
+
+{$R *.fmx}
+
+uses
+  FMX.Platform, u_dm_main;
+
+const
+  cTouchMeCaption = 'Now touch the fingerprint sensor!';
+
+
+constructor TfrmFingerAuth.Create(AOwner: TComponent);
+begin
+  inherited;
+  TMessageManager.DefaultManager.SubscribeToMessage(TApplicationEventMessage, ApplicationEventMessageHandler);
+  Listening(False);
+  if TBiometric.IsSupported then
+  begin
+    case TBiometric.Current.GetBiometryKind of
+      TBiometryKind.None: KindLabel.Text := 'Biometry kind: None, or not implemented';
+      TBiometryKind.Face: KindLabel.Text := 'Biometry kind: Face';
+      TBiometryKind.Touch: KindLabel.Text := 'Biometry kind: Touch';
+    end;
+
+    try
+    TBiometric.Current.KeyName := ChangeFileExt(ExtractFileName(ParamStr(0)), '') + '.key';
+    except
+      on e:Exception do
+        dmmain.writeLog(e.Message,1,false);
+    end;
+
+  end
+  else
+  begin
+    BiometricImage.Visible := False;
+    KindLabel.Text := 'Biometry kind: Not supported on this device';
+  end;
+end;
+
+destructor TfrmFingerAuth.Destroy;
+begin
+  TMessageManager.DefaultManager.Unsubscribe(TApplicationEventMessage, ApplicationEventMessageHandler);
+  inherited;
+end;
+
+procedure TfrmFingerAuth.Listening(const AIsListening: Boolean);
+begin
+  if AIsListening then
+    TouchMeLabel.Text := cTouchMeCaption
+  else
+    TouchMeLabel.Text := '';
+  CancelButton.Visible := AIsListening;
+  BiometricImage.Enabled := not AIsListening;
+end;
+
+procedure TfrmFingerAuth.ResetButtonClick(Sender: TObject);
+begin
+  TBiometric.Current.Reset;
+  ShowMessage('Authentication has been reset, if supported');
+end;
+
+procedure TfrmFingerAuth.ApplicationEventMessageHandler(const Sender: TObject; const M: TMessage);
+begin
+  case TApplicationEventMessage(M).Value.Event of
+    TApplicationEvent.EnteredBackground:
+    begin
+      // When your app goes into the background, you should cancel listening for verification!
+      TBiometric.Current.Cancel;
+    end;
+  end;
+end;
+
+procedure TfrmFingerAuth.CancelButtonClick(Sender: TObject);
+begin
+  TBiometric.Current.Cancel;
+end;
+
+procedure TfrmFingerAuth.BiometricImageClick(Sender: TObject);
+begin
+  if TBiometric.Current.CanVerify then
+    Verify
+  else if TBiometric.Current.IsBiometryLockedOut then
+    TBiometric.Current.RestoreBiometry(VerificationSuccessResultHandler, VerificationFailResultHandler) // or perhaps use a separate handler for Biometry
+  else
+    ShowMessage('Unable to verify. If on Android, check that the USE_FINGERPRINT permission has been added to the manifest');
+end;
+
+procedure TfrmFingerAuth.Verify;
+begin
+  if not TBiometric.Current.HasUserInterface then
+    Listening(True);
+  TBiometric.Current.Verify(cTouchMeCaption, VerificationSuccessResultHandler, VerificationFailResultHandler);
+end;
+
+procedure TfrmFingerAuth.VerificationFailResultHandler(const AFailResult: TBiometricFailResult; const AResultMessage: string);
+begin
+
+  case AFailResult of
+    TBiometricFailResult.Cancelled:
+    begin
+      Listening(False);
+      ShowMessage('You cancelled');
+    end;
+    TBiometricFailResult.Denied: ShowMessage(Format('Falscher finger: %s', [AResultMessage]));
+    TBiometricFailResult.Error: ShowMessage(Format('Error: %s', [AResultMessage]));
+    TBiometricFailResult.Fallback: ShowMessage('You chose the fallback');
+    TBiometricFailResult.Help:  ShowMessage(Format('You may need help: %s', [AResultMessage]));
+    TBiometricFailResult.LockedOut:  ShowMessage(Format('You may need to wait for the biometry to unlock: %s', [AResultMessage]));
+  else
+    ShowMessage('Unhandled result!');
+  end;
+  Application.Terminate;
+end;
+
+procedure TfrmFingerAuth.VerificationSuccessResultHandler;
+begin
+  Listening(False);
+  ShowMessage('Hier gehts weiter');
+end;
+
+end.

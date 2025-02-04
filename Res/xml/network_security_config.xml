@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">*.3e0h2cz1k1ji0ttu.myfritz.net</domain>
+        <trust-anchors>
+            <certificates src="system" />
+			<certificates src="user" />
+			<certificates src="@raw/my_ca"/>
+
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

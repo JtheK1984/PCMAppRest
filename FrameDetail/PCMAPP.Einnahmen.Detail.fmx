@@ -1,0 +1,325 @@
+object frm_PCMAPP_EinnahmenDetail: Tfrm_PCMAPP_EinnahmenDetail
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 700
+  ClientWidth = 370
+  WindowState = wsMaximized
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnShow = FormShow
+  OnFocusChanged = FormFocusChanged
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 3
+  object tb_Main: TRectangle
+    Align = Top
+    Fill.Kind = None
+    Margins.Top = 40.000000000000000000
+    Position.Y = 40.000000000000000000
+    Sides = [Bottom]
+    Size.Width = 370.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claDarkgray
+    object lbl_ModulName: TLabel
+      Align = Client
+      StyledSettings = [Family, Size, FontColor]
+      Size.Width = 370.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      Text = 'Einnahmen'
+      object lo_Left: TLayout
+        Align = Left
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btn_Back: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 2
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'priortoolbutton'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_BackClick
+        end
+        object btn_Cancel: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 18
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'replytoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_CancelClick
+        end
+      end
+      object lo_Right: TLayout
+        Align = Right
+        Position.X = 320.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btn_Edit: TButton
+          Align = Right
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 20
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbuttonbordered'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_EditClick
+        end
+        object btn_Save: TButton
+          Align = Right
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 22
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_SaveClick
+        end
+      end
+    end
+  end
+  object lo_Form: TLayout
+    Align = Client
+    Size.Width = 370.000000000000000000
+    Size.Height = 612.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object vsbx_main: TVertScrollBox
+      Align = Client
+      Size.Width = 370.000000000000000000
+      Size.Height = 612.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Viewport.Width = 370.000000000000000000
+      Viewport.Height = 612.000000000000000000
+      object lo_Main: TLayout
+        Align = Client
+        Size.Width = 370.000000000000000000
+        Size.Height = 612.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object vsbx_EinnahmenDetailView: TVertScrollBox
+          Align = Client
+          Size.Width = 370.000000000000000000
+          Size.Height = 612.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Viewport.Width = 370.000000000000000000
+          Viewport.Height = 612.000000000000000000
+          object lbl_FixBetrag: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 136.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Fixbetrag:'
+            TabOrder = 120
+          end
+          object lbl_Beschreibung: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 72.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Beschreibung:'
+            TabOrder = 119
+          end
+          object lbl_Target: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Absender:'
+            TabOrder = 118
+          end
+          object edt_Target: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 0
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 35.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object edt_Beschreibung: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 2
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 99.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object edt_FixBetrag: TNumberBox
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 5
+            Cursor = crIBeam
+            Max = 9999999.000000000000000000
+            ValueType = Float
+            KeyboardType = DecimalNumberPad
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 163.000000000000000000
+            HorzIncrement = 0.000000000000000000
+            VertIncrement = 0.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            OnKeyDown = edt_FixBetragKeyDown
+            OnEnter = edt_FixBetragEnter
+          end
+          object btn_FixBetrag: TButton
+            Align = Bottom
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 522.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 35.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            Text = 'Fixbetrag '#252'bernehmen'
+            TextSettings.Trimming = None
+            OnClick = btn_FixBetragClick
+          end
+          object btn_BetragNull: TButton
+            Align = Bottom
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Margins.Bottom = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 561.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 35.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            Text = 'Betrag auf 0 setzen'
+            TextSettings.Trimming = None
+            OnClick = btn_BetragNullClick
+          end
+          object edt_Betrag: TNumberBox
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 4
+            Cursor = crIBeam
+            Max = 9999999.000000000000000000
+            ValueType = Float
+            KeyboardType = DecimalNumberPad
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 227.000000000000000000
+            HorzIncrement = 0.000000000000000000
+            VertIncrement = 0.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            OnKeyDown = edt_FixBetragKeyDown
+            OnEnter = edt_BetragEnter
+          end
+          object lbl_Betrag: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 200.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Betrag:'
+            TabOrder = 122
+          end
+        end
+      end
+    end
+  end
+end

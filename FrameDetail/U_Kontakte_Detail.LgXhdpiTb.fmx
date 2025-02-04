@@ -1,0 +1,231 @@
+inherited frmKontakteDetail_LgXhdpiTb: TfrmKontakteDetail_LgXhdpiTb
+  ClientHeight = 829
+  ClientWidth = 480
+  DesignerMasterStyle = 0
+  inherited tbMain: TRectangle
+    Size.Width = 480.000000000000000000
+    inherited lblModulName: TLabel
+      Size.Width = 480.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      inherited Layout2: TLayout
+        Position.X = 430.000000000000000000
+      end
+    end
+  end
+  inherited vsbxmain: TVertScrollBox
+    Size.Width = 480.000000000000000000
+    Size.Height = 781.000000000000000000
+    Viewport.Width = 475.000000000000000000
+    Viewport.Height = 781.000000000000000000
+    inherited loMain: TLayout
+      Size.Width = 475.000000000000000000
+      inherited vsbxKontakteDetailView: TVertScrollBox
+        Size.Width = 475.000000000000000000
+        Viewport.Width = 470.000000000000000000
+        Viewport.Height = 821.000000000000000000
+        inherited rec1008PRIVAT: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblPRIVAT: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+        inherited rec1015PostleitzahlFirma: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited rec117StrasseFirma: TRectangle
+            inherited Label2: TLabel
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+            end
+          end
+          inherited btnAdressFirma: TFlatRectButton
+            Position.X = 422.000000000000000000
+          end
+        end
+        inherited rec1014Firma: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblFirma: TLabel
+            Size.Width = 460.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+          inherited edtFirma: TEdit
+            Size.Width = 450.000000000000000000
+          end
+        end
+        inherited rec1011Handy: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited rec111HandyDetail: TRectangle
+            inherited lblHandy: TLabel
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+            end
+          end
+          inherited btnHandy: TFlatRectButton
+            Position.X = 422.000000000000000000
+          end
+        end
+        inherited rec1012Email: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited Rectangle7: TRectangle
+            inherited lblEMail: TLabel
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+            end
+          end
+          inherited btnEmail: TFlatRectButton
+            Position.X = 422.000000000000000000
+          end
+        end
+        inherited rec1013GESCHAEFTLICH: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblGeschaeftlich: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+        inherited rec1017HandyFirma: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited Rectangle2: TRectangle
+            inherited lblHandyFirma: TLabel
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+            end
+          end
+          inherited FlatRectButton5: TFlatRectButton
+            Position.X = 422.000000000000000000
+          end
+        end
+        inherited rec1018EmailFirma: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited rec1018EmailFirmaDetail: TRectangle
+            inherited lblEmailFirma: TLabel
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+            end
+          end
+          inherited btnEmailFirma: TFlatRectButton
+            Position.X = 422.000000000000000000
+          end
+        end
+        inherited rec1000Anrede: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblAnrede: TLabel
+            Size.Width = 450.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+          inherited cbxAnrede: TComboBox
+            Size.Width = 450.000000000000000000
+          end
+        end
+        inherited rec1001Vorname: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblVorname: TLabel
+            Size.Width = 460.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+          inherited edtVorname: TEdit
+            Size.Width = 450.000000000000000000
+          end
+        end
+        inherited rec1002Nachname: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblNachname: TLabel
+            Size.Width = 460.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+          inherited edtNachname: TEdit
+            Size.Width = 450.000000000000000000
+          end
+        end
+        inherited rec1003Geschlecht: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblGeschlecht: TLabel
+            Size.Width = 460.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+          inherited cbxGeschlecht: TComboBox
+            Size.Width = 450.000000000000000000
+          end
+        end
+        inherited rec1004Geburtsdatum: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblGeburtsdatum: TLabel
+            Size.Width = 460.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+          inherited dtpGeburtsdatum: TDateEdit
+            Size.Width = 450.000000000000000000
+          end
+        end
+        inherited rec1005Familienstand: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblFamilienstand: TLabel
+            Size.Width = 460.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+          inherited cbxFamilienstand: TComboBox
+            Size.Width = 450.000000000000000000
+          end
+        end
+        inherited rec1006Staatsangehoerigkeit: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblStaatsangehoerigkeit: TLabel
+            Size.Width = 460.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+          inherited cbxStaatsangehoerigkeit: TComboBox
+            Size.Width = 450.000000000000000000
+          end
+        end
+        inherited rec1007Konfession: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited lblKonfession: TLabel
+            Size.Width = 460.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+          inherited cbxKonfession: TComboBox
+            Size.Width = 450.000000000000000000
+          end
+        end
+        inherited rec1009Adresse: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited rec109AdressDetail: TRectangle
+            inherited lblStrasse: TLabel
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+            end
+            inherited edtStrasse: TEdit
+              Margins.Right = 10.000000000000000000
+              Size.Width = 300.000000000000000000
+            end
+            inherited edtPostleitzahl: TEdit
+              Margins.Right = 10.000000000000000000
+              Size.Width = 300.000000000000000000
+            end
+          end
+          inherited btnAdress: TFlatRectButton
+            Position.X = 422.000000000000000000
+          end
+        end
+        inherited rec1010Telefon: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited rec110TelefonDetail: TRectangle
+            inherited lblTelefon: TLabel
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+            end
+            inherited edtTelefon: TEdit
+              Margins.Right = 10.000000000000000000
+              Size.Width = 300.000000000000000000
+            end
+          end
+          inherited btnTelefon: TFlatRectButton
+            Position.X = 422.000000000000000000
+          end
+        end
+        inherited rec1016TelefonFirma: TRectangle
+          Size.Width = 470.000000000000000000
+          inherited Rectangle4: TRectangle
+            inherited lblTelefonFirma: TLabel
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+            end
+          end
+          inherited FlatRectButton3: TFlatRectButton
+            Position.X = 422.000000000000000000
+          end
+        end
+      end
+    end
+  end
+end

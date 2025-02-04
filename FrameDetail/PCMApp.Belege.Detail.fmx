@@ -1,0 +1,496 @@
+object frm_PCMAPP_BelegeDetail: Tfrm_PCMAPP_BelegeDetail
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 700
+  ClientWidth = 370
+  WindowState = wsMaximized
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnResize = FormResize
+  OnShow = FormShow
+  OnFocusChanged = FormFocusChanged
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 3
+  object tb_Main: TRectangle
+    Align = Top
+    Fill.Kind = None
+    Margins.Top = 40.000000000000000000
+    Position.Y = 40.000000000000000000
+    Sides = [Bottom]
+    Size.Width = 370.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claDarkgray
+    object lbl_ModulName: TLabel
+      Align = Client
+      StyledSettings = [Family, Size, FontColor]
+      Size.Width = 370.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      Text = 'Belege'
+      object lo_Left: TLayout
+        Align = Left
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btn_Back: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 2
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'priortoolbutton'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_BackClick
+        end
+        object btn_Cancel: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 18
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'replytoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_CancelClick
+        end
+      end
+      object lo_Right: TLayout
+        Align = Right
+        Position.X = 320.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btn_Edit: TButton
+          Align = Right
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 20
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbuttonbordered'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_EditClick
+        end
+        object btn_Save: TButton
+          Align = Right
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 22
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_SaveClick
+        end
+      end
+    end
+  end
+  object lo_Form: TLayout
+    Align = Client
+    Size.Width = 370.000000000000000000
+    Size.Height = 612.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object vsbx_main: TVertScrollBox
+      Align = Client
+      Size.Width = 370.000000000000000000
+      Size.Height = 612.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Viewport.Width = 370.000000000000000000
+      Viewport.Height = 612.000000000000000000
+      object lo_Main: TLayout
+        Align = Client
+        Size.Width = 370.000000000000000000
+        Size.Height = 612.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object vsbx_BelegeDetailView: TVertScrollBox
+          Align = Client
+          Size.Width = 370.000000000000000000
+          Size.Height = 612.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Viewport.Width = 370.000000000000000000
+          Viewport.Height = 612.000000000000000000
+          object lbl_Belegdatum: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 72.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Belegdatum:'
+            TabOrder = 110
+          end
+          object lbl_Target: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Belegnummer:'
+            TabOrder = 109
+          end
+          object edt_BelNr: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 0
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 35.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object edt_BetragBel: TNumberBox
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 3
+            Cursor = crIBeam
+            Max = 9999999.000000000000000000
+            ValueType = Float
+            KeyboardType = DecimalNumberPad
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 227.000000000000000000
+            HorzIncrement = 0.000000000000000000
+            VertIncrement = 0.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+            OnEnter = edt_BetragBelEnter
+          end
+          object lbl_Kategorie: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 264.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Kategorie:'
+            TabOrder = 114
+          end
+          object lbl_Betrag: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 200.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Betrag:'
+            TabOrder = 113
+          end
+          object lbl_Aussteller: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 136.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Aussteller:'
+            TabOrder = 112
+          end
+          object edt_BelAus: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 2
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 163.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object dtp_Beleg: TDateEdit
+            Date = 44840.000000000000000000
+            Format = 'dd.mm.yyyy'
+            Align = Top
+            Enabled = False
+            FirstDayOfWeek = dowMonday
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 99.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+            TabOrder = 1
+            ParentShowHint = False
+            ShowHint = False
+          end
+          object cbx_Kat: TComboBox
+            Align = Top
+            Enabled = False
+            Items.Strings = (
+              'Lebensmittel'
+              'Textilien'
+              'Schuhe'
+              'Medizin'
+              'Drogerie'
+              'Elektronik'
+              'KFZ'
+              'Sonstiges')
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 291.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 4
+          end
+          object lo_KostenDatum: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 331.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 10
+            object lo_Jahr: TLayout
+              Align = Right
+              Position.X = 188.000000000000000000
+              Size.Width = 150.000000000000000000
+              Size.Height = 59.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object cbx_Jahr: TComboBox
+                Align = Top
+                Enabled = False
+                Items.Strings = (
+                  '2020'
+                  '2021'
+                  '2022'
+                  '2023'
+                  '2024'
+                  '2025'
+                  '2026'
+                  '2027'
+                  '2028'
+                  '2029'
+                  '2030'
+                  '2031'
+                  '2032'
+                  '2033'
+                  '2034'
+                  '2035'
+                  '2036'
+                  '2037'
+                  '2038'
+                  '2039'
+                  '2040'
+                  '2041'
+                  '2042'
+                  '2043'
+                  '2044'
+                  '2045'
+                  '2046'
+                  '2047'
+                  '2048'
+                  '2049'
+                  '2050'
+                  '2051'
+                  '2052'
+                  '2053'
+                  '2054'
+                  '2055'
+                  '2056'
+                  '2057'
+                  '2058'
+                  '2059'
+                  '2060'
+                  '2061'
+                  '2062'
+                  '2063'
+                  '2064'
+                  '2065'
+                  '2066'
+                  '2067'
+                  '2068'
+                  '2069'
+                  '2070'
+                  '2071'
+                  '2072'
+                  '2073'
+                  '2074'
+                  '2075'
+                  '2076'
+                  '2077'
+                  '2078'
+                  '2079'
+                  '2080'
+                  '2081'
+                  '2082'
+                  '2083'
+                  '2084'
+                  '2085'
+                  '2086'
+                  '2087'
+                  '2088'
+                  '2089'
+                  '2090'
+                  '2091'
+                  '2092'
+                  '2093'
+                  '2094'
+                  '2095'
+                  '2096'
+                  '2097'
+                  '2098'
+                  '2099')
+                ItemIndex = 1
+                Position.Y = 22.000000000000000000
+                Size.Width = 150.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+              end
+              object lbl_Jahr: TLabel
+                Align = Top
+                StyledSettings = [Family, FontColor]
+                Size.Width = 150.000000000000000000
+                Size.Height = 22.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Size = 16.000000000000000000
+                TextSettings.Font.StyleExt = {00070000000000000004000000}
+                TextSettings.Trimming = None
+                Text = 'Jahr:'
+                TabOrder = 124
+              end
+            end
+            object lo_Monat: TLayout
+              Align = Left
+              Size.Width = 145.000000000000000000
+              Size.Height = 59.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object cbx_Monat: TComboBox
+                Align = Top
+                Enabled = False
+                Items.Strings = (
+                  '1'
+                  '2'
+                  '3'
+                  '4'
+                  '5'
+                  '6'
+                  '7'
+                  '8'
+                  '9'
+                  '10'
+                  '11'
+                  '12')
+                Position.Y = 22.000000000000000000
+                Size.Width = 145.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+              end
+              object lbl_Monat: TLabel
+                Align = Top
+                StyledSettings = [Family, FontColor]
+                Size.Width = 145.000000000000000000
+                Size.Height = 22.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Size = 16.000000000000000000
+                TextSettings.Font.StyleExt = {00070000000000000004000000}
+                TextSettings.Trimming = None
+                Text = 'Monat:'
+                TabOrder = 124
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

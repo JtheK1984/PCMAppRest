@@ -1,0 +1,461 @@
+object frm_PCMAPP_GutscheinDetail: Tfrm_PCMAPP_GutscheinDetail
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 700
+  ClientWidth = 370
+  WindowState = wsMaximized
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnShow = FormShow
+  OnFocusChanged = FormFocusChanged
+  Touch.InteractiveGestures = [LongTap, DoubleTap]
+  OnGesture = FormGesture
+  DesignerMasterStyle = 3
+  object tb_Main: TRectangle
+    Align = Top
+    Fill.Kind = None
+    Margins.Top = 40.000000000000000000
+    Position.Y = 40.000000000000000000
+    Sides = [Bottom]
+    Size.Width = 370.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claDarkgray
+    object lbl_ModulName: TLabel
+      Align = Client
+      StyledSettings = [Family, Size, FontColor]
+      Size.Width = 370.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      Text = 'Gutscheine'
+      object lo_Left: TLayout
+        Align = Left
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btn_Back: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 2
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'priortoolbutton'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_BackClick
+        end
+        object btn_Cancel: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 18
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'replytoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_CancelClick
+        end
+      end
+      object lo_Right: TLayout
+        Align = Right
+        Position.X = 320.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btn_Edit: TButton
+          Align = Right
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 20
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbuttonbordered'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_EditClick
+        end
+        object btn_Save: TButton
+          Align = Right
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 22
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_SaveClick
+        end
+      end
+    end
+  end
+  object lo_Form: TLayout
+    Align = Client
+    Size.Width = 370.000000000000000000
+    Size.Height = 612.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object vsbx_Main: TVertScrollBox
+      Align = Client
+      Size.Width = 370.000000000000000000
+      Size.Height = 612.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Viewport.Width = 370.000000000000000000
+      Viewport.Height = 612.000000000000000000
+      object lo_Main: TLayout
+        Align = Client
+        Size.Width = 370.000000000000000000
+        Size.Height = 612.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object vsbx_GutscheinDetailView: TVertScrollBox
+          Align = Client
+          Size.Width = 370.000000000000000000
+          Size.Height = 612.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Viewport.Width = 370.000000000000000000
+          Viewport.Height = 612.000000000000000000
+          object lbl_Nummer: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Nummer:'
+            TabOrder = 12
+            TabStop = False
+          end
+          object edt_Nummer: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 0
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 31.000000000000000000
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+            OnChange = edt_NummerChange
+          end
+          object lbl_Bezeichnung: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 68.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Bezeichnung:'
+            TabOrder = 7
+            TabStop = False
+          end
+          object edt_Bezeichnung: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 91.000000000000000000
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object lbl_Datum: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 128.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Datum:'
+            TabOrder = 8
+            TabStop = False
+          end
+          object edt_Wert: TNumberBox
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 3
+            Cursor = crIBeam
+            Max = 9999999999.000000000000000000
+            ValueType = Float
+            KeyboardType = NumbersAndPunctuation
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 211.000000000000000000
+            HorzIncrement = 0.000000000000000000
+            VertIncrement = 0.000000000000000000
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+            OnEnter = edt_WertEnter
+          end
+          object lbl_Wert: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 188.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Wert:'
+            TabOrder = 9
+            TabStop = False
+          end
+          object edt_WertRest: TNumberBox
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 4
+            Cursor = crIBeam
+            Max = 9999999999.000000000000000000
+            ValueType = Float
+            KeyboardType = NumbersAndPunctuation
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 271.000000000000000000
+            HorzIncrement = 0.000000000000000000
+            VertIncrement = 0.000000000000000000
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+            OnEnter = edt_WertRestEnter
+          end
+          object dtp_Datum: TDateEdit
+            Date = 44701.000000000000000000
+            Format = 'dd.mm.yyyy'
+            Align = Top
+            FirstDayOfWeek = dowMonday
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 151.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+            TabOrder = 2
+            TextSettings.FontColor = claWhite
+          end
+          object lbl_Restwert: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 248.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Restwert:'
+            TabOrder = 11
+            TabStop = False
+          end
+          object edt_Pin: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 5
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 331.000000000000000000
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object lbl_Pin: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 308.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Abrage-Pin:'
+            TabOrder = 6
+            TabStop = False
+          end
+          object lbl_Barcode: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 368.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Barcode:'
+            TabOrder = 10
+            TabStop = False
+          end
+          object rec_Barcode: TRectangle
+            Align = Client
+            Fill.Color = claWhite
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Margins.Bottom = 16.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 154.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            object img_Result: TImage
+              MultiResBitmap = <
+                item
+                end>
+              Align = Client
+              Size.Width = 338.000000000000000000
+              Size.Height = 154.000000000000000000
+              Size.PlatformDefault = False
+              OnDblClick = img_ResultDblClick
+            end
+            object img_Scan: TImage
+              MultiResBitmap = <
+                item
+                end>
+              Align = Client
+              Size.Width = 330.000000000000000000
+              Size.Height = 82.000000000000000000
+              Size.PlatformDefault = False
+              Visible = False
+            end
+          end
+          object lo_Buttons: TLayout
+            Align = Bottom
+            Margins.Bottom = 16.000000000000000000
+            Position.Y = 561.000000000000000000
+            Size.Width = 370.000000000000000000
+            Size.Height = 35.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 14
+            object btn_BarcodeFromKamera: TButton
+              Align = Left
+              Margins.Left = 16.000000000000000000
+              Position.X = 16.000000000000000000
+              Size.Width = 150.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+              Text = 'von Kamera'
+              TextSettings.Trimming = None
+              OnClick = btn_BarcodeFromKameraClick
+            end
+            object btn_BarcodeFromImage: TButton
+              Align = Right
+              Margins.Right = 16.000000000000000000
+              Position.X = 204.000000000000000000
+              Size.Width = 150.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              Text = 'aus Galerie'
+              TextSettings.Trimming = None
+              OnClick = btn_BarcodeFromImageClick
+            end
+          end
+        end
+      end
+    end
+  end
+  object al_Gutschein: TActionList
+    Left = 120
+    Top = 180
+    object TakePhotoFromCameraAction: TTakePhotoFromCameraAction
+      Category = 'Media Library'
+      OnDidFinishTaking = TakePhotoFromCameraActionDidFinishTaking
+    end
+    object TakePhotoFromLibraryAction: TTakePhotoFromLibraryAction
+      Category = 'Media Library'
+      OnDidFinishTaking = TakePhotoFromLibraryActionDidFinishTaking
+    end
+  end
+end

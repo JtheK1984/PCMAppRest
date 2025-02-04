@@ -1,0 +1,1653 @@
+object frm_PCMAPP_KontakteDetail: Tfrm_PCMAPP_KontakteDetail
+  Left = 0
+  Top = 0
+  Caption = 'Kontakte'
+  ClientHeight = 700
+  ClientWidth = 370
+  Quality = HighQuality
+  WindowState = wsMaximized
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnShow = FormShow
+  OnFocusChanged = FormFocusChanged
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 3
+  object tb_Main: TRectangle
+    Align = Top
+    Fill.Kind = None
+    Margins.Top = 40.000000000000000000
+    Position.Y = 40.000000000000000000
+    Sides = [Bottom]
+    Size.Width = 370.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claDarkgray
+    object lbl_ModulName: TLabel
+      Align = Client
+      StyledSettings = [Family, Size, FontColor]
+      Size.Width = 370.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      Text = 'Kontakte'
+      object lo_Left: TLayout
+        Align = Left
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btn_Cancel: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 18
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'replytoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_CancelClick
+        end
+        object btn_Back: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 2
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'priortoolbutton'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_BackClick
+        end
+      end
+      object lo_Right: TLayout
+        Align = Right
+        Position.X = 320.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btn_Edit: TButton
+          Align = Right
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 20
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbuttonbordered'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_EditClick
+        end
+        object btn_Save: TButton
+          Align = Right
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 22
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_SaveClick
+        end
+      end
+    end
+  end
+  object lo_Form: TLayout
+    Align = Client
+    Size.Width = 370.000000000000000000
+    Size.Height = 612.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+    object vsbx_main: TVertScrollBox
+      Align = Contents
+      Size.Width = 370.000000000000000000
+      Size.Height = 612.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      TabStop = False
+      Viewport.Width = 370.000000000000000000
+      Viewport.Height = 612.000000000000000000
+      object lo_Main: TLayout
+        Align = Client
+        Size.Width = 370.000000000000000000
+        Size.Height = 612.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        TabStop = False
+        object vsbx_KontakteDetailView: TVertScrollBox
+          Align = Client
+          Size.Width = 370.000000000000000000
+          Size.Height = 612.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          TabStop = False
+          Viewport.Width = 365.000000000000000000
+          Viewport.Height = 612.000000000000000000
+          object rec_PRIVAT: TRectangle
+            Align = Top
+            Fill.Kind = None
+            Position.Y = 633.000000000000000000
+            Size.Width = 365.000000000000000000
+            Size.Height = 51.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            object lbl_PRIVAT: TLabel
+              Align = Center
+              AutoSize = True
+              StyledSettings = [Family, FontColor]
+              Margins.Left = 10.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Size.Width = 1097.000000000000000000
+              Size.Height = 20.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.HorzAlign = Center
+              TextSettings.Trimming = None
+              Text = 'Private Kontaktdaten'
+              TabOrder = 0
+            end
+          end
+          object rec_FIRMA: TRectangle
+            Align = Top
+            Fill.Kind = None
+            Position.Y = 972.000000000000000000
+            Size.Width = 365.000000000000000000
+            Size.Height = 51.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            object lbl_Firmar: TLabel
+              Align = Center
+              AutoSize = True
+              StyledSettings = [Family, FontColor]
+              Margins.Left = 10.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Size.Width = 1097.000000000000000000
+              Size.Height = 20.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.HorzAlign = Center
+              TextSettings.Trimming = None
+              Text = 'Gesch'#228'ftliche Kontaktdaten'
+              TabOrder = 0
+            end
+          end
+          object rec_Photo: TRectangle
+            Align = MostTop
+            Fill.Kind = None
+            Size.Width = 365.000000000000000000
+            Size.Height = 116.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            object img_Picture: TImage
+              MultiResBitmap.Height = 128
+              MultiResBitmap.Width = 128
+              MultiResBitmap = <
+                item
+                  Width = 128
+                  Height = 128
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000080000000800806000000C33E61
+                    CB0000000473424954080808087C086488000008A649444154789CEDDD7F68D4
+                    E71D07F0F7E7F99EB167AAB2D5428781ADF38F81FD431A258CFD55112EA7C965
+                    7FD8B84EA84528DB28761D824E6D723EBB14A5DACA1C6E6CA3D055A8C3B852CC
+                    253149A10A852D8B3F86B49551A66CABB68EDA8931F134B9EFF3D91FB974593A
+                    4DEEBCBBCFF3E4FBBCE0C084E49EF7D7EFFBBEF77CEF7BF704F03CCFF33CCFF3
+                    3CCFF33C2F2AE87EEF406BCDE508E295466B7D5FFB50952B88E7265F8088F305
+                    88385F8088F30588385F8088F30588B858A507B8DFF3D4A8ABF4EB2CFE081071
+                    BE0011E70B1071159F034C97CAF4F96B07F7904D27AB3A67F2478088F3058838
+                    5F8088F30588385F8088F30588385F8088F30588385F8088F30588385F8088AB
+                    FAB50009045C66C249620C31D10513067F0FE2A39FD5E7FE320A00E7E28FD786
+                    B9DA8755107E83989733A18118AB19A893CE5E6973B900D708381C828EF4B427
+                    CE81E84B17A1BAFEFBCF9B85DB2500EF020098A9A963A03E006F646013802555
+                    495D6573AF0086AE40993D0F3C78F3F5635B37E40000E912EE87887B80B300CE
+                    B61EE86CBB3DB270338CDA05C54BCB9A57D89C29C03030B618B48F31B6379B4E
+                    DD2AE77D178AF4AB94CEFE8E50B3F30678FB22A0A69C634899130530C08585C0
+                    C6AE74E3F94A8E93D5A95B00DA9B337D7F30C011052CAFE478D53007CE02CC5B
+                    E3716AE84E272BBAF3A7EA4E27CF8FC7A901306F556BCC4A71BA000C7368A519
+                    DA30B0AD71B4DA630F6C6B1C5D69863630CCA16A8F5D4ECE3E0530CCA1EEF4BA
+                    E7BB053368AD0D80E79B33BD20A82D82514AE6E811C0BCB5CA0CBD209D62D244
+                    16379F0E9C2B80012EDC8907CF141E7D56D05A9B3BF1E019035C90CE522CA70A
+                    300C8C11B051E2397F2603DB1A4709D8380C8C496729865305580CDA57CDD97E
+                    B1BAD3C9F38B41FBA47314C39D0218BAC2666CAF748C99B019DB0B4357A473CC
+                    963B0550664FE18518AB6575EA1694D9239D63B65C29C0B5071EBCF9BA7488D9
+                    2A64BD269D63369C28000187BFB8B0E380635B37E408382C9D63369C2840083A
+                    229DA158AE64B6BE00045CEE694F9C93CE51AC9EF6C439022E4BE79889F50560
+                    C2C9FFF7660EEB1131134E4AC79889F50520C690748652B990DDFA0280F1A174
+                    84923990DDFA02841CFB87748652B990DDFA0204F1D1CFA43394CA85ECD61760
+                    F2ADDB2E7221BBF505F02ACBFA029C8B3F5E2B9DA1542E64B7BE0061AEF661E9
+                    0CA57221BBF5050828FF75E90CA57221BBF50500E131E908257320BBF5056042
+                    83748652B990DDFA0210633598DD5B719C9988B15A3AC64CAC2F0003754D1D03
+                    F5D2398AD5D43150EFC2C7CBAD2F000004E08DD2198AE54A66270AC0C0A6D603
+                    9D71E91CB3D57AA0335E5853C07A4E1400C092DB230B374B8798AD4256271694
+                    70A5008051BB523ABB403AC64C523ABB0046ED92CE315BEE1440F15252353BA5
+                    63CC8454CD4E97561171A700006E80B73767FA5648E7B89BE64CDF8A1BE0EDD2
+                    398AE154011601350C1C49ECEFB7EE224B627F7F2D03475C5B3AC6A902008002
+                    96CFCF856F68ADADC9AEB556F373E11B2E2E1963CD7F6271D4FA33AAE1A0748A
+                    491359D47AE91CA57076851082DAD29CE9C52A33F482D45A015A6B7546351C74
+                    757510C0D923C00482DA725635744ACC0912FBFB6BCFAA864E97773EE0780126
+                    A8F5F3723C54CDB383E64CDF8A79391E72F5B03F95B34F01532960F93030D492
+                    E9DFC7666C6FA53E469ED2D905A4FC4291569A3845E436A066732A73E27F978A
+                    BD4FAD073AE3934BC53278E9A272DCA925E64C01BEA0782940BFBC3DB2E8672D
+                    99BE7B2E167D4F53168BBE3D52582C5AB9F711C599CC890270387683829AC5D3
+                    BEBD8481AD0ABCB5A5A3FF3277F415B75C7C47FF6A06EAEEB6CBEF32A673DC2E
+                    80C17528FC28A4585F0CBC13A01F03F8D2052306EAC0789A81A7C10CA5F2E03B
+                    F371567D7BE207EE004AE50106B8F00BF778ACDF02F81721C5F6C680240C7E0D
+                    85AF5464FBAAC0E5029C5231DA74BCADF1E3C2D73BD7E99E8301053FC91BF36C
+                    2C500F9573B07C683E8F29F55AC8E1CF7B75D3D5C2B73BBFFB52FF9F8CE1C300
+                    9E28E778D5E2DE69A0191F0761C74A33B866CACE0700F4EAA6ABD9DDC91D398A
+                    D731D353047ADB203F52F250C88F10E86D667A2A47F1BAECEEE48E293B1F0070
+                    BCADF1E39566700D083B60C6C74B1D4B8A5B4700838B50B1EF67DB93A7B3F7F8
+                    B1537AF56D0047011C6DD59D35B960E1779451EB98F8896160C5DD4EE18681B1
+                    45C079623A6594E95D10DEFAE331BD61C6851F0BAF44BE9CCA9C781706BF87C2
+                    B2D236B0FADC2900D1B13CC2674FA4D70D17F36B851D78AA70C30F7E7366DEA7
+                    9F7EBE4C055C67185F050045F8B709E9F2B7BEF6D0C5DFFE7055C98FE26C7AED
+                    E9B5BAB73E46C16B606E2DF57EAAC9FA025C32089705F869575BE24039968A29
+                    ECE0BF166E657742AF1B06F3F75A5EEAFFF3C5102F7F5321A8C438E562F51CC0
+                    203FF268C02D5DEDC9579D5A278888BBDA93AF3E1A70CBFDCC41AAC1DE02185C
+                    27155BD3DDBEB6573A4AA9BADBD7F6928AAD81C175E92C77636B018629A612DD
+                    6D49EB17599A49775B7288622A01A0A8B94BB5585880AB79627AB2AB2D71463A
+                    49B974B525CE10D393C0D5BC7496E9AC2B00E19117BB7637BE239DA3DCBA7637
+                    BE4378E445E91CD359550002DEAB3783AF48E7A8947A33F80A01EF49E798CA9A
+                    025C32084343CFD9F4A760CA4D6B6D4243CF5D3208A5B34CB2A600CB80377B74
+                    E307D2392AAD47377EB00C78533AC7246B0A402A9CB387FEE96CDA562B0AC04C
+                    83C7D34DEF4BE7A896E3E9A6F79969503A0760490188F8A874866AB3659BAD28
+                    406842675FED2B952DDB2C5E803CCC27BDBAE923E91CD5D6AB9B3ECAC37C229D
+                    43BC000AEAB4740629366CBB7801025064267FD3D9B0EDE20500E36FD211C458
+                    B0EDF20500FF533A811CF96D172F00B1F997740629366CBBF85BC28C521FA632
+                    7DD23144D870D143FC08E0C9F20588385F8088ABFA1C209B4EBAB7F2F71CE68F
+                    0011E70B1071BE001157F13980D6DA9D4FF444903F02449C2F40C4F902449C2F
+                    40C4F902449C2F40C4F902789EE7799EE7799EE7799EE745C47F0099A2E7F99F
+                    7ADE7A0000000049454E44AE426082}
+                  FileName = 'E:\Projekte\PCMManagerApp\Grafiken\128x128\photo_portrait.png'
+                end>
+              Align = Center
+              Size.Width = 100.000000000000000000
+              Size.Height = 100.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object img_PictureDefault: TImage
+              MultiResBitmap.Height = 128
+              MultiResBitmap.Width = 128
+              MultiResBitmap = <
+                item
+                  Width = 128
+                  Height = 128
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000080000000800806000000C33E61
+                    CB0000000473424954080808087C086488000008A649444154789CEDDD7F68D4
+                    E71D07F0F7E7F99EB167AAB2D5428781ADF38F81FD431A258CFD55112EA7C965
+                    7FD8B84EA84528DB28761D824E6D723EBB14A5DACA1C6E6CA3D055A8C3B852CC
+                    253149A10A852D8B3F86B49551A66CABB68EDA8931F134B9EFF3D91FB974593A
+                    4DEEBCBBCFF3E4FBBCE0C084E49EF7D7EFFBBEF77CEF7BF704F03CCFF33CCFF3
+                    3CCFF33C2F2AE87EEF406BCDE508E295466B7D5FFB50952B88E7265F8088F305
+                    88385F8088F30588385F8088F30588B858A507B8DFF3D4A8ABF4EB2CFE081071
+                    BE0011E70B1071159F034C97CAF4F96B07F7904D27AB3A67F2478088F3058838
+                    5F8088F30588385F8088F30588385F8088F30588385F8088F30588385F8088AB
+                    FAB50009045C66C249620C31D10513067F0FE2A39FD5E7FE320A00E7E28FD786
+                    B9DA8755107E83989733A18118AB19A893CE5E6973B900D708381C828EF4B427
+                    CE81E84B17A1BAFEFBCF9B85DB2500EF020098A9A963A03E006F646013802555
+                    495D6573AF0086AE40993D0F3C78F3F5635B37E40000E912EE87887B80B300CE
+                    B61EE86CBB3DB270338CDA05C54BCB9A57D89C29C03030B618B48F31B6379B4E
+                    DD2AE77D178AF4AB94CEFE8E50B3F30678FB22A0A69C634899130530C08585C0
+                    C6AE74E3F94A8E93D5A95B00DA9B337D7F30C011052CAFE478D53007CE02CC5B
+                    E3716AE84E272BBAF3A7EA4E27CF8FC7A901306F556BCC4A71BA000C7368A519
+                    DA30B0AD71B4DA630F6C6B1C5D69863630CCA16A8F5D4ECE3E0530CCA1EEF4BA
+                    E7BB053368AD0D80E79B33BD20A82D82514AE6E811C0BCB5CA0CBD209D62D244
+                    16379F0E9C2B80012EDC8907CF141E7D56D05A9B3BF1E019035C90CE522CA70A
+                    300C8C11B051E2397F2603DB1A4709D8380C8C496729865305580CDA57CDD97E
+                    B1BAD3C9F38B41FBA47314C39D0218BAC2666CAF748C99B019DB0B4357A473CC
+                    963B0550664FE18518AB6575EA1694D9239D63B65C29C0B5071EBCF9BA7488D9
+                    2A64BD269D63369C28000187BFB8B0E380635B37E408382C9D63369C2840083A
+                    229DA158AE64B6BE00045CEE694F9C93CE51AC9EF6C439022E4BE79889F50560
+                    C2C9FFF7660EEB1131134E4AC79889F50520C690748652B990DDFA0280F1A174
+                    84923990DDFA02841CFB87748652B990DDFA0204F1D1CFA43394CA85ECD61760
+                    F2ADDB2E7221BBF505F02ACBFA029C8B3F5E2B9DA1542E64B7BE0061AEF661E9
+                    0CA57221BBF5050828FF75E90CA57221BBF50500E131E908257320BBF5056042
+                    83748652B990DDFA0210633598DD5B719C9988B15A3AC64CAC2F0003754D1D03
+                    F5D2398AD5D43150EFC2C7CBAD2F000004E08DD2198AE54A66270AC0C0A6D603
+                    9D71E91CB3D57AA0335E5853C07A4E1400C092DB230B374B8798AD4256271694
+                    70A5008051BB523ABB403AC64C523ABB0046ED92CE315BEE1440F15252353BA5
+                    63CC8454CD4E97561171A700006E80B73767FA5648E7B89BE64CDF8A1BE0EDD2
+                    398AE154011601350C1C49ECEFB7EE224B627F7F2D03475C5B3AC6A902008002
+                    96CFCF856F68ADADC9AEB556F373E11B2E2E1963CD7F6271D4FA33AAE1A0748A
+                    491359D47AE91CA57076851082DAD29CE9C52A33F482D45A015A6B7546351C74
+                    757510C0D923C00482DA725635744ACC0912FBFB6BCFAA864E97773EE0780126
+                    A8F5F3723C54CDB383E64CDF8A79391E72F5B03F95B34F01532960F93030D492
+                    E9DFC7666C6FA53E469ED2D905A4FC4291569A3845E436A066732A73E27F978A
+                    BD4FAD073AE3934BC53278E9A272DCA925E64C01BEA0782940BFBC3DB2E8672D
+                    99BE7B2E167D4F53168BBE3D52582C5AB9F711C599CC890270387683829AC5D3
+                    BEBD8481AD0ABCB5A5A3FF3277F415B75C7C47FF6A06EAEEB6CBEF32A673DC2E
+                    80C17528FC28A4585F0CBC13A01F03F8D2052306EAC0789A81A7C10CA5F2E03B
+                    F371567D7BE207EE004AE50106B8F00BF778ACDF02F81721C5F6C680240C7E0D
+                    85AF5464FBAAC0E5029C5231DA74BCADF1E3C2D73BD7E99E8301053FC91BF36C
+                    2C500F9573B07C683E8F29F55AC8E1CF7B75D3D5C2B73BBFFB52FF9F8CE1C300
+                    9E28E778D5E2DE69A0191F0761C74A33B866CACE0700F4EAA6ABD9DDC91D398A
+                    D731D353047ADB203F52F250C88F10E86D667A2A47F1BAECEEE48E293B1F0070
+                    BCADF1E39566700D083B60C6C74B1D4B8A5B4700838B50B1EF67DB93A7B3F7F8
+                    B1537AF56D0047011C6DD59D35B960E1779451EB98F8896160C5DD4EE18681B1
+                    45C079623A6594E95D10DEFAE331BD61C6851F0BAF44BE9CCA9C781706BF87C2
+                    B2D236B0FADC2900D1B13CC2674FA4D70D17F36B851D78AA70C30F7E7366DEA7
+                    9F7EBE4C055C67185F050045F8B709E9F2B7BEF6D0C5DFFE7055C98FE26C7AED
+                    E9B5BAB73E46C16B606E2DF57EAAC9FA025C32089705F869575BE24039968A29
+                    ECE0BF166E657742AF1B06F3F75A5EEAFFF3C5102F7F5321A8C438E562F51CC0
+                    203FF268C02D5DEDC9579D5A278888BBDA93AF3E1A70CBFDCC41AAC1DE02185C
+                    27155BD3DDBEB6573A4AA9BADBD7F6928AAD81C175E92C77636B018629A612DD
+                    6D49EB17599A49775B7288622A01A0A8B94BB5585880AB79627AB2AB2D71463A
+                    49B974B525CE10D393C0D5BC7496E9AC2B00E19117BB7637BE239DA3DCBA7637
+                    BE4378E445E91CD359550002DEAB3783AF48E7A8947A33F80A01EF49E798CA9A
+                    025C32084343CFD9F4A760CA4D6B6D4243CF5D3208A5B34CB2A600CB80377B74
+                    E307D2392AAD47377EB00C78533AC7246B0A402A9CB387FEE96CDA562B0AC04C
+                    83C7D34DEF4BE7A896E3E9A6F79969503A0760490188F8A874866AB3659BAD28
+                    406842675FED2B952DDB2C5E803CCC27BDBAE923E91CD5D6AB9B3ECAC37C229D
+                    43BC000AEAB4740629366CBB7801025064267FD3D9B0EDE20500E36FD211C458
+                    B0EDF20500FF533A811CF96D172F00B1F997740629366CBBF85BC28C521FA632
+                    7DD23144D870D143FC08E0C9F20588385F8088ABFA1C209B4EBAB7F2F71CE68F
+                    0011E70B1071BE001157F13980D6DA9D4FF444903F02449C2F40C4F902449C2F
+                    40C4F902449C2F40C4F902789EE7799EE7799EE7799EE745C47F0099A2E7F99F
+                    7ADE7A0000000049454E44AE426082}
+                  FileName = 'E:\Projekte\PCMManagerApp\Grafiken\128x128\photo_portrait.png'
+                end>
+              Align = Center
+              Size.Width = 100.000000000000000000
+              Size.Height = 100.000000000000000000
+              Size.PlatformDefault = False
+              Visible = False
+            end
+          end
+          object lbl_Mail: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 913.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'E-Mail:'
+            TabOrder = 964
+          end
+          object lbl_Firma: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 1028.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Firma:'
+            TabOrder = 961
+          end
+          object lbl_Handy: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 849.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Handy:'
+            TabOrder = 959
+          end
+          object lbl_Staatsangehoerigkeit: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 505.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Staatsangeh'#246'rigkeit:'
+            TabOrder = 956
+          end
+          object lbl_Telefon: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 785.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Telefon:'
+            TabOrder = 954
+          end
+          object lbl_Adresse: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 689.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Adresse'
+            TabOrder = 951
+          end
+          object lbl_Konfession: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 569.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Konfession:'
+            TabOrder = 947
+          end
+          object lbl_Familienstand: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 441.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Familienstand:'
+            TabOrder = 945
+          end
+          object lbl_Geburtsdatum: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 377.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Geburtsdatum:'
+            TabOrder = 942
+          end
+          object lbl_Geschlecht: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 313.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Geschlecht:'
+            TabOrder = 940
+          end
+          object lbl_Nachname: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 249.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Nachname:'
+            TabOrder = 937
+          end
+          object lbl_Vorname: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 185.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Vorname:'
+            TabOrder = 934
+          end
+          object cbx_Anrede: TComboBox
+            Align = Top
+            Items.Strings = (
+              'Herr'
+              'Frau'
+              'Familie')
+            ItemIndex = 0
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 148.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+          end
+          object lbl_Anrede: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 121.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Anrede:'
+            TabOrder = 903
+          end
+          object edt_Vorname: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 212.000000000000000000
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Vorname'
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object edt_Nachname: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 2
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 276.000000000000000000
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Nachname'
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object cbx_Geschlecht: TComboBox
+            Align = Top
+            Items.Strings = (
+              'm'#228'nnlich'
+              'weiblich'
+              'Familie')
+            ItemIndex = 0
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 340.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+          end
+          object dtp_Geburtsdatum: TDateEdit
+            Date = 44306.000000000000000000
+            Format = 'dd.mm.yyyy'
+            Align = Top
+            FirstDayOfWeek = dowMonday
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 404.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family]
+            TabOrder = 4
+            TextSettings.FontColor = claWhite
+          end
+          object cbx_Familienstand: TComboBox
+            Align = Top
+            Items.Strings = (
+              'ledig'
+              'geschieden'
+              'verheiratet'
+              'verwitwet'
+              'verstorben')
+            ItemIndex = 4
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 468.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 5
+          end
+          object cbx_Staatsangehoerigkeit: TComboBox
+            Align = Top
+            Items.Strings = (
+              'deutsch'
+              'englisch'
+              'franz'#246'sisch'
+              'bosnisch'
+              'russisch'
+              't'#252'rkisch'
+              'amerikanisch'
+              'arabisch'
+              'indisch'
+              'polnisch')
+            ItemIndex = 0
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 532.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 6
+          end
+          object cbx_Konfession: TComboBox
+            Align = Top
+            Items.Strings = (
+              'R'#246'misch-Katholisch'
+              'Evangelisch'
+              'Sonstige')
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 596.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 7
+          end
+          object lbl_MailFirma: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 1316.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'E-Mail:'
+            TabOrder = 501
+          end
+          object lbl_HandyFirma: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 1252.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Handy:'
+            TabOrder = 497
+          end
+          object lbl_TelefonFirma: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 1188.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Telefon:'
+            TabOrder = 493
+          end
+          object lbl_AdresseFirma: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 1092.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Adresse'
+            TabOrder = 491
+          end
+          object edt_Firma: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 388
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 1055.000000000000000000
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Firma'
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object lo_Adresse: TLayout
+            Align = Top
+            Margins.Right = 16.000000000000000000
+            Position.Y = 716.000000000000000000
+            Size.Width = 349.000000000000000000
+            Size.Height = 64.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 8
+            object rec_MapPrivat: TRectangle
+              Align = Right
+              Fill.Kind = None
+              Position.X = 313.000000000000000000
+              Size.Width = 36.000000000000000000
+              Size.Height = 64.000000000000000000
+              Size.PlatformDefault = False
+              Stroke.Kind = None
+              object img_MapPrivat: TImage
+                MultiResBitmap.Height = 48
+                MultiResBitmap.Width = 48
+                MultiResBitmap = <
+                  item
+                    Width = 48
+                    Height = 48
+                    PNG = {
+                      89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                      870000000473424954080808087C08648800000563494441546881ED594D685C
+                      5514FECE7DAF7406E9427011FB83B8115368E84E13579592B193292D516713A8
+                      908005C16E5C482579B9BE89B4BA54102A240BA19BA68821FF8275D59FEC4AA5
+                      8D74274D6B164A7F524988EFDDE362DEBCDCF7FAFEE6CD9474916F35F7E79D73
+                      BE7BCEB9F7DC3BC00E76D012E8B94966A6E3F62FEF9150038EA37A0C52FB01C0
+                      65B1629AE21A2B7171DAEA5D0011B7A2E6B9103821E70EBA424C10F056D23C06
+                      960CA506A764F94E5E5D6D2770BCB6F8EEBACB3F1705F66499BFAEB05634E8E4
+                      F448E94A1E7D6D257042CE1DFC17E246D8789770CB747113001C03870D46973E
+                      BEAEB0F612D4DB793C61B666B20666726B8B134568C6BB58668387E6468E5DD7
+                      A756ECF96E72691C063A01A028B0C78598007377B339D1360F1CFF72F11888E7
+                      FC0E17CBAAE0BC337BB6F2306A7EDFB99997C58679B5410200C0549E1E2DCD37
+                      A337B7076CDB3EA494B200EC9352F6905003CC5BEBC1060FC5190F00B3672B0F
+                      2BF6FC1081AE35FA48A80100CF10D074F501F84E4AF9796E020D614AA97E0002
+                      C03800388EEA310C03403DE6C361138519EBD8F5726DE15623271C47F5A4E802
+                      8033009A2710230C005601A0BECFD7093412360B4C173759D40934CE0A29E51B
+                      00BE8AD00500FF04BE6FC17005E027003F6635B6099C02F041CCD88ADE882590
+                      66B810C2B62CEBF746A7CB62C5005E07EA5B65564BBD6DD597E17577E8BA00FC
+                      0160388A40D83DB06DFB90947252297513F55568CC51002E0B210E4B293FD48D
+                      0700D3147E321A8CAE8A3DDF9D667CC59EEFD6CF044DC6615D17113DD23EBB17
+                      D0AB37A494DF28A53E4386150F8395B808E281469B5C1AEF3B3793B88DD2068D
+                      7B69E3CB90520A21C4479665DDF6FB99F7FB72891243E80C822B9E6A7803D356
+                      EF42A5B6B8E4D73F063AC58679B562CF0FCD581107D9C6D64106D4EBA219AB77
+                      619A4A0CE076503A0E68BF1309FC0D609FC7B4777474F4D734C37D10B121E706
+                      03A584814E025D2BD71602A50431BAF495F74A89C18453D8F700330742289C03
+                      2BDAC4F5CCC67B9892E53B45834E2A384FF57E83D1C502A758E054B80E52709E
+                      160D3A995207E9041293D81F24A203C881E991D21513BB8EB2BBF9386D2EBB9B
+                      8F4DEC3A9A54895EB8706117B6762577EFDEBD7FE9E36102BA7BF62327A6ACD2
+                      1299BBFB8155277ED6AA43E6EEFE29ABB49424EBC18307AF027EC0AD9E3E7DFA
+                      3F7D3C4040CF703DF3F3A0BEAA1DB5F8191DB52C770022D2ED58098FC7861082
+                      999F0B05F5E43C01779F310AB85B504FCE6791110AE56402A10C6FC903003029
+                      AB9BCC2CC3FDCC2C27657533A318DD8E7BE1C130019D61CB0400A0D0B976092E
+                      96FD0E17CB85CEB54BED900D84087819EE7ACD0E6F07680993D5AA0BC15BB920
+                      B83659ADBA099F849118D601025E86AF7A4DC3DB015A86EF851CAB9F16D6CF14
+                      73089E056D0923DF0BCDAF7E6A58A7116879276AA0D0B976294FECA785751481
+                      B6EE440D4C56AB6EB3AB0FA4877514811711B1611D4520F1E0D826C486751481
+                      D8D2751B111BD669045E080F24D568010269A5EB3622F6300B10482B5DB70B49
+                      8759E04A9956BAEAD09EFB2A00AE10D10FCC3C2BA54CB803E403111599FDDB66
+                      228103DAC4480231EF4565662E03B82FA59C304D737C7878F8CF560D6FE862E6
+                      7EADFB95580248285D131EBA74EC0330E238CE1752CAC5BC5E497954FB369640
+                      D4FB4BDA0B1D117DCFCC47000C7A04807A1E35ED95665F0381D0FF0352CACB00
+                      DEF79A6300DE0490499894D224A23E66FE184009D01F4E00D4EB9948AF68F994
+                      D9F038023710FFC75CE687AEB1B1B1D71CC71942D02B3AEE039820A2DF98F993
+                      3C86C711588950D8D40B5D485E9A57C2685A5798C03A8042AB864721C52BB975
+                      85097C0DE05300B3ED323C8C90578E3C4F5D3BD84106FC0FC5EFF579546C1AE4
+                      0000000049454E44AE426082}
+                    FileName = 'E:\Projekte\PCMManagerApp\Grafiken\48x48\map_location2.png'
+                  end>
+                Align = Client
+                MarginWrapMode = Center
+                Margins.Top = 1.000000000000000000
+                Margins.Bottom = 1.000000000000000000
+                Size.Width = 36.000000000000000000
+                Size.Height = 62.000000000000000000
+                Size.PlatformDefault = False
+                OnClick = img_MapPrivatClick
+              end
+            end
+            object lo_AdressPrivatDetail: TLayout
+              Align = Client
+              Margins.Left = 16.000000000000000000
+              Size.Width = 297.000000000000000000
+              Size.Height = 64.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object edt_Postleitzahl: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Top
+                TabOrder = 1
+                ReturnKeyType = Next
+                TextSettings.FontColor = claWhite
+                Position.Y = 32.000000000000000000
+                Margins.Right = 5.000000000000000000
+                Size.Width = 292.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Postleitzahl Ort'
+                StyledSettings = [Family, Style, FontColor]
+              end
+              object edt_Strasse: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Top
+                TabOrder = 0
+                ReturnKeyType = Next
+                TextSettings.FontColor = claWhite
+                Margins.Right = 5.000000000000000000
+                Size.Width = 292.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Stra'#223'e / Hausnummer'
+                StyledSettings = [Family, Style, FontColor]
+              end
+            end
+          end
+          object lo_Telefon: TLayout
+            Align = Top
+            Margins.Right = 16.000000000000000000
+            Position.Y = 812.000000000000000000
+            Size.Width = 349.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 9
+            object edt_Telefon: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 0
+              KeyboardType = PhonePad
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Margins.Left = 16.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Size.Width = 292.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Telefon'
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object img_TelefonPrivat: TImage
+              MultiResBitmap.Height = 40
+              MultiResBitmap.Width = 40
+              MultiResBitmap = <
+                item
+                  Width = 40
+                  Height = 40
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000280000002808060000008CFEB8
+                    6D0000000473424954080808087C086488000003F1494441545885ED985F485E
+                    7518C73FCF798F6F53B606E5FE1495E546939623B03FB045ACB4BAC9DDE928A8
+                    6E863781375110BDD6831D2531A418FD9182C1EA2EE82646914A22D6A0661749
+                    E4164BDAD2C53022E3D5D7D7F3FE9E2ED4103DEFEB5177EC66DF9B03BFE7F93E
+                    BF0FBF737E7FCE0FAE6B7392A43B0882E0F642A1700CB811F8D5397756447E57
+                    5517C79F28A0AA5600A781278072600AB8E879DE57CEB90F54F5EA5A35BC2401
+                    81FB8147811D800FEC058E38E75E09C3B04F550FFFAF8066F630501111DAE6FB
+                    FE2133FB48558FAA6A518EC40055B542441E006E2896232235C0CBC09DC57292
+                    1CC1FD4015A5BF73018E8AC8932D2D2D6551094902DE0BDC1A23AFDCCC8E5557
+                    57477D0AC900AA6A1A3808EC8A69A99B9E9EDE16154804D0F7FD3D2C00C6AD7F
+                    733A9D4E450512010CC3708F99DD1D37DFCCFE2A2B2B2B44C5925E0763C93937
+                    3A3F3F3F17154B04309D4E8F8BC81010C6C94FA552DF02B9C8D8B5045BD2C0C0
+                    40AEA1A161D439B79385D95CAA9F5911795B557F8E0A26F58A2D93C9FCA6AA27
+                    52A9D43DC0498A8C10306A66E3806D25E07F6A6B6BBB086480CF23C205E03BE0
+                    5231FF564D1207CC44B44F01675575BA9871AB00D3404D44FB05331B2E65DC2A
+                    C09B80432BDA7222D2A7AA974B19B70450448EB370605DAEA9F9F9F94F442472
+                    722C2971C0EEEEEEDD66762222742A0882F1B5FC8902AAAA9FCD665F64F579EF
+                    02F05E9C1A89028A4823F0FC8AE650440255FD234E0D7F231D777676EECAE7F3
+                    759EE7FD595353F3437373F3AA8D5E551F34B35781DD2B4267CCEC4CDCBED6F5
+                    57D7DBDB5B76E5CA95C7811EE0000B0BED976118BEE4FBFE7955754D4D4DA9DA
+                    DADAFB9C733DC0232B4A4C00CFA9EAD714D939562AF65EACAA15D96CF619A013
+                    583A4A79C03ECFF3F60397EAEBEBBDCACACA06337B0B7868B9DFCCB222F27E79
+                    79F9A7FDFDFD91279728C51AC1AEAEAE1DB95CAED5CC5E006E894829003F0113
+                    667658447646C4FBC2306C0D82E097B870B10055752F1000C781EDEB29BE4C13
+                    9EE73DDDD6D636BCD6BAB7522567712693D907F402CF6E146E6C6CCC01ADCEB9
+                    6FD60B072546300882AA300C4F024F95CA5B4339E7DC6BEDEDEDDD1BF4175F66
+                    C2303C60668F89C846E1A6810F3DCF7B77837EA0F42BCE8BC8EC06EBFE037C0C
+                    F4A86AD4312BB68A02E6F3F9F3C017C4FCAF586E6501EE4D559DDC041B50621D
+                    1C1A1ACA0E0F0FFF68660781BB88FF1DBE33333393E9E8E898DA2C1C713A55D5
+                    DB0A85C2A9542A7584D547A62519F037F086AAF65C0BB025ADB9930C0E0E4E37
+                    36367E3637379715918A454F7AF19907AE02E744E4F5C9C9C9D3232323B16E4E
+                    E32AF60C5DBCC3BBC33957E7795E15B0DD3937EB79DEB8EFFBDF87617839EEB5
+                    EE756DA5FE05F8B5629A559174E60000000049454E44AE426082}
+                  FileName = 'E:\Projekte\PCMManagerApp\Grafiken\48x48\phone_receiver2.png'
+                end>
+              Align = Right
+              MarginWrapMode = Center
+              Position.X = 313.000000000000000000
+              Size.Width = 36.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = img_TelefonPrivatClick
+            end
+          end
+          object lo_Handy: TLayout
+            Align = Top
+            Margins.Right = 16.000000000000000000
+            Position.Y = 876.000000000000000000
+            Size.Width = 349.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 10
+            object edt_Handy: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 0
+              KeyboardType = PhonePad
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Margins.Left = 16.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Size.Width = 292.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Handy'
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object img_Handy: TImage
+              MultiResBitmap.Height = 36
+              MultiResBitmap.Width = 19
+              MultiResBitmap = <
+                item
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    870000000473424954080808087C08648800000186494441546881ED99BF6AC3
+                    3010877F971A3A16FC00F150C8A3F4113295843E40BC653358066DD932770A9D
+                    F20859FB168142DB0710642CA8A84B0AC2C44DF427BDE5BECD92EF4E9F6C2D27
+                    401092A0D8C0F57A7D6B8C5939E7664474179BC7397720A24D5996CBBAAEBF42
+                    E38BD8C2C698158005D1C93D7803F07262FC11C0BD3F70945F186300A00E5D47
+                    B4C071E787A65FDBB6ED88C879EF53D775157A027E3E440844FF424A2977FEAD
+                    E09CC1EB89FE023DF600B600BE03626E004C014C520A6711288AE2A1699A8FD0
+                    38ADF5B3B5F63DA5F62825F89798C5A7C4F96411E04404B811016E44801B11E0
+                    4604B811016E44801B11E04604B811016E44801B11E0460400406B5DFD679C4F
+                    96E6AEB576A7940AEE4E5B6BA7A9B573B5D727009A4CB982C825D067DF6FB96B
+                    AD2B6BED0E89F7017DAE7588B7FDD6F9F1799BBBD0B50486CE42C819B9886801
+                    E7DCE18FE971E0F8B97C83449F0122DA00580C4CCF955200F0E98D8D01CCCFE4
+                    0B265AA02CCBA531060317DD23004F97E4F12FBA63D7220809FC00D385767D85
+                    1BBE3B0000000049454E44AE426082}
+                  FileName = 'E:\Projekte\PCMManagerApp\Grafiken\48x48\mobilephone3.png'
+                end>
+              Align = Right
+              MarginWrapMode = Center
+              Position.X = 313.000000000000000000
+              Size.Width = 36.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = img_HandyClick
+            end
+          end
+          object lo_EMail: TLayout
+            Align = Top
+            Margins.Right = 16.000000000000000000
+            Position.Y = 940.000000000000000000
+            Size.Width = 349.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 11
+            object edt_Email: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 0
+              KeyboardType = EmailAddress
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Margins.Left = 16.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Size.Width = 292.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'E-Mail'
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object img_EMail: TImage
+              MultiResBitmap.Height = 48
+              MultiResBitmap.Width = 48
+              MultiResBitmap = <
+                item
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    870000000473424954080808087C086488000007AD494441546881ED996D6C95
+                    E519C77FD7737A78D354535D44DC8C097B43F9E0ACE8B062024E68A145D031BA
+                    4467E2348AFAA9B8855138F7F51C6D6589391F34F13523814D874A2672801698
+                    2E40D4B53AF6C565E0922D731F4067083D5384F6F4B9F6E1DC95D3D3F3D2D353
+                    C896F84F9AF4B99FEBE577F5B9DF0BFFE79273197CD3A64D1701AC5BB76E6022
+                    FEAD8FA7AF10AB6BC5389C4EB4BC57CCE69C14A0AA9702CF032B7CD30EE00155
+                    FD743CFE2D4FED995A773248C0E90E98360D8E6785CBEEDE9968D956683BE905
+                    A8EAF78157816F14BCFA17F02355FD6339FF158FED991D116C37E3DAD16F8E67
+                    0399D9F2C6C6E6DFE7B706B5239F95AA3E021CE02C7CE47FF06D07BCCD18B526
+                    7B7FD29ADCF3F4992C7D63E10166D60D5B747B61EBA47C0155BD10781168CF6B
+                    FE5444EE0230B3DF0097E6BDDB06DCAFAA9F79F85F0AFCBC62229195E98D4B76
+                    E437D5FC0554F56A33EB2F80EF33B346E7DC5EE7DC5E336B04FAF2DEB7037701
+                    B485BD9B72F0C347E2316645F16C0336DC5F24D5BBE90D8BDF1853532DF0A954
+                    6A7A26937918B830AFF924F08CAA0EE6DBAAEA14E021E062E088AA6E6B4BF63C
+                    01B22E071F5B7426C89E0E86EAF602F30A529D8A2476FDEE8DB7FD75520BA845
+                    ADE1DE6E11FB85451C9D1267E1EF3A9B8FB5267B3608F2D828C3E8A8997CF7EE
+                    5D6EC94BC5E28CAB0055B549608EC8F5FBCD6DC9DE2E60BD451C0D0816196706
+                    0962D73446FD87FE14BB713326F7E4F925D38966572AE8A4CE4215D4A5AA9BDB
+                    C2DEC781F5021F06048B86A664878663F13761B0F73DB9F1B6C6E1BE7B11DB92
+                    739167D21B9768B9A0E7ED0BC462B16FF771FDB7C464378005DC28D9A1BF138B
+                    FD010BE6E6AC4E9F8E6CEA8A79D6B7FFB0CCBF7B6762F15644CAE6AEAB164455
+                    273C6E96257B67FE07A278C4E7336275FF8C449688D9DCB316D3A605727AC79F
+                    65DE0D3B134BB650B2E39C55D92EE4678E49518BEEF9FAEE44F3A10BA2E139D3
+                    EA86E6CCBCF4E21326D19A3186D1D4ADDF8BDEFB8BAAB68E87A16401AAFA8888
+                    ACAD991C58A13D57D5111C6ED5BDBF0DA4EE3B12C59B8E7FFCE99B01D2341ADE
+                    5E68A46F0DB014D80E20226B4BADDE50A40BE5AFAA6616D60ADFF2D49EA9C327
+                    D90E7C4DB076FC8237A6638F859F0A606653816E556D226FF51ED1A82FE09CBB
+                    B2C8AA5A93EA4E8A82349635F2F0AA1AE5C317A8DDCCFA9D73578E8A9FFF2022
+                    2F0073F29A3E9A10B5575BB2F71A38FE28CC2C6963C6B3BB5CF3C3696919F928
+                    85F05F3288C81CE005A079A4AD700C2CCCFBFD4955DD3C2172AF08BA6066B999
+                    AE7B5762C9C3E5A64ACFF06409C63105E48FF847C2305C092022EB29D26DCB69
+                    B9F67EF333682BFA32E20C66F7A513CD9D25E0CDE7C433E40FE251B352B969F4
+                    B099BDA6AA0F3AE79E00EE05B2E32D20CBF067F50C7F38163EFA1B812D48BB96
+                    5F9574857B9D734FA8EA8366F61A70B8549E9205D4D7D7FF00D80D3CABAAA173
+                    6E0B30E640515466328519A7E3B1D822183EE25B4F01DD307C6DA9F3ADD7EDCE
+                    B92DAA1A02CF02BB3D4B75057474747C01DC496E4A4D8461F83CB06F3CFCADC9
+                    BDE17070EA5D80782CB6C8B0B5D9BAE8AA74A2B933AD6DA72AB8EFF3B9123EF7
+                    9D9EA5A8CA6E2554356B660F846178CC07BC2C954AB5970B08204433CC82135F
+                    4894ED59BFF4DF40AA0234F0E5F9621BB01C483AE7542AEC852AEE4645C454D5
+                    016B8065994C66BFAA3694F349BBA58FEE722D4D1E7E5C52D5864C26B31F5806
+                    AC515557097E5C05E425784E4456018DC0A1C205A516F9588780461159A5AACF
+                    8DD7B7AAF38073EEF520081603978BC8DBAA3AB7A25305A9EA5C11791BB83C08
+                    82C5CEB9D7ABF1AFFA409348240E01B7F8C783C964724131BBEEEEEE4B92C9E4
+                    FC643239BFBBBBFB926236DEF7A07FBCC5C7AE4A133A91A9EA0766D6041C8BA2
+                    68DFC88207E09CBB5955DF1A1C1CFC248AA277A2287A677070F013557DCB3977
+                    F3885D18862BA328DA071C33B32655FD60222C133E528661F811B000D82F2227
+                    CC4C547583881C0066030E68F13F0E982D22075475839989889C00F6030B7CAC
+                    09A9EA1359BE54F504B03C954A4D0FC3F025E0C7C0AF810755357FBEEF55D514
+                    F01CF058188657D7D7D7FFB4A3A363792DF9A1C60200BABABA2ECF64323B801B
+                    802EE7DCC662D39FAA9E32B37BFC5FBB3393C9CCEEEAEA5AD1D9D979AC96FC35
+                    DD4AA8EA75434343FDE4A6D635BE0B959CBBFD9AB281DC9AD2383434D4AFAAD7
+                    D5C230E10254F587E4E6EE06E08E6AE66E6F7B87F73DE4634D485517E0076B82
+                    DC15FA29E05655DD596D1CEF73AB8FF1AAAA26CCACEA1B8FAA0AF083F5652004
+                    FE013455BAEF2F27EFDBE463856118BE9C4AA5A65713A39AADC4AC81818103E4
+                    CECBEFC7E3F19B5475EC7EBF4AA9EA87F178FC26E07DA07D6060E080AACE1AAF
+                    FFB80A4826938D40BF88CC037A80859D9D9D1F4F88B8887CAC85408FCFD1EF73
+                    5654C502C2305C1545D141E00A6033B0BCF06A6332E4632EF739AE88A2E86018
+                    86AB2AF9952CC0CC240C436766AF0033C8EDCFEF53D5711F2BAB95AA669D73F7
+                    0149608699BDE2194A0EEE512F0A2E715F015603591179C839F7E239A12EA130
+                    0CEF37B367C82DB6232C239C5F7297EB42ABCDEC7360E5F98607F039577A86D5
+                    A5EC466D25CC6C40442E1A7916910B80B4AA9E2BCE8A1219DD7BCC6CD43FCD83
+                    02E3ADE781A92615328E2AA0A1A1E167C0D38555FE2FC8333DED19BFD2579A2C
+                    FD17C40746B47C840EFE0000000049454E44AE426082}
+                  FileName = 'E:\Projekte\PCMManagerApp\Grafiken\48x48\mail_write.png'
+                end>
+              Align = Right
+              MarginWrapMode = Center
+              Position.X = 313.000000000000000000
+              Size.Width = 36.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = img_EMailClick
+            end
+          end
+          object lo_AdresseFirma: TLayout
+            Align = Top
+            Margins.Right = 16.000000000000000000
+            Position.Y = 1119.000000000000000000
+            Size.Width = 349.000000000000000000
+            Size.Height = 64.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 13
+            object rec_MapFirma: TRectangle
+              Align = Right
+              Fill.Kind = None
+              Position.X = 313.000000000000000000
+              Size.Width = 36.000000000000000000
+              Size.Height = 64.000000000000000000
+              Size.PlatformDefault = False
+              Stroke.Kind = None
+              object img_MapFirma: TImage
+                MultiResBitmap.Height = 48
+                MultiResBitmap.Width = 48
+                MultiResBitmap = <
+                  item
+                    Width = 48
+                    Height = 48
+                    PNG = {
+                      89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                      870000000473424954080808087C08648800000563494441546881ED594D685C
+                      5514FECE7DAF7406E9427011FB83B8115368E84E13579592B193292D516713A8
+                      908005C16E5C482579B9BE89B4BA54102A240BA19BA68821FF8275D59FEC4AA5
+                      8D74274D6B164A7F524988EFDDE362DEBCDCF7FAFEE6CD9474916F35F7E79D73
+                      BE7BCEB9F7DC3BC00E76D012E8B94966A6E3F62FEF9150038EA37A0C52FB01C0
+                      65B1629AE21A2B7171DAEA5D0011B7A2E6B9103821E70EBA424C10F056D23C06
+                      960CA506A764F94E5E5D6D2770BCB6F8EEBACB3F1705F66499BFAEB05634E8E4
+                      F448E94A1E7D6D257042CE1DFC17E246D8789770CB747113001C03870D46973E
+                      BEAEB0F612D4DB793C61B666B20666726B8B134568C6BB58668387E6468E5DD7
+                      A756ECF96E72691C063A01A028B0C78598007377B339D1360F1CFF72F11888E7
+                      FC0E17CBAAE0BC337BB6F2306A7EDFB99997C58679B5410200C0549E1E2DCD37
+                      A337B7076CDB3EA494B200EC9352F6905003CC5BEBC1060FC5190F00B3672B0F
+                      2BF6FC1081AE35FA48A80100CF10D074F501F84E4AF9796E020D614AA97E0002
+                      C03800388EEA310C03403DE6C361138519EBD8F5726DE15623271C47F5A4E802
+                      8033009A2710230C005601A0BECFD7093412360B4C173759D40934CE0A29E51B
+                      00BE8AD00500FF04BE6FC17005E027003F6635B6099C02F041CCD88ADE882590
+                      66B810C2B62CEBF746A7CB62C5005E07EA5B65564BBD6DD597E17577E8BA00FC
+                      0160388A40D83DB06DFB90947252297513F55568CC51002E0B210E4B293FD48D
+                      0700D3147E321A8CAE8A3DDF9D667CC59EEFD6CF044DC6615D17113DD23EBB17
+                      D0AB37A494DF28A53E4386150F8395B808E281469B5C1AEF3B3793B88DD2068D
+                      7B69E3CB90520A21C4479665DDF6FB99F7FB72891243E80C822B9E6A7803D356
+                      EF42A5B6B8E4D73F063AC58679B562CF0FCD581107D9C6D64106D4EBA219AB77
+                      619A4A0CE076503A0E68BF1309FC0D609FC7B4777474F4D734C37D10B121E706
+                      03A584814E025D2BD71602A50431BAF495F74A89C18453D8F700330742289C03
+                      2BDAC4F5CCC67B9892E53B45834E2A384FF57E83D1C502A758E054B80E52709E
+                      160D3A995207E9041293D81F24A203C881E991D21513BB8EB2BBF9386D2EBB9B
+                      8F4DEC3A9A54895EB8706117B6762577EFDEBD7FE9E36102BA7BF62327A6ACD2
+                      1299BBFB8155277ED6AA43E6EEFE29ABB49424EBC18307AF027EC0AD9E3E7DFA
+                      3F7D3C4040CF703DF3F3A0BEAA1DB5F8191DB52C770022D2ED58098FC7861082
+                      999F0B05F5E43C01779F310AB85B504FCE6791110AE56402A10C6FC903003029
+                      AB9BCC2CC3FDCC2C27657533A318DD8E7BE1C130019D61CB0400A0D0B976092E
+                      96FD0E17CB85CEB54BED900D84087819EE7ACD0E6F07680993D5AA0BC15BB920
+                      B83659ADBA099F849118D601025E86AF7A4DC3DB015A86EF851CAB9F16D6CF14
+                      73089E056D0923DF0BCDAF7E6A58A7116879276AA0D0B976294FECA785751481
+                      B6EE440D4C56AB6EB3AB0FA4877514811711B1611D4520F1E0D826C486751481
+                      D8D2751B111BD669045E080F24D568010269A5EB3622F6300B10482B5DB70B49
+                      8759E04A9956BAEAD09EFB2A00AE10D10FCC3C2BA54CB803E403111599FDDB66
+                      228103DAC4480231EF4565662E03B82FA59C304D737C7878F8CF560D6FE862E6
+                      7EADFB95580248285D131EBA74EC0330E238CE1752CAC5BC5E497954FB369640
+                      D4FB4BDA0B1D117DCFCC47000C7A04807A1E35ED95665F0381D0FF0352CACB00
+                      DEF79A6300DE0490499894D224A23E66FE184009D01F4E00D4EB9948AF68F994
+                      D9F038023710FFC75CE687AEB1B1B1D71CC71942D02B3AEE039820A2DF98F993
+                      3C86C711588950D8D40B5D485E9A57C2685A5798C03A8042AB864721C52BB975
+                      85097C0DE05300B3ED323C8C90578E3C4F5D3BD84106FC0FC5EFF579546C1AE4
+                      0000000049454E44AE426082}
+                    FileName = 'E:\Projekte\PCMManagerApp\Grafiken\48x48\map_location2.png'
+                  end>
+                Align = Right
+                MarginWrapMode = Center
+                Margins.Top = 1.000000000000000000
+                Position.Y = 1.000000000000000000
+                Size.Width = 36.000000000000000000
+                Size.Height = 63.000000000000000000
+                Size.PlatformDefault = False
+                OnClick = img_MapFirmaClick
+              end
+            end
+            object lo_AdresseFirmaDetail: TLayout
+              Align = Client
+              Margins.Left = 16.000000000000000000
+              Size.Width = 297.000000000000000000
+              Size.Height = 64.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object edt_PostleitzahlFirma: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Top
+                TabOrder = 1
+                ReturnKeyType = Next
+                TextSettings.FontColor = claWhite
+                Position.Y = 32.000000000000000000
+                Size.Width = 297.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Postleitzahl Ort'
+                StyledSettings = [Family, Style, FontColor]
+              end
+              object edt_StrasseFirma: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Top
+                TabOrder = 0
+                ReturnKeyType = Next
+                TextSettings.FontColor = claWhite
+                Size.Width = 297.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Stra'#223'e / Hausnummer'
+                StyledSettings = [Family, Style, FontColor]
+              end
+            end
+          end
+          object lo_TelefonFirma: TLayout
+            Align = Top
+            Margins.Right = 16.000000000000000000
+            Position.Y = 1215.000000000000000000
+            Size.Width = 349.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 14
+            object edt_TelefonFirma: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 9
+              KeyboardType = PhonePad
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Margins.Left = 16.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Size.Width = 292.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Telefon'
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object img_TelefonFirma: TImage
+              MultiResBitmap.Height = 48
+              MultiResBitmap.Width = 48
+              MultiResBitmap = <
+                item
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    870000000473424954080808087C0864880000039F494441546881ED994D685C
+                    551CC57F775E8A84D62C422BC1859F1512AA14A42DDD0853B0455017A24E9116
+                    AB0B89D812AC944EA119E7FF12089658A9C52EC60F941204A3B40B3FD04DF314
+                    172E44513729A556A84D42A350D0018DF3DE7531299476DE7DF7BE797D6F93B3
+                    3DFF7BEE39BCFB35FF8115ACA02BA82226F57D7F9BD6FA18B001B8007C08BC2F
+                    22BFB96AE51E4044D6D236BDE63A2A024E799E77A856AB9DB7D52B6569CE128F
+                    71A379687B79AAD56AFD2422BB6DC58A08F08889544AAD064E8AC84B3662B906
+                    989E9EF680ED16A50A382E22E5A4C25C03CCCECE6E01FA2DCB3DE0ED46A3B1CA
+                    54946B80288A8CCBA703EE5B5858A8980AF2DE03AE01D05AEF34F1B905989898
+                    58076C4A3174B389CC2DC0D2D2D2F694F3DD6622F35C42CECB67194D13996780
+                    7B538EFBD944E619E0C794E3CE98C83C03BC062CBA0E2A954A5F19F9D4761C21
+                    22BF7B9EF71010380C5B1C1C1CFCCE5450C8737A6C6C6C4314457B8117133CBC
+                    2B222F98B4BC4C9D5962666666310882CFCBE5F23A604B5C9D52EA601004174C
+                    5A45BC46AF85E984B9383434142409141D60BD81FBA052A98449024507885B3E
+                    AD9E9E9E776C040A0B20227DC0D618FAD4E8E8E8451B9DC20228A59E046E89A1
+                    276D750A09A0B5565AEB7D31F49722F2BDAD5621C768A9547A0278B903A581DD
+                    41105CB2D52AA2ADB206F805B8AB03FD89883CEDA257C4123A4167F3FF005557
+                    B19E6EDD8C8F8FDF1D86E166A5D4E2C0C0C0B7C3C3C3FFC5D5D6EBF543C0B331
+                    F4EB22F2ABEBFC5D7D01DFF7AB61189E033ED25A9F999B9B3B2B221D8F46DFF7
+                    AB4AA98918A9737D7D7D719C11A9F640A3D158353F3F7F02E8F4D0FA1B785444
+                    BE01989C9C5CDD6C36DF029E8B918B806D57EB5DE11C60F902FA18D81157A3B5
+                    6E2AA58E2AA52E6BAD5F01EE31481E159103AE3EAEC2690FD4EBF53B80CF8007
+                    4C75CBEDC157B5D649923FF4F7F71F76F1703DAC0388C883C0A7C0EDDD4C780D
+                    AE789E57191919F9B71B11AB4DECFBFEE3C0D764673E0476B9B4D1E39018C0F7
+                    FD67B4D6A7E9DC124F8B8322F24516428901B4D647C8F6C9715C44DEC84ACC66
+                    09193B638E9802F667A86715C0D89771C034F0BC884419E90116013CCFDBAFB5
+                    FEB3CB79A6805D22D2EA52E7062406A8D56A6795520F037FA49CE34D60CFCD30
+                    0F0E37B188DC4FFB12BBD37248081C109163698CD9C2FA740982E072B95C3E09
+                    AC053662FE7A0BC04E1199EAD25F22523DE644643DB087F61F7643C0ADC015DA
+                    3F544EF7F6F6BE57AD56FFCACCE50A5670F3F03FEE1A03BAC350882800000000
+                    49454E44AE426082}
+                  FileName = 'E:\Projekte\PCMManagerApp\Grafiken\48x48\phone_receiver2.png'
+                end>
+              Align = Right
+              MarginWrapMode = Center
+              Position.X = 313.000000000000000000
+              Size.Width = 36.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = img_TelefonFirmaClick
+            end
+          end
+          object lo_HandyFirma: TLayout
+            Align = Top
+            Margins.Right = 16.000000000000000000
+            Position.Y = 1279.000000000000000000
+            Size.Width = 349.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 15
+            object edt_HandyFirma: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 16
+              KeyboardType = PhonePad
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Margins.Left = 16.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Size.Width = 292.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Handy'
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object img_HandyFirma: TImage
+              MultiResBitmap.Height = 36
+              MultiResBitmap.Width = 19
+              MultiResBitmap = <
+                item
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    870000000473424954080808087C08648800000186494441546881ED99BF6AC3
+                    3010877F971A3A16FC00F150C8A3F4113295843E40BC653358066DD932770A9D
+                    F20859FB168142DB0710642CA8A84B0AC2C44DF427BDE5BECD92EF4E9F6C2D27
+                    401092A0D8C0F57A7D6B8C5939E7664474179BC7397720A24D5996CBBAAEBF42
+                    E38BD8C2C698158005D1C93D7803F07262FC11C0BD3F70945F186300A00E5D47
+                    B4C071E787A65FDBB6ED88C879EF53D775157A027E3E440844FF424A2977FEAD
+                    E09CC1EB89FE023DF600B600BE03626E004C014C520A6711288AE2A1699A8FD0
+                    38ADF5B3B5F63DA5F62825F89798C5A7C4F96411E04404B811016E44801B11E0
+                    4604B811016E44801B11E04604B811016E44801B11E0460400406B5DFD679C4F
+                    96E6AEB576A7940AEE4E5B6BA7A9B573B5D727009A4CB982C825D067DF6FB96B
+                    AD2B6BED0E89F7017DAE7588B7FDD6F9F1799BBBD0B50486CE42C819B9886801
+                    E7DCE18FE971E0F8B97C83449F0122DA00580C4CCF955200F0E98D8D01CCCFE4
+                    0B265AA02CCBA531060317DD23004F97E4F12FBA63D7220809FC00D385767D85
+                    1BBE3B0000000049454E44AE426082}
+                  FileName = 'E:\Projekte\PCMManagerApp\Grafiken\48x48\mobilephone3.png'
+                end>
+              Align = Right
+              MarginWrapMode = Center
+              Position.X = 313.000000000000000000
+              Size.Width = 36.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = img_HandyFirmaClick
+            end
+          end
+          object lo_EMailFirma: TLayout
+            Align = Top
+            Margins.Right = 16.000000000000000000
+            Position.Y = 1343.000000000000000000
+            Size.Width = 349.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 16
+            object edt_EMailfirma: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 17
+              KeyboardType = EmailAddress
+              ReturnKeyType = Done
+              TextSettings.FontColor = claWhite
+              Margins.Left = 16.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Size.Width = 292.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object img_EMailfirma: TImage
+              MultiResBitmap.Height = 48
+              MultiResBitmap.Width = 48
+              MultiResBitmap = <
+                item
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    870000000473424954080808087C086488000007AD494441546881ED996D6C95
+                    E519C77FD7737A78D354535D44DC8C097B43F9E0ACE8B062024E68A145D031BA
+                    4467E2348AFAA9B8855138F7F51C6D6589391F34F13523814D874A2672801698
+                    2E40D4B53AF6C565E0922D731F4067083D5384F6F4B9F6E1DC95D3D3F3D2D353
+                    C896F84F9AF4B99FEBE577F5B9DF0BFFE79273197CD3A64D1701AC5BB76E6022
+                    FEAD8FA7AF10AB6BC5389C4EB4BC57CCE69C14A0AA9702CF032B7CD30EE00155
+                    FD743CFE2D4FED995A773248C0E90E98360D8E6785CBEEDE9968D956683BE905
+                    A8EAF78157816F14BCFA17F02355FD6339FF158FED991D116C37E3DAD16F8E67
+                    0399D9F2C6C6E6DFE7B706B5239F95AA3E021CE02C7CE47FF06D07BCCD18B526
+                    7B7FD29ADCF3F4992C7D63E10166D60D5B747B61EBA47C0155BD10781168CF6B
+                    FE5444EE0230B3DF0097E6BDDB06DCAFAA9F79F85F0AFCBC62229195E98D4B76
+                    E437D5FC0554F56A33EB2F80EF33B346E7DC5EE7DC5E336B04FAF2DEB7037701
+                    B485BD9B72F0C347E2316645F16C0336DC5F24D5BBE90D8BDF1853532DF0A954
+                    6A7A26937918B830AFF924F08CAA0EE6DBAAEA14E021E062E088AA6E6B4BF63C
+                    01B22E071F5B7426C89E0E86EAF602F30A529D8A2476FDEE8DB7FD75520BA845
+                    ADE1DE6E11FB85451C9D1267E1EF3A9B8FB5267B3608F2D828C3E8A8997CF7EE
+                    5D6EC94BC5E28CAB0055B549608EC8F5FBCD6DC9DE2E60BD451C0D0816196706
+                    0962D73446FD87FE14BB713326F7E4F925D38966572AE8A4CE4215D4A5AA9BDB
+                    C2DEC781F5021F06048B86A664878663F13761B0F73DB9F1B6C6E1BE7B11DB92
+                    739167D21B9768B9A0E7ED0BC462B16FF771FDB7C464378005DC28D9A1BF138B
+                    FD010BE6E6AC4E9F8E6CEA8A79D6B7FFB0CCBF7B6762F15644CAE6AEAB164455
+                    273C6E96257B67FE07A278C4E7336275FF8C449688D9DCB316D3A605727AC79F
+                    65DE0D3B134BB650B2E39C55D92EE4678E49518BEEF9FAEE44F3A10BA2E139D3
+                    EA86E6CCBCF4E21326D19A3186D1D4ADDF8BDEFB8BAAB68E87A16401AAFA8888
+                    ACAD991C58A13D57D5111C6ED5BDBF0DA4EE3B12C59B8E7FFCE99B01D2341ADE
+                    5E68A46F0DB014D80E20226B4BADDE50A40BE5AFAA6616D60ADFF2D49EA9C327
+                    D90E7C4DB076FC8237A6638F859F0A606653816E556D226FF51ED1A82FE09CBB
+                    B2C8AA5A93EA4E8A82349635F2F0AA1AE5C317A8DDCCFA9D73578E8A9FFF2022
+                    2F0073F29A3E9A10B5575BB2F71A38FE28CC2C6963C6B3BB5CF3C3696919F928
+                    85F05F3288C81CE005A079A4AD700C2CCCFBFD4955DD3C2172AF08BA6066B999
+                    AE7B5762C9C3E5A64ACFF06409C63105E48FF847C2305C092022EB29D26DCB69
+                    B9F67EF333682BFA32E20C66F7A513CD9D25E0CDE7C433E40FE251B352B969F4
+                    B099BDA6AA0F3AE79E00EE05B2E32D20CBF067F50C7F38163EFA1B812D48BB96
+                    5F9574857B9D734FA8EA8366F61A70B8549E9205D4D7D7FF00D80D3CABAAA173
+                    6E0B30E640515466328519A7E3B1D822183EE25B4F01DD307C6DA9F3ADD7EDCE
+                    B92DAA1A02CF02BB3D4B75057474747C01DC496E4A4D8461F83CB06F3CFCADC9
+                    BDE17070EA5D80782CB6C8B0B5D9BAE8AA74A2B933AD6DA72AB8EFF3B9123EF7
+                    9D9EA5A8CA6E2554356B660F846178CC07BC2C954AB5970B08204433CC82135F
+                    4894ED59BFF4DF40AA0234F0E5F9621BB01C483AE7542AEC852AEE4645C454D5
+                    016B8065994C66BFAA3694F349BBA58FEE722D4D1E7E5C52D5864C26B31F5806
+                    AC515557097E5C05E425784E4456018DC0A1C205A516F9588780461159A5AACF
+                    8DD7B7AAF38073EEF520081603978BC8DBAA3AB7A25305A9EA5C11791BB83C08
+                    82C5CEB9D7ABF1AFFA409348240E01B7F8C783C964724131BBEEEEEE4B92C9E4
+                    FC643239BFBBBBFB926236DEF7A07FBCC5C7AE4A133A91A9EA0766D6041C8BA2
+                    68DFC88207E09CBB5955DF1A1C1CFC248AA277A2287A677070F013557DCB3977
+                    F3885D18862BA328DA071C33B32655FD60222C133E528661F811B000D82F2227
+                    CC4C547583881C0066030E68F13F0E982D22075475839989889C00F6030B7CAC
+                    09A9EA1359BE54F504B03C954A4D0FC3F025E0C7C0AF810755357FBEEF55D514
+                    F01CF058188657D7D7D7FFB4A3A363792DF9A1C60200BABABA2ECF64323B801B
+                    802EE7DCC662D39FAA9E32B37BFC5FBB3393C9CCEEEAEA5AD1D9D979AC96FC35
+                    DD4AA8EA75434343FDE4A6D635BE0B959CBBFD9AB281DC9AD2383434D4AFAAD7
+                    D5C230E10254F587E4E6EE06E08E6AE66E6F7B87F73DE4634D485517E0076B82
+                    DC15FA29E05655DD596D1CEF73AB8FF1AAAA26CCACEA1B8FAA0AF083F5652004
+                    FE013455BAEF2F27EFDBE463856118BE9C4AA5A65713A39AADC4AC81818103E4
+                    CECBEFC7E3F19B5475EC7EBF4AA9EA87F178FC26E07DA07D6060E080AACE1AAF
+                    FFB80A4826938D40BF88CC037A80859D9D9D1F4F88B8887CAC85408FCFD1EF73
+                    5654C502C2305C1545D141E00A6033B0BCF06A6332E4632EF739AE88A2E86018
+                    86AB2AF9952CC0CC240C436766AF0033C8EDCFEF53D5711F2BAB95AA669D73F7
+                    0149608699BDE2194A0EEE512F0A2E715F015603591179C839F7E239A12EA130
+                    0CEF37B367C82DB6232C239C5F7297EB42ABCDEC7360E5F98607F039577A86D5
+                    A5EC466D25CC6C40442E1A7916910B80B4AA9E2BCE8A1219DD7BCC6CD43FCD83
+                    02E3ADE781A92615328E2AA0A1A1E167C0D38555FE2FC8333DED19BFD2579A2C
+                    FD17C40746B47C840EFE0000000049454E44AE426082}
+                  FileName = 'E:\Projekte\PCMManagerApp\Grafiken\48x48\mail_write.png'
+                end>
+              Align = Right
+              MarginWrapMode = Center
+              Margins.Top = 1.000000000000000000
+              Margins.Bottom = 1.000000000000000000
+              Position.X = 313.000000000000000000
+              Position.Y = 1.000000000000000000
+              Size.Width = 36.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              OnClick = img_EMailfirmaClick
+            end
+          end
+        end
+      end
+    end
+  end
+  object imglst_Contacts: TImageList
+    Source = <
+      item
+        MultiResBitmap.LoadSize = 0
+        MultiResBitmap = <
+          item
+            Scale = 8.000000000000000000
+            Width = 128
+            Height = 128
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000080000000800806000000C33E61
+              CB0000000473424954080808087C086488000008A649444154789CEDDD7F68D4
+              E71D07F0F7E7F99EB167AAB2D5428781ADF38F81FD431A258CFD55112EA7C965
+              7FD8B84EA84528DB28761D824E6D723EBB14A5DACA1C6E6CA3D055A8C3B852CC
+              253149A10A852D8B3F86B49551A66CABB68EDA8931F134B9EFF3D91FB974593A
+              4DEEBCBBCFF3E4FBBCE0C084E49EF7D7EFFBBEF77CEF7BF704F03CCFF33CCFF3
+              3CCFF33C2F2AE87EEF406BCDE508E295466B7D5FFB50952B88E7265F8088F305
+              88385F8088F30588385F8088F30588B858A507B8DFF3D4A8ABF4EB2CFE081071
+              BE0011E70B1071159F034C97CAF4F96B07F7904D27AB3A67F2478088F3058838
+              5F8088F30588385F8088F30588385F8088F30588385F8088F30588385F8088AB
+              FAB50009045C66C249620C31D10513067F0FE2A39FD5E7FE320A00E7E28FD786
+              B9DA8755107E83989733A18118AB19A893CE5E6973B900D708381C828EF4B427
+              CE81E84B17A1BAFEFBCF9B85DB2500EF020098A9A963A03E006F646013802555
+              495D6573AF0086AE40993D0F3C78F3F5635B37E40000E912EE87887B80B300CE
+              B61EE86CBB3DB270338CDA05C54BCB9A57D89C29C03030B618B48F31B6379B4E
+              DD2AE77D178AF4AB94CEFE8E50B3F30678FB22A0A69C634899130530C08585C0
+              C6AE74E3F94A8E93D5A95B00DA9B337D7F30C011052CAFE478D53007CE02CC5B
+              E3716AE84E272BBAF3A7EA4E27CF8FC7A901306F556BCC4A71BA000C7368A519
+              DA30B0AD71B4DA630F6C6B1C5D69863630CCA16A8F5D4ECE3E0530CCA1EEF4BA
+              E7BB053368AD0D80E79B33BD20A82D82514AE6E811C0BCB5CA0CBD209D62D244
+              16379F0E9C2B80012EDC8907CF141E7D56D05A9B3BF1E019035C90CE522CA70A
+              300C8C11B051E2397F2603DB1A4709D8380C8C496729865305580CDA57CDD97E
+              B1BAD3C9F38B41FBA47314C39D0218BAC2666CAF748C99B019DB0B4357A473CC
+              963B0550664FE18518AB6575EA1694D9239D63B65C29C0B5071EBCF9BA7488D9
+              2A64BD269D63369C28000187BFB8B0E380635B37E408382C9D63369C2840083A
+              229DA158AE64B6BE00045CEE694F9C93CE51AC9EF6C439022E4BE79889F50560
+              C2C9FFF7660EEB1131134E4AC79889F50520C690748652B990DDFA0280F1A174
+              84923990DDFA02841CFB87748652B990DDFA0204F1D1CFA43394CA85ECD61760
+              F2ADDB2E7221BBF505F02ACBFA029C8B3F5E2B9DA1542E64B7BE0061AEF661E9
+              0CA57221BBF5050828FF75E90CA57221BBF50500E131E908257320BBF5056042
+              83748652B990DDFA0210633598DD5B719C9988B15A3AC64CAC2F0003754D1D03
+              F5D2398AD5D43150EFC2C7CBAD2F000004E08DD2198AE54A66270AC0C0A6D603
+              9D71E91CB3D57AA0335E5853C07A4E1400C092DB230B374B8798AD4256271694
+              70A5008051BB523ABB403AC64C523ABB0046ED92CE315BEE1440F15252353BA5
+              63CC8454CD4E97561171A700006E80B73767FA5648E7B89BE64CDF8A1BE0EDD2
+              398AE154011601350C1C49ECEFB7EE224B627F7F2D03475C5B3AC6A902008002
+              96CFCF856F68ADADC9AEB556F373E11B2E2E1963CD7F6271D4FA33AAE1A0748A
+              491359D47AE91CA57076851082DAD29CE9C52A33F482D45A015A6B7546351C74
+              757510C0D923C00482DA725635744ACC0912FBFB6BCFAA864E97773EE0780126
+              A8F5F3723C54CDB383E64CDF8A79391E72F5B03F95B34F01532960F93030D492
+              E9DFC7666C6FA53E469ED2D905A4FC4291569A3845E436A066732A73E27F978A
+              BD4FAD073AE3934BC53278E9A272DCA925E64C01BEA0782940BFBC3DB2E8672D
+              99BE7B2E167D4F53168BBE3D52582C5AB9F711C599CC890270387683829AC5D3
+              BEBD8481AD0ABCB5A5A3FF3277F415B75C7C47FF6A06EAEEB6CBEF32A673DC2E
+              80C17528FC28A4585F0CBC13A01F03F8D2052306EAC0789A81A7C10CA5F2E03B
+              F371567D7BE207EE004AE50106B8F00BF778ACDF02F81721C5F6C680240C7E0D
+              85AF5464FBAAC0E5029C5231DA74BCADF1E3C2D73BD7E99E8301053FC91BF36C
+              2C500F9573B07C683E8F29F55AC8E1CF7B75D3D5C2B73BBFFB52FF9F8CE1C300
+              9E28E778D5E2DE69A0191F0761C74A33B866CACE0700F4EAA6ABD9DDC91D398A
+              D731D353047ADB203F52F250C88F10E86D667A2A47F1BAECEEE48E293B1F0070
+              BCADF1E39566700D083B60C6C74B1D4B8A5B4700838B50B1EF67DB93A7B3F7F8
+              B1537AF56D0047011C6DD59D35B960E1779451EB98F8896160C5DD4EE18681B1
+              45C079623A6594E95D10DEFAE331BD61C6851F0BAF44BE9CCA9C781706BF87C2
+              B2D236B0FADC2900D1B13CC2674FA4D70D17F36B851D78AA70C30F7E7366DEA7
+              9F7EBE4C055C67185F050045F8B709E9F2B7BEF6D0C5DFFE7055C98FE26C7AED
+              E9B5BAB73E46C16B606E2DF57EAAC9FA025C32089705F869575BE24039968A29
+              ECE0BF166E657742AF1B06F3F75A5EEAFFF3C5102F7F5321A8C438E562F51CC0
+              203FF268C02D5DEDC9579D5A278888BBDA93AF3E1A70CBFDCC41AAC1DE02185C
+              27155BD3DDBEB6573A4AA9BADBD7F6928AAD81C175E92C77636B018629A612DD
+              6D49EB17599A49775B7288622A01A0A8B94BB5585880AB79627AB2AB2D71463A
+              49B974B525CE10D393C0D5BC7496E9AC2B00E19117BB7637BE239DA3DCBA7637
+              BE4378E445E91CD359550002DEAB3783AF48E7A8947A33F80A01EF49E798CA9A
+              025C32084343CFD9F4A760CA4D6B6D4243CF5D3208A5B34CB2A600CB80377B74
+              E307D2392AAD47377EB00C78533AC7246B0A402A9CB387FEE96CDA562B0AC04C
+              83C7D34DEF4BE7A896E3E9A6F79969503A0760490188F8A874866AB3659BAD28
+              406842675FED2B952DDB2C5E803CCC27BDBAE923E91CD5D6AB9B3ECAC37C229D
+              43BC000AEAB4740629366CBB7801025064267FD3D9B0EDE20500E36FD211C458
+              B0EDF20500FF533A811CF96D172F00B1F997740629366CBBF85BC28C521FA632
+              7DD23144D870D143FC08E0C9F20588385F8088ABFA1C209B4EBAB7F2F71CE68F
+              0011E70B1071BE001157F13980D6DA9D4FF444903F02449C2F40C4F902449C2F
+              40C4F902449C2F40C4F902789EE7799EE7799EE7799EE745C47F0099A2E7F99F
+              7ADE7A0000000049454E44AE426082}
+            FileName = 'E:\Projekte\PCMManagerApp\Grafiken\128x128\photo_portrait.png'
+          end>
+        Name = 'photo_portrait'
+      end>
+    Destination = <
+      item
+        Layers = <
+          item
+            Name = 'photo_portrait'
+          end>
+      end>
+    Left = 256
+    Top = 232
+  end
+end

@@ -1,0 +1,730 @@
+object frmRestoreDetail: TfrmRestoreDetail
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 707
+  ClientWidth = 411
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnShow = FormShow
+  OnFocusChanged = FormFocusChanged
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 0
+  object tbMain: TRectangle
+    Align = Top
+    Fill.Kind = None
+    Margins.Top = 33.000000000000000000
+    Position.Y = 33.000000000000000000
+    Sides = [Bottom]
+    Size.Width = 411.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claDarkgray
+    object lblModulName: TLabel
+      Align = Client
+      StyledSettings = [Family, Size]
+      Size.Width = 411.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Datenwiederherstellung'
+      object Layout1: TLayout
+        Align = Left
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btnBack: TButton
+          Tag = 6
+          Align = Client
+          StyledSettings = [Family, Size, Style]
+          IconTintColor = claWhite
+          ModalResult = 2
+          Size.Width = 50.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'priortoolbutton'
+          TabOrder = 0
+          OnClick = btnBackClick
+        end
+      end
+      object Layout2: TLayout
+        Align = Right
+        Position.X = 361.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+      end
+    end
+  end
+  object Layout3: TLayout
+    Align = Client
+    Size.Width = 411.000000000000000000
+    Size.Height = 626.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object vsbxmain: TVertScrollBox
+      Align = Contents
+      Size.Width = 411.000000000000000000
+      Size.Height = 626.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'framedscrollboxstyle'
+      TabOrder = 2
+      Viewport.Width = 391.000000000000000000
+      Viewport.Height = 622.000000000000000000
+      object loMain: TLayout
+        Align = Top
+        Size.Width = 391.000000000000000000
+        Size.Height = 800.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object vsbxBemerkung: TVertScrollBox
+          Align = Client
+          Size.Width = 391.000000000000000000
+          Size.Height = 800.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Viewport.Width = 391.000000000000000000
+          Viewport.Height = 800.000000000000000000
+          object btnBetragNull: TButton
+            Align = MostBottom
+            Margins.Left = 20.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Margins.Bottom = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 745.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 35.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            Text = 'ausgew'#228'hltes Backup wiederherstellen'
+            OnClick = btnBetragNullClick
+          end
+          object lblTarget: TLabel
+            Align = Top
+            StyledSettings = [Family]
+            Margins.Left = 20.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            Text = 'Vorhandene Sicherungen:'
+            TabOrder = 114
+          end
+          object lo8Belege: TLayout
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 306.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 137
+            object loLocalAccountSwitch: TLayout
+              Align = Right
+              Position.X = 273.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object swBelege: TSwitch
+                Align = Right
+                IsChecked = False
+                Position.X = 34.000000000000000000
+                Size.Width = 44.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object loLocalAccountDetail: TLayout
+              Align = Client
+              Margins.Left = 5.000000000000000000
+              Size.Width = 268.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object loLocalAccountDetailDescription: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 268.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claDimgray
+                Text = 'Belege wiederherstellen'
+                TabOrder = 1
+              end
+            end
+          end
+          object lo9Gutscheine: TLayout
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 336.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 136
+            object Layout6: TLayout
+              Align = Right
+              Position.X = 273.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object swGutschein: TSwitch
+                Align = Right
+                IsChecked = False
+                Position.X = 34.000000000000000000
+                Size.Width = 44.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object Layout7: TLayout
+              Align = Client
+              Margins.Left = 5.000000000000000000
+              Size.Width = 268.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label1: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 268.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claDimgray
+                Text = 'Gutscheine wiederherstellen'
+                TabOrder = 1
+              end
+            end
+          end
+          object lo7Ausgaben: TLayout
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 276.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 134
+            object Layout9: TLayout
+              Align = Right
+              Position.X = 273.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object swAusgaben: TSwitch
+                Align = Right
+                IsChecked = False
+                Position.X = 34.000000000000000000
+                Size.Width = 44.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object Layout10: TLayout
+              Align = Client
+              Margins.Left = 5.000000000000000000
+              Size.Width = 268.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label2: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 268.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claDimgray
+                Text = 'Ausgaben wiederherstellen'
+                TabOrder = 1
+              end
+            end
+          end
+          object lo6Einnahmen: TLayout
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 246.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 133
+            object Layout12: TLayout
+              Align = Right
+              Position.X = 273.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object swEinnahmen: TSwitch
+                Align = Right
+                IsChecked = False
+                Position.X = 34.000000000000000000
+                Size.Width = 44.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object Layout13: TLayout
+              Align = Client
+              Margins.Left = 5.000000000000000000
+              Size.Width = 268.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label3: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 268.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claDimgray
+                Text = 'Einnahmen wiederherstellen'
+                TabOrder = 1
+              end
+            end
+          end
+          object lo5Serials: TLayout
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 216.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 131
+            object Layout15: TLayout
+              Align = Right
+              Position.X = 273.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object swSerial: TSwitch
+                Align = Right
+                IsChecked = False
+                Position.X = 34.000000000000000000
+                Size.Width = 44.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object Layout16: TLayout
+              Align = Client
+              Margins.Left = 5.000000000000000000
+              Size.Width = 268.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label4: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 268.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claDimgray
+                Text = 'Serials wiederherstellen'
+                TabOrder = 1
+              end
+            end
+          end
+          object lo4Passwort: TLayout
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 186.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 130
+            object Layout18: TLayout
+              Align = Right
+              Position.X = 273.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object swPasswort: TSwitch
+                Align = Right
+                IsChecked = False
+                Position.X = 34.000000000000000000
+                Size.Width = 44.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object Layout19: TLayout
+              Align = Client
+              Margins.Left = 5.000000000000000000
+              Size.Width = 268.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label5: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 268.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claDimgray
+                Text = 'Passw'#246'rter wiederherstellen'
+                TabOrder = 1
+              end
+            end
+          end
+          object lo3Kalender: TLayout
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 156.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 129
+            object Layout21: TLayout
+              Align = Right
+              Position.X = 273.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object swKalender: TSwitch
+                Align = Right
+                IsChecked = False
+                Position.X = 34.000000000000000000
+                Size.Width = 44.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object Layout22: TLayout
+              Align = Client
+              Margins.Left = 5.000000000000000000
+              Size.Width = 268.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label6: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 268.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claDimgray
+                Text = 'Kalender wiederherstellen'
+                TabOrder = 1
+              end
+            end
+          end
+          object lo2Kontakte: TLayout
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 126.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 128
+            object Layout24: TLayout
+              Align = Right
+              Position.X = 273.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object swKontakt: TSwitch
+                Align = Right
+                IsChecked = False
+                Position.X = 34.000000000000000000
+                Size.Width = 44.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object Layout25: TLayout
+              Align = Client
+              Margins.Left = 5.000000000000000000
+              Size.Width = 268.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label7: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 268.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claDimgray
+                Text = 'Kontakte wiederherstellen'
+                TabOrder = 1
+              end
+            end
+          end
+          object lo1All: TLayout
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 96.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 132
+            object Layout27: TLayout
+              Align = Right
+              Position.X = 273.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object swAll: TSwitch
+                Align = Right
+                IsChecked = False
+                Position.X = 34.000000000000000000
+                Size.Width = 44.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+                OnClick = swAllClick
+              end
+            end
+            object Layout28: TLayout
+              Align = Client
+              Margins.Left = 5.000000000000000000
+              Size.Width = 268.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label8: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 268.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claDimgray
+                Text = 'Alle Module wiederherstellen'
+                TabOrder = 1
+              end
+            end
+          end
+          object Label9: TLabel
+            Align = Top
+            StyledSettings = [Family]
+            Margins.Left = 20.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 69.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            Text = 'Tabellen ausw'#228'hlen:'
+            TabOrder = 113
+          end
+          object cbxFiles: TComboBox
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'comboboxstyle'
+            TabOrder = 0
+            OnChange = cbxFilesChange
+          end
+          object Label10: TLabel
+            Align = Top
+            StyledSettings = [Family, FontColor]
+            Margins.Left = 20.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 401.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 75.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TabOrder = 138
+          end
+          object ProgressBar1: TProgressBar
+            Align = Bottom
+            Orientation = Horizontal
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 685.000000000000000000
+            Scale.Y = 5.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 10.000000000000000000
+            Size.PlatformDefault = False
+            Value = 50.000000000000000000
+            Visible = False
+          end
+          object Layout4: TLayout
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 366.000000000000000000
+            Size.Width = 351.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 135
+            object Layout5: TLayout
+              Align = Right
+              Position.X = 273.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object Switch1: TSwitch
+                Align = Right
+                IsChecked = False
+                Position.X = 34.000000000000000000
+                Size.Width = 44.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object Layout8: TLayout
+              Align = Client
+              Margins.Left = 5.000000000000000000
+              Size.Width = 268.000000000000000000
+              Size.Height = 30.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label11: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 268.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claDimgray
+                Text = 'Kalenderabos wiederherstellen'
+                TabOrder = 1
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  object qryRestore: TFDQuery
+    Connection = dmMain.conRestore
+    Left = 183
+    Top = 292
+  end
+  object ImageList1: TImageList
+    Source = <
+      item
+        MultiResBitmap.LoadSize = 0
+        MultiResBitmap = <
+          item
+            Scale = 3.000000000000000000
+            Width = 48
+            Height = 48
+            PNG = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              015F494441546843ED965D4E83401485492CBA00B55B35AEA0CBD0F888B54BA9
+              BA14E08D5FCF29778C4C19A7FA3297E47E49038169CE37C3094C661886611886
+              31671CC7BCEBBAC7AAAAEEE5D27A80FCA6699A171C474CE2BD2CCB5BB9A51F91
+              7FA6BC039338E249DCC910BDC035772BEFD3B6ED4E86E9048EDFB5F1C11378C5
+              612343F54139BF360E91CF65A83E28175979D5F2569B2450CE6A9302CA25A90D
+              F723087840C0BF578772496A23F29F0CC2D7F0A9288A2BB97531F86B9ADAD475
+              BD45C0C71435C149E0707120C726A90DE9FB7E3745CD11A1E8243026EDDB0601
+              D7083A9C123D6275C2101D6F9B61186E10F83645CF09D589D792D56609062278
+              7F32F0F0EB84739D1F290447EB84531DB50911AB93AADA84A0088416EBB4842A
+              7907848275FA89C8A7AD4D88DFEA4454AEBC0F05217A56A755C83B203AAB93C8
+              EBAC4D08D609DB8E3D7E05E4D7B1F23E10E777E0CF3B55C3300CC330D64D967D
+              01BA1F4067839902F00000000049454E44AE426082}
+            FileName = 'C:\Users\Entwicklung\Desktop\checkmark-256.png'
+          end>
+        Name = 'checkmark-256'
+      end
+      item
+        MultiResBitmap.Height = 50
+        MultiResBitmap.Width = 50
+        MultiResBitmap.LoadSize = 0
+        MultiResBitmap = <
+          item
+            Width = 50
+            Height = 50
+            PNG = {
+              89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+              B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              01C2494441546843ED974B4EC330108693D233B00496484880380537E1120828
+              3760C7E306BD44A49E83C296D065A2BC95F04F3BA970691C1A35AD2DCD27A150
+              C7EAFC9F1C7B524710044110046137789E370C82E0903FDA495555C33CCF5FD3
+              34FDC2DF190FDB054BBCE13AC74A19E456246A48264992539E6636B427E871E2
+              EC0A189F465174CC53CD05590F34121F711C9FF05473198FC724F1C2B915AC91
+              405692785EC456C1F8D42689A695B0664FE836F63B2E473CD55C1072ED114B90
+              0456C27A097A9CEC90C8B24C27D1DF9E408D018ADFA2B35EF05027F03DDA3E51
+              9665AF122E8A3C5131BC1E7C43E69C6F6D444B9FF8ECF588458D412D5103117F
+              53199668EA13FD373B14B99E4C2625D75CC22BF3AFC70CD3F7DF2750CBC5DEB8
+              EF2A8369DA3EB1D366879A2473D720330BC3F092A72AE0B6EE74DA4F9F406DDD
+              CACCB0328A0C86CD6D76C840A7D7439B0C3EB635BBFDBF3B218B8BC0238DCC15
+              C236F60923246A9089566684E6B548F80BDFF753FE5701F3FBED135D41369279
+              5CB732ABD04A18FD7B0219E72BA393C1FD69AFAF1DDB02591B4F3392306A4FB4
+              81CC7FFA0C24ECF83DB10AB22F65AC95A82199A2286E70B55742100441100461
+              DB38CE0F48FD6F07D51D063A0000000049454E44AE426082}
+            FileName = 'C:\Users\Entwicklung\Desktop\checkmark-256.png'
+          end>
+        Name = 'Item 0'
+      end>
+    Destination = <
+      item
+        Layers = <
+          item
+            Name = 'Item 0'
+            SourceRect.Right = 50.000000000000000000
+            SourceRect.Bottom = 50.000000000000000000
+          end>
+      end>
+    Left = 552
+    Top = 320
+  end
+  object qryMain: TFDQuery
+    Connection = dmMain.ZmiappConnection
+    Left = 103
+    Top = 292
+  end
+end

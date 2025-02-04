@@ -1,0 +1,961 @@
+inherited frmMain_XLgXhdpiTb: TfrmMain_XLgXhdpiTb
+  ClientHeight = 1255
+  ClientWidth = 800
+  DesignerMasterStyle = 3
+  inherited loMainPCM: TLayout
+    Size.Width = 800.000000000000000000
+    Size.Height = 1167.000000000000000000
+    inherited tcmain: TTabControl
+      Size.Width = 800.000000000000000000
+      Size.Height = 1167.000000000000000000
+      Sizes = (
+        800s
+        1167s
+        800s
+        1167s
+        800s
+        1167s
+        800s
+        1167s
+        800s
+        1167s)
+      inherited ti1Login: TTabItem
+        ExplicitSize.cx = 8.000000000000000000
+        ExplicitSize.cy = 8.000000000000000000
+        inherited vsbxLogin: TVertScrollBox
+          Size.Width = 800.000000000000000000
+          Size.Height = 1167.000000000000000000
+          Viewport.Width = 371.000000000000000000
+          Viewport.Height = 868.000000000000000000
+          inherited loLoginHeader: TLayout
+            inherited imgLogo: TImage
+              MultiResBitmap.Height = 200
+              MultiResBitmap.Width = 200
+            end
+          end
+          inherited loLoginBody: TLayout
+            inherited edtBenutzername: TEdit
+              inherited imgUser: TImage
+                MultiResBitmap.Height = 48
+                MultiResBitmap.Width = 48
+              end
+            end
+            inherited edtPasswort: TEdit
+              inherited imgUnlock: TImage
+                MultiResBitmap.Height = 48
+                MultiResBitmap.Width = 48
+              end
+              inherited imgLock: TImage
+                MultiResBitmap.Height = 48
+                MultiResBitmap.Width = 48
+              end
+            end
+          end
+        end
+      end
+      inherited tiActiveFrame: TTabItem
+        ExplicitSize.cx = 8.000000000000000000
+        ExplicitSize.cy = 8.000000000000000000
+        inherited FrameLayout: TLayout
+          Size.Width = 800.000000000000000000
+          Size.Height = 1167.000000000000000000
+        end
+      end
+      inherited tiDetailFrame: TTabItem
+        ExplicitSize.cx = 135.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        inherited DetailFrameLayout: TLayout
+          Size.Width = 800.000000000000000000
+          Size.Height = 1167.000000000000000000
+        end
+      end
+      inherited tiFinger: TTabItem
+        ExplicitSize.cx = 8.000000000000000000
+        ExplicitSize.cy = 8.000000000000000000
+        inherited BiometricImage: TImage
+          MultiResBitmap.Height = 160
+          MultiResBitmap.Width = 160
+        end
+      end
+      inherited ti2MainProgram: TTabItem
+        ExplicitSize.cx = 8.000000000000000000
+        ExplicitSize.cy = 8.000000000000000000
+        inherited tcMainApp: TTabControl
+          Size.Width = 800.000000000000000000
+          Size.Height = 1167.000000000000000000
+          Sizes = (
+            800s
+            1167s
+            800s
+            1167s
+            800s
+            1167s
+            800s
+            1167s
+            800s
+            1167s
+            800s
+            1167s
+            800s
+            1167s)
+          inherited ti1MainHome: TTabItem
+            CustomIcon.Height = 48
+            CustomIcon.Width = 48
+            CustomIcon.TransparentColor = 16711680
+            ExplicitSize.cx = 130.000000000000000000
+            ExplicitSize.cy = 49.000000000000000000
+            inherited vsbxmain: TVertScrollBox
+              Size.Width = 800.000000000000000000
+              Size.Height = 1167.000000000000000000
+              Viewport.Width = 371.000000000000000000
+              Viewport.Height = 868.000000000000000000
+              inherited loMain: TLayout
+                inherited rec1Contacts: TRectangle
+                  inherited recContactsHeader: TRectangle
+                    inherited recContacts: TRectangle
+                      inherited imgContacts: TImage
+                        MultiResBitmap.Height = 24
+                        MultiResBitmap.Width = 24
+                      end
+                      inherited lblContactsHeader: TLabel
+                        TextSettings.Font.StyleExt = {00060000000000000004000000}
+                      end
+                      inherited imgHomeContacts: TImage
+                        MultiResBitmap.Height = 24
+                      end
+                    end
+                  end
+                  inherited laContacts: TLayout
+                    inherited laContactsMain: TLayout
+                      inherited crlContactsMain: TCircle
+                        inherited crlContactsSub: TCircle
+                          inherited laContactsDetail: TLayout
+                            inherited lblKontakteAnzahl: TLabel
+                              TextSettings.Font.StyleExt = {00060000000000000004000000}
+                            end
+                          end
+                        end
+                      end
+                    end
+                  end
+                  inherited trvwContacts: TTreeView
+                    Viewport.Width = 233.000000000000000000
+                    Viewport.Height = 98.000000000000000000
+                    inherited trvwitmName: TTreeViewItem
+                      TextSettings.Font.StyleExt = {00070000000000000004000000}
+                    end
+                  end
+                end
+                inherited rec2Calendar: TRectangle
+                  inherited Rectangle22: TRectangle
+                    inherited Rectangle23: TRectangle
+                      inherited Image36: TImage
+                        MultiResBitmap.Height = 24
+                        MultiResBitmap.Width = 24
+                      end
+                      inherited Label86: TLabel
+                        TextSettings.Font.StyleExt = {00060000000000000004000000}
+                      end
+                      inherited imgHomeCalendar: TImage
+                        MultiResBitmap.Height = 24
+                      end
+                    end
+                  end
+                  inherited laCalendar: TLayout
+                    inherited laCalendarMain: TLayout
+                      inherited crlCalndarMain: TCircle
+                        inherited crlCalendarSub: TCircle
+                          inherited laCalendarDetails: TLayout
+                            inherited lblKalenderAnzahl: TLabel
+                              TextSettings.Font.StyleExt = {00060000000000000004000000}
+                            end
+                          end
+                        end
+                      end
+                    end
+                  end
+                  inherited TreeView2: TTreeView
+                    Viewport.Width = 233.000000000000000000
+                    Viewport.Height = 98.000000000000000000
+                    inherited Einnahmen: TTreeViewItem
+                      TextSettings.Font.StyleExt = {00070000000000000004000000}
+                    end
+                  end
+                end
+                inherited rec3PasswordSerials: TRectangle
+                  inherited rec3left: TRectangle
+                    inherited Rectangle31: TRectangle
+                      inherited Rectangle32: TRectangle
+                        inherited Image39: TImage
+                          MultiResBitmap.Height = 24
+                          MultiResBitmap.Width = 24
+                        end
+                        inherited Label94: TLabel
+                          TextSettings.Font.StyleExt = {00060000000000000004000000}
+                        end
+                        inherited imgHomePass: TImage
+                          MultiResBitmap.Height = 24
+                        end
+                      end
+                    end
+                    inherited Layout88: TLayout
+                      inherited Layout89: TLayout
+                        inherited Circle13: TCircle
+                          inherited CirclePWD: TCircle
+                            inherited Layout90: TLayout
+                              inherited lblPasswortAnzahl: TLabel
+                                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                              end
+                            end
+                          end
+                        end
+                      end
+                    end
+                  end
+                  inherited rec3Right: TRectangle
+                    inherited Rectangle35: TRectangle
+                      inherited Rectangle36: TRectangle
+                        inherited Image40: TImage
+                          MultiResBitmap.Height = 24
+                          MultiResBitmap.Width = 24
+                        end
+                        inherited Label98: TLabel
+                          TextSettings.Font.StyleExt = {00060000000000000004000000}
+                        end
+                        inherited imgHomeSerial: TImage
+                          MultiResBitmap.Height = 24
+                        end
+                      end
+                    end
+                    inherited Layout91: TLayout
+                      inherited Layout92: TLayout
+                        inherited Circle15: TCircle
+                          inherited CircleSer: TCircle
+                            inherited Layout93: TLayout
+                              inherited lblSerialAnzahl: TLabel
+                                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                              end
+                            end
+                          end
+                        end
+                      end
+                    end
+                  end
+                end
+                inherited rec4Fincance: TRectangle
+                  inherited Rectangle26: TRectangle
+                    inherited Rectangle27: TRectangle
+                      inherited Image37: TImage
+                        MultiResBitmap.Height = 24
+                        MultiResBitmap.Width = 24
+                      end
+                      inherited Label90: TLabel
+                        TextSettings.Font.StyleExt = {00060000000000000004000000}
+                      end
+                      inherited imgHomeFinance: TImage
+                        MultiResBitmap.Height = 517
+                        MultiResBitmap.Width = 753
+                      end
+                    end
+                  end
+                  inherited Layout85: TLayout
+                    inherited Layout86: TLayout
+                      inherited Circle7: TCircle
+                        inherited Pie4: TPie
+                          inherited FloatKeyAnimation4: TFloatKeyAnimation
+                            Keys = <
+                              item
+                              end
+                              item
+                                Key = 0.119999997317791000
+                              end
+                              item
+                                Key = 0.250000000000000000
+                              end
+                              item
+                                Key = 0.375000000000000000
+                              end
+                              item
+                                Key = 0.500000000000000000
+                              end
+                              item
+                                Key = 0.625000000000000000
+                              end
+                              item
+                                Key = 0.750000000000000000
+                              end
+                              item
+                                Key = 0.875000000000000000
+                              end
+                              item
+                                Key = 1.000000000000000000
+                              end>
+                          end
+                        end
+                        inherited CircleFin: TCircle
+                          inherited Layout87: TLayout
+                            inherited lblUGEs: TLabel
+                              TextSettings.Font.StyleExt = {00060000000000000004000000}
+                            end
+                          end
+                        end
+                      end
+                    end
+                  end
+                  inherited TreeView1: TTreeView
+                    Viewport.Width = 90.000000000000000000
+                    Viewport.Height = 98.000000000000000000
+                    inherited TreeViewItem14: TTreeViewItem
+                      TextSettings.Font.StyleExt = {00070000000000000004000000}
+                    end
+                  end
+                  inherited TreeView3: TTreeView
+                    Viewport.Width = 143.000000000000000000
+                    Viewport.Height = 98.000000000000000000
+                    inherited TreeViewItem15: TTreeViewItem
+                      TextSettings.Font.StyleExt = {00070000000000000004000000}
+                    end
+                  end
+                end
+                inherited rec5BelegeGiftCards: TRectangle
+                  inherited rec5LEft: TRectangle
+                    inherited rec5LeftHeader: TRectangle
+                      inherited Rectangle14: TRectangle
+                        inherited Image34: TImage
+                          MultiResBitmap.Height = 24
+                          MultiResBitmap.Width = 24
+                        end
+                        inherited Label64: TLabel
+                          TextSettings.Font.StyleExt = {00060000000000000004000000}
+                        end
+                        inherited imgHomeBelege: TImage
+                          MultiResBitmap.Height = 517
+                          MultiResBitmap.Width = 753
+                        end
+                      end
+                    end
+                    inherited Layout76: TLayout
+                      inherited Layout77: TLayout
+                        inherited Circle2: TCircle
+                          inherited CircleBelege: TCircle
+                            inherited Layout78: TLayout
+                              inherited lblBelege: TLabel
+                                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                              end
+                            end
+                          end
+                        end
+                      end
+                    end
+                  end
+                  inherited rec5right: TRectangle
+                    inherited Rectangle19: TRectangle
+                      inherited Rectangle20: TRectangle
+                        inherited Image35: TImage
+                          MultiResBitmap.Height = 24
+                          MultiResBitmap.Width = 24
+                        end
+                        inherited Label72: TLabel
+                          TextSettings.Font.StyleExt = {00060000000000000004000000}
+                        end
+                        inherited imgHomeGutscheine: TImage
+                          MultiResBitmap.Height = 517
+                          MultiResBitmap.Width = 753
+                        end
+                      end
+                    end
+                    inherited Layout79: TLayout
+                      inherited Layout80: TLayout
+                        inherited Circle5: TCircle
+                          inherited CircleGUT: TCircle
+                            inherited Layout81: TLayout
+                              inherited lblGutschein: TLabel
+                                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                              end
+                            end
+                          end
+                        end
+                      end
+                    end
+                  end
+                end
+              end
+            end
+          end
+          inherited ti2MainKontakte: TTabItem
+            CustomIcon.Height = 48
+            CustomIcon.Width = 48
+            CustomIcon.LoadSize = 2
+            ExplicitSize.cx = 130.000000000000000000
+            ExplicitSize.cy = 49.000000000000000000
+            inherited lvKontakte: TListView
+              Margins.Left = 10.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Size.Width = 780.000000000000000000
+              Size.Height = 1167.000000000000000000
+            end
+          end
+          inherited ti3MainKalender: TTabItem
+            CustomIcon.Height = 48
+            CustomIcon.Width = 48
+            ExplicitSize.cx = 132.000000000000000000
+            ExplicitSize.cy = 49.000000000000000000
+            inherited tcKalender: TTabControl
+              Size.Width = 800.000000000000000000
+              Size.Height = 1167.000000000000000000
+              Sizes = (
+                800s
+                1118s
+                800s
+                1118s)
+              inherited TabItem1: TTabItem
+                Size.Width = 118.000000000000000000
+                ExplicitSize.cx = 64.000000000000000000
+                ExplicitSize.cy = 49.000000000000000000
+                inherited Calendar1: TCalendar
+                  Size.Width = 800.000000000000000000
+                end
+                inherited lvKalender1: TListView
+                  Size.Width = 800.000000000000000000
+                  Size.Height = 818.000000000000000000
+                end
+              end
+              inherited TabItem2: TTabItem
+                Size.Width = 98.000000000000000000
+                ExplicitSize.cx = 64.000000000000000000
+                ExplicitSize.cy = 49.000000000000000000
+                inherited lvKalender: TListView
+                  Size.Width = 800.000000000000000000
+                  Size.Height = 1118.000000000000000000
+                end
+              end
+            end
+          end
+          inherited ti4MainPasswort: TTabItem
+            CustomIcon.Height = 48
+            CustomIcon.Width = 48
+            ExplicitSize.cx = 132.000000000000000000
+            ExplicitSize.cy = 49.000000000000000000
+            inherited tcPassSerial: TTabControl
+              Size.Width = 800.000000000000000000
+              Size.Height = 1167.000000000000000000
+              Sizes = (
+                800s
+                1118s
+                800s
+                1118s)
+              inherited tiPasswort: TTabItem
+                Size.Width = 400.000000000000000000
+                ExplicitSize.cx = 262.000000000000000000
+                ExplicitSize.cy = 49.000000000000000000
+                inherited lvPasswort: TListView
+                  Size.Width = 800.000000000000000000
+                  Size.Height = 1118.000000000000000000
+                end
+              end
+              inherited tiSerial: TTabItem
+                Size.Width = 400.000000000000000000
+                ExplicitSize.cx = 145.000000000000000000
+                ExplicitSize.cy = 49.000000000000000000
+                inherited lvSerials: TListView
+                  Size.Width = 800.000000000000000000
+                  Size.Height = 1118.000000000000000000
+                end
+              end
+            end
+          end
+          inherited ti5MainFinanzen: TTabItem
+            CustomIcon.Height = 48
+            CustomIcon.Width = 48
+            ExplicitSize.cx = 130.000000000000000000
+            ExplicitSize.cy = 49.000000000000000000
+            inherited VertScrollBox7: TVertScrollBox
+              Size.Width = 800.000000000000000000
+              Size.Height = 1167.000000000000000000
+              Viewport.Width = 371.000000000000000000
+              Viewport.Height = 868.000000000000000000
+              inherited tcFinanzen: TTabControl
+                Sizes = (
+                  616s
+                  812s
+                  616s
+                  812s
+                  616s
+                  812s
+                  616s
+                  812s)
+                inherited tiAktuell: TTabItem
+                  ExplicitSize.cx = 262.000000000000000000
+                  ExplicitSize.cy = 49.000000000000000000
+                  inherited tcFinanzenOverview: TTabControl
+                    Sizes = (
+                      616s
+                      812s
+                      616s
+                      812s)
+                    inherited tiKomprimiert: TTabItem
+                      ExplicitSize.cx = 8.000000000000000000
+                      ExplicitSize.cy = 8.000000000000000000
+                      inherited Group: TScrollBox
+                        Viewport.Width = 371.000000000000000000
+                        Viewport.Height = 819.000000000000000000
+                        inherited Layout10: TLayout
+                          inherited Label13: TLabel
+                            TextSettings.Font.StyleExt = {00060000000000000004000000}
+                          end
+                        end
+                        inherited Layout14: TLayout
+                          inherited lrest: TLabel
+                            TextSettings.Font.StyleExt = {00060000000000000004000000}
+                          end
+                          inherited Label26: TLabel
+                            TextSettings.Font.StyleExt = {00060000000000000004000000}
+                          end
+                        end
+                        inherited recEinnahmen: TRectangle
+                          inherited Label11: TLabel
+                            TextSettings.Font.StyleExt = {00060000000000000004000000}
+                          end
+                        end
+                        inherited recAusgabenVar: TRectangle
+                          inherited Label14: TLabel
+                            TextSettings.Font.StyleExt = {00060000000000000004000000}
+                          end
+                        end
+                        inherited recAusgabenFix: TRectangle
+                          inherited Label2: TLabel
+                            TextSettings.Font.StyleExt = {00060000000000000004000000}
+                          end
+                        end
+                        inherited loKostenDatum: TLayout
+                          inherited loJahr: TLayout
+                            inherited Label51: TLabel
+                              TextSettings.Font.StyleExt = {00070000000000000004000000}
+                            end
+                          end
+                          inherited loMonat: TLayout
+                            inherited lblMonat: TLabel
+                              TextSettings.Font.StyleExt = {00070000000000000004000000}
+                            end
+                          end
+                        end
+                      end
+                    end
+                    inherited tiDetail: TTabItem
+                      ExplicitSize.cx = 8.000000000000000000
+                      ExplicitSize.cy = 8.000000000000000000
+                      inherited tcFinDetail: TTabControl
+                        Sizes = (
+                          616s
+                          812s
+                          616s
+                          812s
+                          616s
+                          812s)
+                        inherited tiFinEinDetail: TTabItem
+                          ExplicitSize.cx = 496.000000000000000000
+                          ExplicitSize.cy = 49.000000000000000000
+                          inherited ScrollBox1: TScrollBox
+                            Viewport.Width = 371.000000000000000000
+                            Viewport.Height = 819.000000000000000000
+                            inherited Layout19: TLayout
+                              inherited lblFinEinGesamt: TLabel
+                                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                              end
+                              inherited Label3: TLabel
+                                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                              end
+                            end
+                            inherited Label5: TLabel
+                              TextSettings.Font.StyleExt = {00060000000000000004000000}
+                            end
+                            inherited memFinEinDetailBesch: TMemo
+                              Viewport.Width = 240.000000000000000000
+                              Viewport.Height = 691.000000000000000000
+                            end
+                            inherited memFinEinDetailBetrag: TMemo
+                              Viewport.Width = 344.000000000000000000
+                              Viewport.Height = 691.000000000000000000
+                            end
+                          end
+                        end
+                        inherited tiFinvarDetail: TTabItem
+                          ExplicitSize.cx = 496.000000000000000000
+                          ExplicitSize.cy = 49.000000000000000000
+                          inherited ScrollBox2: TScrollBox
+                            Viewport.Width = 371.000000000000000000
+                            Viewport.Height = 819.000000000000000000
+                            inherited Layout41: TLayout
+                              inherited lblFinvarGesamt: TLabel
+                                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                              end
+                              inherited Label57: TLabel
+                                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                              end
+                            end
+                            inherited Label44: TLabel
+                              TextSettings.Font.StyleExt = {00060000000000000004000000}
+                            end
+                            inherited memFinvarDetailBesch: TMemo
+                              Viewport.Width = 240.000000000000000000
+                              Viewport.Height = 691.000000000000000000
+                            end
+                            inherited memFinvarDetailBetrag: TMemo
+                              Viewport.Width = 344.000000000000000000
+                              Viewport.Height = 691.000000000000000000
+                            end
+                          end
+                        end
+                        inherited tiFinfixDetail: TTabItem
+                          ExplicitSize.cx = 8.000000000000000000
+                          ExplicitSize.cy = 8.000000000000000000
+                          inherited ScrollBox3: TScrollBox
+                            Viewport.Width = 371.000000000000000000
+                            Viewport.Height = 819.000000000000000000
+                            inherited Layout21: TLayout
+                              inherited lblFinfixGesamt: TLabel
+                                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                              end
+                              inherited Label25: TLabel
+                                TextSettings.Font.StyleExt = {00060000000000000004000000}
+                              end
+                            end
+                            inherited Label27: TLabel
+                              TextSettings.Font.StyleExt = {00060000000000000004000000}
+                            end
+                            inherited memFinfixDetailBesch: TMemo
+                              Viewport.Width = 240.000000000000000000
+                              Viewport.Height = 691.000000000000000000
+                            end
+                            inherited memFinfixDetailBetrag: TMemo
+                              Viewport.Width = 344.000000000000000000
+                              Viewport.Height = 691.000000000000000000
+                            end
+                          end
+                        end
+                      end
+                    end
+                  end
+                end
+                inherited tiEinnahmen: TTabItem
+                  ExplicitSize.cx = 262.000000000000000000
+                  ExplicitSize.cy = 49.000000000000000000
+                end
+                inherited tiAusgaben: TTabItem
+                  ExplicitSize.cx = 145.000000000000000000
+                  ExplicitSize.cy = 49.000000000000000000
+                end
+                inherited tiBelege: TTabItem
+                  ExplicitSize.cx = 78.000000000000000000
+                  ExplicitSize.cy = 49.000000000000000000
+                end
+              end
+            end
+          end
+          inherited ti6Gutschein: TTabItem
+            CustomIcon.Height = 33
+            CustomIcon.Width = 50
+            ExplicitSize.cx = 48.000000000000000000
+            ExplicitSize.cy = 49.000000000000000000
+            inherited btnGutscheineVisible: TButton
+              Position.Y = 1087.000000000000000000
+              Size.Width = 768.000000000000000000
+            end
+            inherited Rectangle4: TRectangle
+              Position.Y = 1121.000000000000000000
+              Size.Width = 800.000000000000000000
+              inherited Rectangle1: TRectangle
+                Size.Width = 792.000000000000000000
+                inherited lblGesamt: TLabel
+                  Size.Width = 640.000000000000000000
+                end
+              end
+              inherited Rectangle2: TRectangle
+                Size.Width = 792.000000000000000000
+                inherited lblRest: TLabel
+                  Size.Width = 640.000000000000000000
+                end
+              end
+            end
+            inherited lvGutschein: TListView
+              Size.Width = 800.000000000000000000
+              Size.Height = 1083.000000000000000000
+            end
+          end
+          inherited ti7More: TTabItem
+            CustomIcon.Height = 48
+            CustomIcon.Width = 48
+            ExplicitSize.cx = 132.000000000000000000
+            ExplicitSize.cy = 49.000000000000000000
+            inherited tcMore: TTabControl
+              Size.Width = 800.000000000000000000
+              Size.Height = 1167.000000000000000000
+              Sizes = (
+                800s
+                1167s
+                800s
+                1167s
+                800s
+                1167s
+                800s
+                1167s)
+              inherited ti1ConfigMenu: TTabItem
+                ExplicitSize.cx = 8.000000000000000000
+                ExplicitSize.cy = 8.000000000000000000
+                inherited lbMore: TListBox
+                  Size.Width = 800.000000000000000000
+                  Size.Height = 1162.000000000000000000
+                  Viewport.Width = 371.000000000000000000
+                  Viewport.Height = 863.000000000000000000
+                  inherited lstbxi1Optionen: TListBoxItem
+                    inherited Layout1: TLayout
+                      inherited Image9: TImage
+                        MultiResBitmap.Height = 48
+                        MultiResBitmap.Width = 48
+                      end
+                    end
+                    inherited Layout2: TLayout
+                      inherited Label7: TLabel
+                        TextSettings.Font.StyleExt = {00070000000000000004000000}
+                      end
+                    end
+                  end
+                  inherited lstbxi2Calabo: TListBoxItem
+                    inherited Layout3: TLayout
+                      inherited Image2: TImage
+                        MultiResBitmap.Height = 48
+                        MultiResBitmap.Width = 48
+                      end
+                    end
+                    inherited Layout4: TLayout
+                      inherited Label1: TLabel
+                        TextSettings.Font.StyleExt = {00070000000000000004000000}
+                      end
+                    end
+                  end
+                  inherited lstbxi3Abmelden: TListBoxItem
+                    inherited Layout36: TLayout
+                      inherited Image38: TImage
+                        MultiResBitmap.Height = 48
+                        MultiResBitmap.Width = 48
+                      end
+                    end
+                    inherited Layout38: TLayout
+                      inherited Label23: TLabel
+                        TextSettings.Font.StyleExt = {00070000000000000004000000}
+                      end
+                    end
+                  end
+                  inherited lstbxi3Beenden: TListBoxItem
+                    inherited Layout37: TLayout
+                      inherited Image1: TImage
+                        MultiResBitmap.Height = 48
+                        MultiResBitmap.Width = 48
+                      end
+                    end
+                    inherited Layout39: TLayout
+                      inherited Label43: TLabel
+                        TextSettings.Font.StyleExt = {00070000000000000004000000}
+                      end
+                    end
+                  end
+                end
+              end
+              inherited ti1ConfigConfig: TTabItem
+                ExplicitSize.cx = 8.000000000000000000
+                ExplicitSize.cy = 8.000000000000000000
+                inherited vsbxConfigConfig: TVertScrollBox
+                  Size.Width = 800.000000000000000000
+                  Size.Height = 1167.000000000000000000
+                  Viewport.Width = 371.000000000000000000
+                  Viewport.Height = 868.000000000000000000
+                end
+              end
+              inherited ti1ConfigMoreModuls: TTabItem
+                ExplicitSize.cx = 8.000000000000000000
+                ExplicitSize.cy = 8.000000000000000000
+                inherited loConfigSecondConfig: TLayout
+                  Size.Width = 800.000000000000000000
+                  Size.Height = 1167.000000000000000000
+                end
+              end
+              inherited TabItem3: TTabItem
+                ExplicitSize.cx = 8.000000000000000000
+                ExplicitSize.cy = 8.000000000000000000
+                inherited lvCalabo: TListView
+                  Size.Width = 800.000000000000000000
+                  Size.Height = 1167.000000000000000000
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  inherited tbMain: TRectangle
+    Size.Width = 800.000000000000000000
+    inherited lblModulName: TLabel
+      Size.Width = 800.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      inherited loMainRight: TLayout
+        Position.X = 750.000000000000000000
+        inherited btnSynchronisation: TButton
+          Size.Width = 2.000000000000000000
+        end
+        inherited btnAddData: TButton
+          Size.Width = 2.000000000000000000
+        end
+      end
+    end
+  end
+  inherited mvMenu: TMultiView
+    inherited lstbxMenu: TListBox
+      Viewport.Width = 234.000000000000000000
+      Viewport.Height = 868.000000000000000000
+      inherited mvli101Home: TListBoxItem
+        inherited lo101HomeImage: TLayout
+          inherited img101Home: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited lo101HomeLabel: TLayout
+          inherited lbl101Home: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+      inherited mvli102Contact: TListBoxItem
+        inherited Layout43: TLayout
+          inherited Image20: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited Layout44: TLayout
+          inherited Label56: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+      inherited mvli103Kalender: TListBoxItem
+        inherited Layout45: TLayout
+          inherited Image21: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited Layout46: TLayout
+          inherited Label59: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+      inherited mvli104Password: TListBoxItem
+        inherited Layout47: TLayout
+          inherited Image22: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited Layout48: TLayout
+          inherited Label61: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+      inherited mvli105Serials: TListBoxItem
+        inherited Layout49: TLayout
+          inherited Image23: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited Layout50: TLayout
+          inherited Label63: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+      inherited mvli106Finanzen: TListBoxItem
+        inherited Layout51: TLayout
+          inherited Image24: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited Layout52: TLayout
+          inherited Label65: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+      inherited mvli107Eingang: TListBoxItem
+        inherited Layout53: TLayout
+          inherited Image25: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited Layout54: TLayout
+          inherited Label67: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+      inherited mvli108Ausgaben: TListBoxItem
+        inherited Layout55: TLayout
+          inherited Image26: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited Layout56: TLayout
+          inherited Label69: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+      inherited mvli109Belege: TListBoxItem
+        inherited Layout57: TLayout
+          inherited Image27: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited Layout58: TLayout
+          inherited Label71: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+      inherited mvli110Gutschein: TListBoxItem
+        inherited Layout63: TLayout
+          inherited Image30: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited Layout64: TLayout
+          inherited Label77: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+      inherited mvli111More: TListBoxItem
+        inherited Layout71: TLayout
+          inherited Image19: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+          end
+        end
+        inherited Layout72: TLayout
+          inherited Label83: TLabel
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+      end
+    end
+  end
+end

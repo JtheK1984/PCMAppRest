@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "179997971509",
+    "project_id": "pcm-manager",
+    "storage_bucket": "pcm-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179997971509:android:c21297d07373cf60ad0d7c",
+        "android_client_info": {
+          "package_name": "com.embarcadero.PCMManagerAPP"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "179997971509-pu388ou396r8o5sf9h0o83o3cml48u91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEBf9yKTznpUuFuZ8epvDUIVKO5QA-hVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "179997971509-pu388ou396r8o5sf9h0o83o3cml48u91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

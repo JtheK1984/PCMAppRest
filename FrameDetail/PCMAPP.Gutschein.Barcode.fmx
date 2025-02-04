@@ -1,0 +1,83 @@
+object frm_PCMAPP_GutscheinBarcodeDetail: Tfrm_PCMAPP_GutscheinBarcodeDetail
+  Left = 0
+  Top = 0
+  ClientHeight = 700
+  ClientWidth = 370
+  WindowState = wsMaximized
+  FormFactor.Width = 1920
+  FormFactor.Height = 1016
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Touch.InteractiveGestures = [Zoom]
+  OnGesture = FormGesture
+  DesignerMasterStyle = 3
+  object tb_Main: TRectangle
+    Align = Top
+    Fill.Kind = None
+    Margins.Top = 40.000000000000000000
+    Position.Y = 40.000000000000000000
+    Sides = [Bottom]
+    Size.Width = 370.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claDarkgray
+    object lbl_ModulName: TLabel
+      Align = Client
+      StyledSettings = [Family, Size, FontColor]
+      Size.Width = 370.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      Text = 'Barcode'
+      object lo_Left: TLayout
+        Align = Left
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btn_Back: TButton
+          Tag = 3
+          Align = Client
+          Hint = 'backsys'
+          IconTintColor = claDarkgray
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'priortoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = btn_BackClick
+        end
+      end
+    end
+  end
+  object rec_Barcode: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Size.Width = 370.000000000000000000
+    Size.Height = 612.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claWhite
+    object img_BarCode: TImage
+      MultiResBitmap = <
+        item
+        end
+        item
+          Scale = 2.000000000000000000
+        end>
+      Align = Center
+      Size.Width = 258.000000000000000000
+      Size.Height = 290.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+end

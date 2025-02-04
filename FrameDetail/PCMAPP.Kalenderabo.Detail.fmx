@@ -1,0 +1,419 @@
+object frm_PCMAPP_CalAboDetail: Tfrm_PCMAPP_CalAboDetail
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 598
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnShow = FormShow
+  OnFocusChanged = FormFocusChanged
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 0
+  object tb_Main: TRectangle
+    Align = Top
+    Fill.Kind = None
+    Margins.Top = 40.000000000000000000
+    Position.Y = 40.000000000000000000
+    Sides = [Bottom]
+    Size.Width = 640.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claDarkgray
+    object lbl_ModulName: TLabel
+      Align = Client
+      StyledSettings = [Family, Size, FontColor]
+      Size.Width = 640.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      Text = 'Kalenderabo'
+      object lo_Left: TLayout
+        Align = Left
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btn_Cancel: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 18
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'replytoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_CancelClick
+        end
+        object btn_Back: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 2
+          ModalResult = 2
+          Size.Width = 50.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'priortoolbutton'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_BackClick
+        end
+      end
+      object lo_Right: TLayout
+        Align = Right
+        Position.X = 590.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btn_Edit: TButton
+          Align = Right
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 20
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbuttonbordered'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_EditClick
+        end
+        object btn_Save: TButton
+          Align = Right
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 22
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbuttonbordered'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_SaveClick
+        end
+      end
+    end
+  end
+  object lo_Form: TLayout
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 510.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object vsbx_main: TVertScrollBox
+      Align = Contents
+      Size.Width = 640.000000000000000000
+      Size.Height = 510.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      TabStop = False
+      Viewport.Width = 640.000000000000000000
+      Viewport.Height = 510.000000000000000000
+      object lo_Main: TLayout
+        Align = Client
+        Size.Width = 640.000000000000000000
+        Size.Height = 510.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        TabStop = False
+        object vsbx_CalaboDetailView: TVertScrollBox
+          Align = Client
+          Size.Width = 640.000000000000000000
+          Size.Height = 510.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          TabStop = False
+          Viewport.Width = 640.000000000000000000
+          Viewport.Height = 510.000000000000000000
+          object lbl_link: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 69.000000000000000000
+            Size.Width = 608.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Link:'
+            TabOrder = 289
+          end
+          object lbl_Kalender: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 608.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Kalender:'
+            TabOrder = 290
+          end
+          object lbl_Passwort: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 197.000000000000000000
+            Size.Width = 608.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Passwort:'
+            TabOrder = 288
+          end
+          object lbl_Benutzer: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 133.000000000000000000
+            Size.Width = 608.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Benutzer:'
+            TabOrder = 287
+          end
+          object edt_Passwort: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 2
+            ReturnKeyType = Next
+            Password = True
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 224.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 608.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Password'
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object edt_Benutzer: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 160.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 608.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Benutzer'
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object edt_Link: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 0
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 96.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 608.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Link zum Kalender'
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object edt_Kalender: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 3
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 32.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 608.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Kalendername'
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object lo_Reminder: TLayout
+            Align = Top
+            Margins.Top = 5.000000000000000000
+            Position.Y = 261.000000000000000000
+            Size.Width = 640.000000000000000000
+            Size.Height = 91.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 294
+            object lo_ReminderLabel: TLayout
+              Align = Client
+              Size.Width = 490.000000000000000000
+              Size.Height = 59.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 292
+              object lo_ReminderCheck: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Margins.Left = 16.000000000000000000
+                Margins.Right = 16.000000000000000000
+                Position.X = 16.000000000000000000
+                Size.Width = 458.000000000000000000
+                Size.Height = 27.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claWhite
+                TextSettings.Trimming = None
+                Text = 'an Termine erinnern:'
+                TabOrder = 288
+              end
+              object lo_ReminderMinutes: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Margins.Left = 16.000000000000000000
+                Margins.Right = 16.000000000000000000
+                Position.X = 16.000000000000000000
+                Position.Y = 27.000000000000000000
+                Size.Width = 458.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claWhite
+                TextSettings.Trimming = None
+                Text = 'vor Termin erinnern:'
+                TabOrder = 287
+              end
+            end
+            object lo_ReminderDetail: TLayout
+              Align = Right
+              Position.X = 490.000000000000000000
+              Position.Y = 32.000000000000000000
+              Size.Width = 150.000000000000000000
+              Size.Height = 59.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 291
+              object cbx_Reminderbefore: TComboBox
+                Align = Top
+                Enabled = False
+                Items.Strings = (
+                  '0 Minuten'
+                  '5 Minuten'
+                  '10 Minuten'
+                  '15 Minuten'
+                  '20 Minuten'
+                  '30 Minuten'
+                  '1 Stunde'
+                  '2 Stunden'
+                  '3 Stunden'
+                  '4 Stunden'
+                  '5 Stunden'
+                  '6 Stunden'
+                  '7 Stunden'
+                  '8 Stunden'
+                  '9 Stunden'
+                  '10 Stunden'
+                  '11 Stunden'
+                  '12 Stunden'
+                  '18 Stunden'
+                  '1 Tag'
+                  '2 Tage'
+                  '3 Tage'
+                  '4 Tage'
+                  '1 Woche'
+                  '2 Wochen')
+                ItemIndex = 3
+                Margins.Right = 16.000000000000000000
+                Placement = RightCenter
+                Position.Y = 27.000000000000000000
+                Size.Width = 134.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 287
+              end
+              object lo_Reminderbefore: TLayout
+                Align = Top
+                Size.Width = 150.000000000000000000
+                Size.Height = 27.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 290
+                object sw_Reminderbefore: TSwitch
+                  Align = Right
+                  Enabled = False
+                  IsChecked = False
+                  Margins.Left = 16.000000000000000000
+                  Margins.Right = 16.000000000000000000
+                  Position.X = 90.000000000000000000
+                  Size.Width = 44.000000000000000000
+                  Size.Height = 27.000000000000000000
+                  Size.PlatformDefault = False
+                  TabOrder = 0
+                end
+              end
+            end
+            object lbl_ReminderHeader: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Margins.Left = 16.000000000000000000
+              Margins.Top = 5.000000000000000000
+              Margins.Right = 16.000000000000000000
+              Position.X = 16.000000000000000000
+              Position.Y = 5.000000000000000000
+              Size.Width = 608.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'Erinnerungen:'
+              TabOrder = 287
+            end
+          end
+        end
+      end
+    end
+  end
+end

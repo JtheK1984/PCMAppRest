@@ -1,0 +1,996 @@
+object frm_PCMAPP_PasswortDetail: Tfrm_PCMAPP_PasswortDetail
+  Left = 0
+  Top = 0
+  Caption = 'Passw'#246'rter'
+  ClientHeight = 700
+  ClientWidth = 370
+  Quality = HighQuality
+  WindowState = wsMaximized
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnShow = FormShow
+  OnFocusChanged = FormFocusChanged
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 3
+  object tb_Main: TRectangle
+    Align = Top
+    Fill.Kind = None
+    Margins.Top = 40.000000000000000000
+    Position.Y = 40.000000000000000000
+    Sides = [Bottom]
+    Size.Width = 370.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claDarkgray
+    object lbl_ModulName: TLabel
+      Align = Client
+      StyledSettings = [Family, Size, FontColor]
+      Size.Width = 370.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      TextSettings.Trimming = None
+      Text = 'Passsw'#246'rter'
+      object lo_Left: TLayout
+        Align = Left
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btn_Back: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 2
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'priortoolbutton'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_BackClick
+        end
+        object btn_Cancel: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 18
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'replytoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_CancelClick
+        end
+      end
+      object lo_Right: TLayout
+        Align = Right
+        Position.X = 320.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btn_Edit: TButton
+          Align = Right
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 20
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbuttonbordered'
+          TabOrder = 1
+          TextSettings.Trimming = None
+          OnClick = btn_EditClick
+        end
+        object btn_Save: TButton
+          Align = Right
+          IconTintColor = claWhite
+          Images = frm_PCM_Main.imglst_main
+          ImageIndex = 21
+          Position.X = 2.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbutton'
+          TabOrder = 0
+          TextSettings.Trimming = None
+          Visible = False
+          OnClick = btn_SaveClick
+        end
+      end
+    end
+  end
+  object lo_Form: TLayout
+    Align = Client
+    Size.Width = 370.000000000000000000
+    Size.Height = 612.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object vsbx_main: TVertScrollBox
+      Align = Contents
+      Size.Width = 370.000000000000000000
+      Size.Height = 612.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      TabStop = False
+      Viewport.Width = 370.000000000000000000
+      Viewport.Height = 612.000000000000000000
+      object lo_Main: TLayout
+        Align = Client
+        Size.Width = 370.000000000000000000
+        Size.Height = 612.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        TabStop = False
+        object vsbx_PasswortDetailView: TVertScrollBox
+          Align = Client
+          Size.Width = 370.000000000000000000
+          Size.Height = 612.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          TabStop = False
+          Viewport.Width = 365.000000000000000000
+          Viewport.Height = 612.000000000000000000
+          object lbl_Typ: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 264.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Typ:'
+            TabOrder = 105
+          end
+          object lbl_User: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 72.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Benutzer:'
+            TabOrder = 104
+          end
+          object lbl_Beschreibung: TLabel
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 27.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            Text = 'Bezeichnung:'
+            TabOrder = 103
+          end
+          object edt_Target: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 0
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 35.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object edt_Beschreibung: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            ReturnKeyType = Next
+            TextSettings.FontColor = claWhite
+            Position.X = 16.000000000000000000
+            Position.Y = 99.000000000000000000
+            Enabled = False
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+          end
+          object cbx_Typ: TComboBox
+            Align = Top
+            Enabled = False
+            Items.Strings = (
+              'APP'
+              'Arbeit'
+              'Banking'
+              'E-Mail'
+              'Internet'
+              'Sonstige'
+              'VPN'
+              'Windows'
+              'W-Lan / Router')
+            Margins.Left = 16.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 291.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 4
+            OnChange = cbx_TypChange
+          end
+          object lo_MAIL_PostausgangsVerschluesselung: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 968.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 15
+            object edt_MAIL_PostausgangsVerschluesselungConfig: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              ReturnKeyType = Done
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object lbl_MAIL_PostausgangsVerschluesselung: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'E-Mail Postausgang Verschl'#252'sselung:'
+              TabOrder = 106
+            end
+          end
+          object lo_MAIL_PostausgangsPort: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 904.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 14
+            object lbl_MAIL_PostausgangsPort: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'E-Mail Postausgang Port:'
+              TabOrder = 107
+            end
+            object edt_MAIL_PostausgangsPortConfig: TNumberBox
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              Cursor = crIBeam
+              Max = 99999.000000000000000000
+              KeyboardType = PhonePad
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              HorzIncrement = 0.000000000000000000
+              VertIncrement = 0.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+          end
+          object lo_MAIL_Postausgangsserver: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 840.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 13
+            object lbl_MAIL_Postausgangsserver: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'E-Mail Postausgang Server:'
+              TabOrder = 110
+            end
+            object edt_MAIL_PostausgangsserverConfig: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+          end
+          object lo_MAIL_PosteingangsVerschluesselung: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 776.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 12
+            object lbl_MAIL_PosteingangsVerschluesselung: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'E-Mail Posteingang Verschl'#252'sselung:'
+              TabOrder = 109
+            end
+            object edt_MAIL_PosteingangsVerschluesselungConfig: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+          end
+          object lo_MAIL_PosteingangsPort: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 712.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 11
+            object edt_MAIL_PosteingangsPortConfig: TNumberBox
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              Cursor = crIBeam
+              Max = 99999.000000000000000000
+              KeyboardType = PhonePad
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              HorzIncrement = 0.000000000000000000
+              VertIncrement = 0.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object lbl_MAIL_PosteingangsPortConfig: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'E-Mail Posteingang Port:'
+              TabOrder = 113
+            end
+          end
+          object lo_APP_Port: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 584.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 9
+            object edt_APP_PortConfig: TNumberBox
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              Cursor = crIBeam
+              Max = 99999.000000000000000000
+              CanFocus = False
+              KeyboardType = PhonePad
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              HorzIncrement = 0.000000000000000000
+              VertIncrement = 0.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object lbl_APP_PortConfig: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'APP Port:'
+              TabOrder = 112
+            end
+          end
+          object lo_APP_Verschluesselung: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 520.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 8
+            object lbl_APP_Verschluesselung: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'APP Verschl'#252'sselung:'
+              TabOrder = 115
+            end
+            object edt_APP_VerschluesselungConfig: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+          end
+          object lo_VPNApp: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 456.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 7
+            object edt_APP_IPConfig: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object lbl_APP_IP: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'VPN / APP IP:'
+              TabOrder = 117
+            end
+          end
+          object lo_VPNShared: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 392.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 6
+            object lbl_VPN_SharedSecret: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'VPN Shared Secret:'
+              TabOrder = 115
+            end
+            object edt_VPN_SharedSecretConfig: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+          end
+          object lo_WLAN: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 328.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 5
+            object lbl_WLANConfig: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'W-LAN Schl'#252'ssel:'
+              TabOrder = 116
+            end
+            object edt_WLANConfig: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+          end
+          object lo_MAIL_Posteingangsserver: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 648.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 10
+            object edt_MAIL_PosteingangsserverConfig: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              TabOrder = 0
+              ReturnKeyType = Next
+              TextSettings.FontColor = claWhite
+              Position.Y = 27.000000000000000000
+              Enabled = False
+              Size.Width = 333.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              StyledSettings = [Family, Style, FontColor]
+            end
+            object lbl_MAIL_PosteingangsserverConfig: TLabel
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 333.000000000000000000
+              Size.Height = 27.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TextSettings.Trimming = None
+              Text = 'E-Mail Posteingang Server:'
+              TabOrder = 116
+            end
+          end
+          object lo_Link: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 200.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            object lo_LinkDesc: TLayout
+              Align = Client
+              Size.Width = 283.000000000000000000
+              Size.Height = 59.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object lbl_linkURL: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 283.000000000000000000
+                Size.Height = 27.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Size = 16.000000000000000000
+                TextSettings.Font.StyleExt = {00070000000000000004000000}
+                TextSettings.FontColor = claWhite
+                TextSettings.Trimming = None
+                Text = 'Link:'
+                TabOrder = 129
+              end
+              object edt_linkURL: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                ReturnKeyType = Next
+                TextSettings.FontColor = claWhite
+                Enabled = False
+                Size.Width = 283.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                StyledSettings = [Family, Style, FontColor]
+              end
+            end
+            object lo_LinkImg: TLayout
+              Align = Right
+              Position.X = 283.000000000000000000
+              Size.Width = 50.000000000000000000
+              Size.Height = 59.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object img_Link: TImage
+                MultiResBitmap = <
+                  item
+                    Width = 48
+                    Height = 48
+                    PNG = {
+                      89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                      870000000473424954080808087C08648800000ADF494441546881ED596B7454
+                      D515FEF6B993CC0061626626303E51AB2E2DD2362030C160040326C8C48A4005
+                      1752041595875ABB8A1AC2CD04642DC1C712AD8FAAB5A2D645170249CC03B056
+                      D264C243583E8056AB451432904CD20C814C66E6EEDD1F21401E374F7EFAFDBB
+                      E7ECC7F7DD73EE39FB9C0BFC849FD02FD0F90822C58BAD758EA49B00BA092C29
+                      10B91AD1883B80FA040070DBDC1B9D1EDF4C6F5EE91C22BA86483E8D247279C9
+                      9229CDFDCD6DE98F73EDAEE5A389D5C2BA70783A003B2080020002342BDC70B7
+                      180A2C2220AF0FA300592A821C2D186B98AA976E5416F54A41CEE43D7DE5D0A7
+                      11A8F1EB231538072456B03A00655C0CA85926293E700CA6B9D99BC68C04AB32
+                      00760000A31E1ADD6B331A8A6B90CCFFD027C4FAC2A5572370748F3ED01A93D5
+                      04E317618B76DB4537E8A7002058957B2780590060007E8DA9024A7E64C83F93
+                      3DBECFA6AE2C4923A68F00D8619C3C29DAA0470C07AF2F1EB799EB0DF7BD5189
+                      6D1EAAE3585F04F478046A76EAD7C0E00F95C2700010418E2BD5B70A00EA2A73
+                      DE8989BA592375BF739C5E0A00597AB13DDEA25D2F2C7384A3F3A1E2E25A32CA
+                      C282B49D6F06071A0B89690108BF1442B3086FD66079DAE1D1BF38EF02EAFCCB
+                      6F8C52ACC08238C769B70F1C63F3664F5BBDDDB1E9C98C609D3FD74B36553E77
+                      6B8A21CDB69560990385A4CE6231D388F55915C34450D4BE2F001843417F55C4
+                      2550DA178ED1FA57FD1610ACD4C74135960103135ADB44E819576ADE1F6ED34B
+                      BF524AD66A6CDB6C68919B61C85A28FCAC236BD443930230050CCD78E5FDF4F2
+                      9011175FD775E6538DE0845B9DE3F4CA3E0BA8D9A95FC3D2EC3FFBE64F0B8071
+                      C83976D595D9F9652F00B2A46B22F083A3D985BAB71600EAF7E917C49AF97D05
+                      6475E38718A2758AACA9C963F5AF7B2DE0E81E7D605C8477B5CE790060C67E4D
+                      C9378661A4B9ACB51765174FFB3D8055A60C381A15B15DF5E729153665F07B50
+                      0DD707C24DF16E9B5B7547FEDC9CD17835A675C1680FD340D698AC3E973C0090
+                      86350E4FFE1D4642E4F2993B322C4498D155725271554579930E6B063F03851B
+                      80449BDBE65660E33B087603001BB15A21D498C5500AC3AD31596DDADF59638D
+                      5F1F19803CDCFA2C846F0199CFA7D4C66C5F71CA7D5B6E991F0E0DF28BE0575D
+                      0930803A0010854BCE340A3EA7F8D84887C7375648E62ACDF289B0CA04A2C7CD
+                      E204200FD7F8F5919DF5753A858255B95B014C0200303E8252B3E77D9A221CB6
+                      65B3C4566B4ABBB42BE267C1876DD7365EF9C74B0FDCA6889F04409AC1B32364
+                      2165E1614A35EF4942FDA960CC5D48900D00BDD945B06D4E8F6F72B7026A76EA
+                      3728E1DDA71F77380E1F9CE8FD7AFE28C5D82838E74DF6100AE47961BCFF73BB
+                      D558CF1A122034580137B6E843B5A1383DD972FC10DDF07AB4BE72798A10B919
+                      940D259348DAAE684C6A74F2587D4FDBF8ED138A3C78D643ADBEFDC07D4389F1
+                      496FC907180644166CC9BD75A7DD2AF950345D09659E21DF92FD4262B5E978CC
+                      E5F8A1F2D101B06892E4F195BA52F31E04CBCA2EB99D469B1190E2C5D6EAC149
+                      C7EA83B0BBDDB4CEE9C95BEAF595AC01E8F1DE900700223C5EB03CF3D960D58A
+                      BC404096BBDD5D2CD98C9331156DB620CE21C0970A2862C2CCF623D01C45C385
+                      27EA87D2947567AAD836B55030C939DE4A1CBED0AD663B3C7AF1D4BC322F38B2
+                      142AAE77EC99BFB1FEBCF185BAAAE50F0924D7EDEEC65E619005718300808011
+                      028C20E968668D436230C9391EC0F6B3AEE78048D2955233EF2A4FFD343BAFF4
+                      2592EA2D676A985E4094DAB461C64C16A69CDEFA760722493FF7B9ED37C092A2
+                      291C886F9239427818CADDA7729B8006942C8E3FA102C9FDE0DA012258229036
+                      1F71DB725AE1AA6804D780B1CB7C8BEB41224818C39C32B8261481AD7F87A656
+                      34D7201AEF343E74A5AE3A726E7B3B9A5CC99ACC2BD233F782E81610DD428297
+                      C1D1686F92695015C146A4C19630B0FFD401B0F19DCD25135CE3561D99BCA66C
+                      D0B95D6D04849A2C0F116454ED4E7DE2FA89E5DFBF95E1FF5FC18ACC456489CF
+                      0010EA693E437039130EC4C2C1C8F9E04F4A1D76A4E65778F3CB165B4FE25553
+                      014B2BD31241F2C0B1A6A3DB0C4DFD47117F16ACCA797FCB1DFE2A221923A027
+                      C0E675CBD98CB260C8183D60B1B99E391F02AA03945EB767C56510098694CC36
+                      15008EE5BBC6E4EFBED036F49CC3869A5577C2F8E8ED4955C98577FA9F234806
+                      10E8F2FC4A40C6D4BCB2BB1D63690580D7DA75370950D61C45434F050C498E05
+                      8170034806DB8146530122320C0004AADD61833204525E7B22F64E819EF50530
+                      743BBA4144F0A7DB7D9E2CA7C7B710ACB288F132080BB468E46297C797698B93
+                      453D211F0B072316D2A64F2BCA6C06641101015301CC74140048DAAA3C6B7CE2
+                      F640853E041CBB5380FB04D86996D8AA6440B5608B37AFE4B9055B53F73AC6F9
+                      16CD2F99B0F19EBF4FC8F6E695CC7778F2DF05D3EBDD0988B33A7393527D3BEC
+                      5AF80D88BA5E806F4C052885C3339EDB304088BFEF3C5CA24D23AEFA4BD6EE39
+                      6F8DAFFAA02837D3435069CCD8DF99B55B4103D1A331557DC4EB2BAD3E82E65A
+                      21793B44F47A965E7C09292EEF8ABC61E08724BB7A7EAAAF6C8108DD0D0004DA
+                      672E8050DE7CEA82E124F09B05550A5788E0558D9A8ED4F957AC7B7362E57FC9
+                      12BD350474B1E2B82D00DC6E050D00EC80B2901A1B31B4AD0837767AD20200A5
+                      51210DD72344B2EC4CA36087A9804822970BF314476A7E050315E68400D8AC76
+                      2159449AAC29CAF11EB1139B9E5B4DF088FB46FDB85807BF6366408C16714CAD
+                      371CA16892612EA064C9946688B8A6AED8769952F20080A66E699054CED037C4
+                      C35017F78A3E212D7BD5F6A144B2CBCC84355C0600021C6AF1E18DEDEF533B14
+                      0CA469EF88167D635DB1769020F70702E8A42E6C410CD13A675DFD1B616DF03C
+                      B37B203308D397054F651C23C628138B7F69CC2FDEF1F47627A9F0752D4DF44A
+                      7BAB0E025A2F5A3F539E7C8727FF5DF710149B91B0C0729CA6AC6B6650BA998D
+                      1988783B00888A767231D0108E1A5AFA03FE117BA311E325C06663F0B6C2DCAC
+                      DDED2D3B2DD988D532307E97A517DB855066468241034E7B987E88E6025A7C99
+                      E33AECECCC89DFBA6FD48F8743096F9092BB420013AB651DA3980828D233F742
+                      D16B71A44689529DAF488C3D24F21B889006319906E61060FA0CFD9304A5E4C5
+                      0EA448DE820841C94800B0835E2AD233F7F658400BC1C8134248767DBF7F1FA2
+                      B11FDBF4C58C007378E26F4B6FAAF6E695BCDBDDF58A095C612D9221226DF602
+                      26DAE0F0E43F9F9D5FF630A05DCB8CFDE0C81366414C0514EADE53B6845021CD
+                      FC9B41164B9BE1638BB62F39ED9913A48CF5506AB6598CEE4082514E8FE5DFAD
+                      175B04D9EC0AD6DD3335BF344D186B81489DC09856A87B4DA7688F4F5CC1AA9C
+                      F701350B84C7A231F5DE3D95A927AD4D720880ABAF0260E0A06D7868C46BC3BE
+                      CA64C0E51CA3D6FF3A3F757418526A41CCA2213EB320777297FB518F4F4B4693
+                      E57E1A101BAEA00EBCBA0DB556251FF78B3C0068B8AEE9A0FDD9B907463F4903
+                      58C356EBA36146BE55459A08B66EC9035D7D03ED306482DE6831249B85E7AD58
+                      A18B403EEE17F9D320C252A860437593B55E046BE320DF19ACA5F6843CD0877F
+                      64F595CB530CD2AE985E965E9080E65DA490D27BDA1D1102D80E7A091C79A2AB
+                      39DF1E7DBA7508EE7AEA52E798553F7857167B42AC2AECBD18C9CEC0E06DC46A
+                      99D952D915FAFD9FD8EB2BCD1523F21869F189BD740D817823845EE96C87ED29
+                      CECB8FEEAC178BADF10D6ABC08A50B248580AB057087800400B0038D040404F8
+                      8640FB20D8114D32769C8F1FDD3FE127F413FF0796C9AF5422BC8F5400000000
+                      49454E44AE426082}
+                    FileName = 'C:\Users\Entwicklung\Desktop\browser.png'
+                  end>
+                Align = Client
+                MarginWrapMode = Center
+                Size.Width = 50.000000000000000000
+                Size.Height = 59.000000000000000000
+                Size.PlatformDefault = False
+                OnClick = img_LinkClick
+              end
+            end
+          end
+          object lo_Password: TLayout
+            Align = Top
+            Margins.Left = 16.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 16.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 136.000000000000000000
+            Size.Width = 333.000000000000000000
+            Size.Height = 59.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            object lo_PasswordDesc: TLayout
+              Align = Client
+              Size.Width = 283.000000000000000000
+              Size.Height = 59.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object edt_Pass: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Top
+                TabOrder = 0
+                ReturnKeyType = Next
+                Password = True
+                TextSettings.FontColor = claWhite
+                Position.Y = 27.000000000000000000
+                Enabled = False
+                Size.Width = 283.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                StyledSettings = [Family, Style, FontColor]
+              end
+              object lbl_pass: TLabel
+                Align = Top
+                StyledSettings = [Family, Style, FontColor]
+                Size.Width = 283.000000000000000000
+                Size.Height = 27.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Size = 16.000000000000000000
+                TextSettings.Font.StyleExt = {00070000000000000004000000}
+                TextSettings.FontColor = claWhite
+                TextSettings.Trimming = None
+                Text = 'Passwort:'
+                TabOrder = 117
+              end
+            end
+            object lo_PasswordImg: TLayout
+              Align = Right
+              Position.X = 283.000000000000000000
+              Size.Width = 50.000000000000000000
+              Size.Height = 59.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object img_Passwordnotvis: TImage
+                MultiResBitmap.Height = 50
+                MultiResBitmap = <
+                  item
+                    Width = 48
+                    Height = 48
+                    PNG = {
+                      89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                      870000000473424954080808087C08648800000371494441546881ED994D885B
+                      5514C77FE7369374EC487D0EC516AAA25DC850A19B2994164A8AC545C1855DCC
+                      A6A59B2E1475ACA06188A0EF66350C992ECAA80B775670318B8A085D6817A130
+                      58D08DE03814BF500BEA223C87CE9864669AE326C58FBC97BC97BCDB07657EBB
+                      9C73CF39FF7F72EF7B2F096CB3CD50485A8D16171777ACACAC1C57D5678149E0
+                      49C0EBA403E047E02B11F96C6262E2FAD4D4D49D34E60E6DA05AADEE5A5B5B7B
+                      59445E011E8D59F6ABAABE333636F66EA9545A1F66FE50062A95CA73AAFA1EB0
+                      7FC016B744E425DFF73F1D54C34006ACB50698035E1FB4C7BF50E0223063AD6D
+                      272DDE91B4A023FE03E045D23943021C050E148BC54F6AB59A262936030C9C07
+                      CE0E50D78FB39DDE8948F40E562A95E755F54A9F654BC047C698A55C2E770B60
+                      6B6B6BBFAA1E55D533C0B19E82444EFBBEFF715C4DB10DCCCDCD3DD868346E02
+                      FBC2F2AAFA9331E605DFF73FEFD5C75A7B5255DF1791272296FC363A3AFAD4CC
+                      CCCCED38BA626FA146A3B107B81991BE212293FDC403586BAF89C824702362C9
+                      BE66B3F95A5C5D890FA1B5B608F840B113FAA150281C2E97CB41923EB3B3B35E
+                      ABD5FA12381092FE0378CC5ABBD1AF4FE2436CADAD596B4F0027809A31E67C52
+                      F100E5723930C69C8F483F029C8CD327B5478941B1D65E039E09492D586B5FED
+                      573FC865345544E4C388D4E138F5991B50D5A58854D8D9E8227303C02F11712F
+                      22FE1F3237D0E34A938B539FB98161D9369035B1F6D93DA092B580CC88BC13EB
+                      D5E94230EE559B1B9C2B8CB0FB5E8ABA4B6B93D59D792E7BF5A024A7165A616B
+                      22B75030EE5555992E8CB813D88FC208BB55990EC63D80D0C78AC843DCDCE09C
+                      2B6149E9A525D24056DB268C5E5A9C5D85DAF0B351AE00B485D3061E7731C795
+                      81EB7746FF3AB5E7D0FC3AC0EF5FBFF196693C7015389EF62027373263CC85BD
+                      1DF1007B0FCDAF1B632E3899E5A2E943EB7C132796064E0CFCB98BA7E3C4D2C0
+                      898176BB7D49976DFEEE6B5DB6F976BB7DC9C52C2706B69AF523716269E0E610
+                      E7C7BF9383FF7C5191837623977FF87B27B39C34357CDB1D946527B35C344543
+                      0C84C552C08D0143F7BB1D164B65940BD4748B0D8BA580934709513D53FFE2ED
+                      CDFFC546D4C1EF804E0CA8E89B5D3112FDF1129BC82DD4DA64D5C9C401E8A525
+                      D2C0CE3C97DDC8494E2F2D9106BC7A50126121CB4FA2B5C9AA080B5E3D2865A5
+                      619BFB9EBF01070C0AC5705543650000000049454E44AE426082}
+                    FileName = 'C:\Users\Entwicklung\Desktop\2072010.png'
+                  end>
+                Align = Client
+                MarginWrapMode = Center
+                Size.Width = 32.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                Visible = False
+                OnClick = img_PasswordnotvisClick
+              end
+              object img_Passwordvis: TImage
+                MultiResBitmap = <
+                  item
+                    Width = 48
+                    Height = 48
+                    PNG = {
+                      89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                      870000000473424954080808087C08648800000384494441546881ED994F685C
+                      5514C67FE77632D3D8487D06690B55D12E2454E82605A950B22822051776914D
+                      4B3705113556D0218C60E6CE2A84898B1275E1CE8A9B2C2A2274212DC442B5A0
+                      1BC118C47F580BEA62780D26662649DF7133A536F3DE9BFB26EF9A22F9EDE6DC
+                      7BCEF77DF3EE9B79C3C036DB6C0AC96BD0ECECEC8E858585A3AAFA0C300C3C0E
+                      04EDE510F819F85A443E1B1A1ABA323A3A7A2B0FDD4D07A8D7EBBB9696965E16
+                      915780871DDB7E53D577060606DE2D97CBCB9BD1DF54805AADF69CAABE07ECEF
+                      71C40D1179A95AAD7EDAAB879E02586B0D3005BCDEEB8C7FA1C0DBC0B8B536CA
+                      DABC236B43DBFC07C08BE4730F09700438303232F2C9DCDC9C6669363D084E03
+                      A77AE8EBC6A9F6EC4C647A076BB5DAF3AA7AA1CBB6AB22F291887C5128146E00
+                      ACAFAFEF57D523AA7A12783AD590C8896AB5FAB1AB27E700535353F7AFACAC7C
+                      0FEC8B5B57D55F44E4056BEDA5B439D6DA63AAFABE883C96B0E5F7FEFEFE27C6
+                      C7C7FF72F1E57C849ACDE66B249807AE89C87037F300D6DA4B22320C5C4BD8B2
+                      AFADE584D315B0D61681EBC09E98E59F4AA5D2E14AA512BA8A024C4E4E06AD56
+                      EB2BE040CCF29FC023D6DAD56E735CAFC031E2CD638C3993D53C40A552098D31
+                      671296F7B435BBE21AE0D984FAE5898989CF1D6774D0EEBD9C51F32E5C031C8E
+                      2B8AC8878EFD89A4CC88D5DC886B80B8738AAA5E75EC4F246546ACE6465C0304
+                      09F5EB8EFD6924CD48D2BC0BD70085B8A2CBA744375266C46A6EA49747897B8A
+                      ED005B8DD339036A5E5DF89F7FEF92F82CA417C74AE160506FAE72BAD4C7EEFF
+                      D2D46D5A6B2CEE2C723E688465393ED38ADB937884C2C1A0AECA58A9CF9FC16E
+                      94FAD8ADCA58381800BC1AB727F1266EAE72DA97B1ACA479490CB055C7268E34
+                      2FAE9F429989E057A35C00888413061EF5A1E32BC0955BFD7F1F7FE8D0F432C0
+                      1FDFBCF19659B9EF2270346F212F5F64C698B37BDBE601F61E9A5E36C69CF5A2
+                      E563E803CB7CEB52CB032F016EEEE249975A1E78091045D1399DB7C5DBAF75DE
+                      16A3283AE743CB4B80F566E329975A1EF8B9898B833FC8C13B3F54E4A05D2D14
+                      1FFCD18B9697A186EF3A8B32EF45CBC7503426405C2D07FC043074BEDB71B55C
+                      A47CA0A6D36C5C2D07BC3C4A88EAC9C697136B1B6A7D9ADB5F8A77F0124045DF
+                      ECA891E98F1767128F506B8D452F8A3D90E62531C0CE22E7FDD8C94E9A97C400
+                      41232C8B30B39557A2B5C6A2083341232C6F95876DFEF7FC03C4BD0FF385611E
+                      9E0000000049454E44AE426082}
+                    FileName = 'C:\Users\Entwicklung\Desktop\Icons\PasswortClear.png'
+                  end>
+                Align = Client
+                MarginWrapMode = Center
+                Size.Width = 50.000000000000000000
+                Size.Height = 59.000000000000000000
+                Size.PlatformDefault = False
+                OnClick = img_PasswordvisClick
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

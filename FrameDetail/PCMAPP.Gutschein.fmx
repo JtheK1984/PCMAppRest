@@ -1,0 +1,73 @@
+object frmBarcode: TfrmBarcode
+  Left = 0
+  Top = 0
+  ClientHeight = 567
+  ClientWidth = 384
+  FormFactor.Width = 1920
+  FormFactor.Height = 1016
+  FormFactor.Devices = [Desktop]
+  Touch.InteractiveGestures = [Zoom]
+  OnGesture = FormGesture
+  DesignerMasterStyle = 3
+  object Image1: TImage
+    MultiResBitmap = <
+      item
+      end
+      item
+        Scale = 2.000000000000000000
+      end>
+    Align = Client
+    Size.Width = 384.000000000000000000
+    Size.Height = 486.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object tbMain: TRectangle
+    Align = Top
+    Fill.Kind = None
+    Margins.Top = 33.000000000000000000
+    Position.Y = 33.000000000000000000
+    Sides = [Bottom]
+    Size.Width = 384.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claDarkgray
+    object lblModulName: TLabel
+      Align = Client
+      StyledSettings = [Family, Size]
+      Size.Width = 384.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Belege'
+      object Layout1: TLayout
+        Align = Left
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btnBack: TButton
+          Tag = 6
+          Align = Client
+          IconTintColor = claWhite
+          ModalResult = 2
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'priortoolbutton'
+          TabOrder = 0
+          OnClick = btnBackClick
+        end
+      end
+      object Layout2: TLayout
+        Align = Right
+        Position.X = 334.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+      end
+    end
+  end
+end
