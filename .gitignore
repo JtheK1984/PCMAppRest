@@ -69,3 +69,4 @@ __recovery/
 modules/
 /Android/Debug
 /Android64/Debug
+/deployedassets.txt
