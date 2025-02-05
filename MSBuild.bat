@@ -12,3 +12,4 @@ copy /y /v E:\Projekte\Mobile\PCMManagerAPP-Rest\Win32\Release\PCMManagerAPP.exe
 echo "Kopiere Datei ins Setupverzeichnis 64-Bit"
 copy /y /v E:\Projekte\Mobile\PCMManagerAPP-Rest\Android64\Debug\PCMManagerAPP\bin\PCMManagerAPP.apk "e:\Inno\Setupfiles\Programme\PCMManagerAPPRest_x64"
 copy /y /v E:\Projekte\Mobile\PCMManagerAPP-Rest\Win64\Release\PCMManagerAPP.exe "e:\Inno\Setupfiles\Programme\PCMManagerAPPRest_x64"
+
