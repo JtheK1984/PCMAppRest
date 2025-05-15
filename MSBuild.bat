@@ -1,7 +1,8 @@
 call "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\rsvars.bat"
-echo "Build erstellen"
+echo "Build erstellen 32 Bit"
 msbuild E:/Projekte/Mobile/PCMManagerAPP-Rest/PCMManagerAPP.dproj /t:Clean;Build /p:config=Release /p:platform=Win32
 msbuild E:/Projekte/Mobile/PCMManagerAPP-Rest/PCMManagerAPP.dproj /p:config=Debug /p:platform=Android /t:Clean;Make;Deploy
+echo "Build erstellen 64 Bit"
 msbuild E:/Projekte/Mobile/PCMManagerAPP-Rest/PCMManagerAPP.dproj /t:Clean;Build /p:config=Release /p:platform=Win64
 msbuild E:/Projekte/Mobile/PCMManagerAPP-Rest/PCMManagerAPP.dproj /p:config=Debug /p:platform=Android64 /t:Clean;Make;Deploy
 

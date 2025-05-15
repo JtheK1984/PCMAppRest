@@ -1,4 +1,4 @@
-unit PCMAPP.Passwort.Detail;
+ï»¿unit PCMAPP.Passwort.Detail;
 
 interface
 
@@ -100,6 +100,7 @@ type
     tb_Main: TRectangle;
     vsbx_main: TVertScrollBox;
     vsbx_PasswortDetailView: TVertScrollBox;
+    edt_PassClear: TEdit;
     procedure btn_BackClick(Sender: TObject);
     procedure btn_CancelClick(Sender: TObject);
     procedure btn_EditClick(Sender: TObject);
@@ -120,6 +121,7 @@ type
     bWeiter: Boolean;
     dBounds: TRectF;
     qry_Passwort: TFDQuery;
+    function EnDecrypt(AInput: string; AEncrypt: boolean): String;
     procedure CalcContentBoundsProc(Sender: TObject; var ContentBounds: TRectF);
     procedure OpenURL(const URL: string; const DisplayError: Boolean = False);
     procedure RestorePosition;
@@ -138,12 +140,31 @@ implementation
 
 uses  PCMAPP.Datamodul,
       PCMApp.Main,
-      PCMAPP.SQL;
+      PCMAPP.SQL,
+      LbCipher,
+      LbClass;
 
 ////////////////////////////////////////////////////////////////////////////////
 // HELPER FUNCTIONS                                                           //
 ////////////////////////////////////////////////////////////////////////////////
 {$Region Helperfunctions}
+function Tfrm_PCMAPP_PasswortDetail.EnDecrypt(AInput: String; AEncrypt: boolean) : String;
+var
+  Rijndael: TLbRijndael;
+  PlainText, EncryptedText: string;
+begin
+  Rijndael := TLbRijndael.Create(nil);
+  try
+    Rijndael.GenerateKey('PCMDevelopmentJensHenske24021984'); // Replace with your actual key
+
+    if AEncrypt then
+      Result := Rijndael.DecryptString(AInput)//  EncryptString(PlainText);
+    else
+      Result := Rijndael.EncryptString(AInput);//  EncryptString(PlainText);
+  finally
+    Rijndael.Free;
+  end;
+end;
 procedure Tfrm_PCMAPP_PasswortDetail.CalcContentBoundsProc(Sender: TObject; var ContentBounds: TRectF);
 begin
   if bNeedOffset and (dBounds.Top > 0) then
@@ -433,7 +454,7 @@ begin
 
   if (cbx_Typ.itemindex = -1) then
   begin
-    ShowMessage('Typ für Passwort muss gewählt sein!');
+    ShowMessage('Typ fÃ¼r Passwort muss gewÃ¤hlt sein!');
     exit;
   end;
   if not frm_PCM_Main.bNeu then
@@ -533,13 +554,18 @@ procedure Tfrm_PCMAPP_PasswortDetail.img_PasswordnotvisClick(Sender: TObject);
 begin
   img_Passwordvis.Visible:= true;
   img_Passwordnotvis.Visible:= false;
-  edt_Pass.Password:= true;
+//  edt_Pass.Password:= true;
+  edt_Pass.Visible:= true;
+  edt_passClear.Visible:= false;
 end;
 procedure Tfrm_PCMAPP_PasswortDetail.img_PasswordvisClick(Sender: TObject);
 begin
   img_Passwordvis.Visible:= false;
   img_Passwordnotvis.Visible:= true;
-  edt_Pass.Password:= false;
+//  edt_Pass.Password:= false;
+  edt_Pass.Visible:= false;
+  edt_passClear.Visible:= true;
+  edt_passClear.Text:= EnDecrypt(edt_Pass.Text,true);
 end;
 {$EndRegion ButtonFunctions}
 ////////////////////////////////////////////////////////////////////////////////
@@ -634,7 +660,7 @@ begin
   SetDesign;
   qry_Passwort:= TFDQuery.Create(nil);
   qry_Passwort.Connection:= dmmain.con_PCM;
-  dmmain.wfWaitFrame.Execute('Passwörter laden...', 'Passwörter', True);
+  dmmain.wfWaitFrame.Execute('PasswÃ¶rter laden...', 'PasswÃ¶rter', True);
   {$IFDEF MSWINDOWS}
   FMX.Types.VKAutoShowMode :=TVKAutoShowMode.Never;
   tb_main.Margins.Top:= 0;
