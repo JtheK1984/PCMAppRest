@@ -209,7 +209,7 @@ var
   wTagakt: Word;
 //  wJahr,wMonat,wTag,wStunde,wMinute,wSekunde,wMSek: Word;
 begin
-  Result:= now();
+//  Result:= now();
   if AWiederholung = '' then
   begin
     result := AStart;

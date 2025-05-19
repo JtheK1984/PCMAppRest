@@ -1,9 +1,11 @@
 call "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\rsvars.bat"
-echo "Build erstellen 32 Bit"
+echo "Build erstellen 32 Bit EXE"
 msbuild E:/Projekte/Mobile/PCMManagerAPP-Rest/PCMManagerAPP.dproj /t:Clean;Build /p:config=Release /p:platform=Win32
+echo "Build erstellen 32 Bit APK"
 msbuild E:/Projekte/Mobile/PCMManagerAPP-Rest/PCMManagerAPP.dproj /p:config=Debug /p:platform=Android /t:Clean;Make;Deploy
-echo "Build erstellen 64 Bit"
+echo "Build erstellen 64 Bit EXE"
 msbuild E:/Projekte/Mobile/PCMManagerAPP-Rest/PCMManagerAPP.dproj /t:Clean;Build /p:config=Release /p:platform=Win64
+echo "Build erstellen 64 Bit APK"
 msbuild E:/Projekte/Mobile/PCMManagerAPP-Rest/PCMManagerAPP.dproj /p:config=Debug /p:platform=Android64 /t:Clean;Make;Deploy
 
 echo "Kopiere Datei ins Setupverzeichnis 32-Bit"
