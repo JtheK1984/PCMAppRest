@@ -6,7 +6,7 @@
         <MainSource>PCMManagerAPP.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Android64</Platform>
+        <Platform Condition="'$(Platform)'==''">Android</Platform>
         <TargetedPlatforms>32787</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -166,8 +166,6 @@
         <Android_LauncherIcon192>Grafiken\192x192\192.png</Android_LauncherIcon192>
         <AUP_USE_BIOMETRIC>true</AUP_USE_BIOMETRIC>
         <Android_NotificationAccentColor>#000000</Android_NotificationAccentColor>
-        <PostBuildEvent><![CDATA[Tools\manifestmerge AndroidManifest.merge.xml $(Platform)\$(Config)\AndroidManifest.xml
-$(PostBuildEvent)]]></PostBuildEvent>
         <Android_SplashTileMode>disabled</Android_SplashTileMode>
         <Android_SplashGravity>center</Android_SplashGravity>
         <Android_BackgroundColor>#FFFFFF</Android_BackgroundColor>
@@ -195,8 +193,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <Android_LauncherIcon192>Grafiken\192x192\192.png</Android_LauncherIcon192>
         <AUP_USE_BIOMETRIC>true</AUP_USE_BIOMETRIC>
         <Android_NotificationAccentColor>#000000</Android_NotificationAccentColor>
-        <PostBuildEvent><![CDATA[Tools\manifestmerge AndroidManifest.merge.xml $(Platform)\$(Config)\AndroidManifest.xml
-$(PostBuildEvent)]]></PostBuildEvent>
         <Android_SplashTileMode>disabled</Android_SplashTileMode>
         <Android_SplashGravity>center</Android_SplashGravity>
         <Android_NotificationIcon24>Grafiken\24x24\24.png</Android_NotificationIcon24>
@@ -677,6 +673,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeArmeabiFile"/>
+                <DeployFile LocalName="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteName>libPCMManagerAPP.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile"/>
                 <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile">
                     <Platform Name="Android64">
@@ -685,6 +687,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeMipsFile"/>
+                <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Release" Class="AndroidLibnativeMipsFile">
+                    <Platform Name="Android">
+                        <RemoteName>libPCMManagerAPP.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\..\ThirdParty\Android\androidx-biometric-1.1.0\res\color-v26\biometric_error_color.xml" Configuration="Release" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\color-v26\</RemoteDir>
@@ -1422,12 +1430,61 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 <DeployFile LocalName="Android\Debug\styles-v21.xml" Configuration="Debug" Class="AndroidSplashStylesV21"/>
                 <DeployFile LocalName="Android\Debug\styles.xml" Configuration="Debug" Class="AndroidSplashStyles"/>
                 <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest"/>
+                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android\Release\colors-night-v21.xml" Configuration="Release" Class="Android_ColorsDark">
+                    <Platform Name="Android">
+                        <RemoteName>colors.xml</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Android\Release\colors.xml" Configuration="Release" Class="Android_Colors"/>
+                <DeployFile LocalName="Android\Release\colors.xml" Configuration="Release" Class="Android_Colors">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Android\Release\libPCMManagerAPP.so" Configuration="Release" Class="ProjectOutput"/>
+                <DeployFile LocalName="Android\Release\libPCMManagerAPP.so" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Android">
+                        <RemoteName>libPCMManagerAPP.so</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Android\Release\splash_image_def.xml" Configuration="Release" Class="AndroidSplashImageDef"/>
+                <DeployFile LocalName="Android\Release\splash_image_def.xml" Configuration="Release" Class="AndroidSplashImageDef">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Android\Release\strings.xml" Configuration="Release" Class="Android_Strings"/>
+                <DeployFile LocalName="Android\Release\strings.xml" Configuration="Release" Class="Android_Strings">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Android\Release\styles-v21.xml" Configuration="Release" Class="AndroidSplashStylesV21"/>
+                <DeployFile LocalName="Android\Release\styles-v21.xml" Configuration="Release" Class="AndroidSplashStylesV21">
+                    <Platform Name="Android">
+                        <RemoteName>styles.xml</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android\Release\styles-v35.xml" Configuration="Release" Class="AndroidSplashStylesV35">
+                    <Platform Name="Android">
+                        <RemoteName>styles.xml</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Android\Release\styles.xml" Configuration="Release" Class="AndroidSplashStyles"/>
+                <DeployFile LocalName="Android\Release\styles.xml" Configuration="Release" Class="AndroidSplashStyles">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="DB\PCMApp.s3db" Configuration="Debug" Class="ProjectFile"/>
                 <DeployFile LocalName="DB\PCMApp.s3db" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Android64">
@@ -1436,6 +1493,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="DB\PCMApp.s3db" Configuration="Release" Class="ProjectFile"/>
+                <DeployFile LocalName="DB\PCMApp.s3db" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\144x144\144.png" Configuration="Debug" Class="Android_LauncherIcon144">
                     <Platform Name="Android64">
                         <RemoteName>ic_launcher.png</RemoteName>
@@ -1444,6 +1507,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\144x144\144.png" Configuration="Debug" Class="UWP_DelphiLogo150"/>
                 <DeployFile LocalName="Grafiken\144x144\144.png" Configuration="Release" Class="Android_LauncherIcon144"/>
+                <DeployFile LocalName="Grafiken\144x144\144.png" Configuration="Release" Class="Android_LauncherIcon144">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\192x192\192.png" Configuration="Debug" Class="Android_LauncherIcon192"/>
                 <DeployFile LocalName="Grafiken\192x192\192.png" Configuration="Debug" Class="Android_LauncherIcon192">
                     <Platform Name="Android64">
@@ -1452,6 +1521,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\192x192\192.png" Configuration="Release" Class="Android_LauncherIcon192"/>
+                <DeployFile LocalName="Grafiken\192x192\192.png" Configuration="Release" Class="Android_LauncherIcon192">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\24x24\24.png" Configuration="Debug" Class="Android_NotificationIcon24"/>
                 <DeployFile LocalName="Grafiken\24x24\24.png" Configuration="Debug" Class="Android_NotificationIcon24">
                     <Platform Name="Android64">
@@ -1460,6 +1535,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\24x24\24.png" Configuration="Release" Class="Android_NotificationIcon24"/>
+                <DeployFile LocalName="Grafiken\24x24\24.png" Configuration="Release" Class="Android_NotificationIcon24">
+                    <Platform Name="Android">
+                        <RemoteName>ic_notification.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\36x36\36.png" Configuration="Debug" Class="Android_NotificationIcon36"/>
                 <DeployFile LocalName="Grafiken\36x36\36.png" Configuration="Debug" Class="Android_NotificationIcon36">
                     <Platform Name="Android64">
@@ -1468,6 +1549,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\36x36\36.png" Configuration="Release" Class="Android_NotificationIcon36"/>
+                <DeployFile LocalName="Grafiken\36x36\36.png" Configuration="Release" Class="Android_NotificationIcon36">
+                    <Platform Name="Android">
+                        <RemoteName>ic_notification.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\426x320\426x320.png" Configuration="Debug" Class="Android_SplashImage426"/>
                 <DeployFile LocalName="Grafiken\426x320\426x320.png" Configuration="Debug" Class="Android_SplashImage426">
                     <Platform Name="Android64">
@@ -1476,6 +1563,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\426x320\426x320.png" Configuration="Release" Class="Android_SplashImage426"/>
+                <DeployFile LocalName="Grafiken\426x320\426x320.png" Configuration="Release" Class="Android_SplashImage426">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\470x320\470x320.png" Configuration="Debug" Class="Android_SplashImage470"/>
                 <DeployFile LocalName="Grafiken\470x320\470x320.png" Configuration="Debug" Class="Android_SplashImage470">
                     <Platform Name="Android64">
@@ -1484,6 +1577,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\470x320\470x320.png" Configuration="Release" Class="Android_SplashImage470"/>
+                <DeployFile LocalName="Grafiken\470x320\470x320.png" Configuration="Release" Class="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\48x48\48.png" Configuration="Debug" Class="Android_NotificationIcon48">
                     <Platform Name="Android64">
                         <RemoteName>ic_notification.png</RemoteName>
@@ -1492,6 +1591,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\48x48\48.png" Configuration="Debug" Class="UWP_DelphiLogo44"/>
                 <DeployFile LocalName="Grafiken\48x48\48.png" Configuration="Release" Class="Android_NotificationIcon48"/>
+                <DeployFile LocalName="Grafiken\48x48\48.png" Configuration="Release" Class="Android_NotificationIcon48">
+                    <Platform Name="Android">
+                        <RemoteName>ic_notification.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\640x480\640.png" Configuration="Debug" Class="Android_SplashImage640"/>
                 <DeployFile LocalName="Grafiken\640x480\640.png" Configuration="Debug" Class="Android_SplashImage640">
                     <Platform Name="Android64">
@@ -1500,6 +1605,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\640x480\640.png" Configuration="Release" Class="Android_SplashImage640"/>
+                <DeployFile LocalName="Grafiken\640x480\640.png" Configuration="Release" Class="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\72x72\72.png" Configuration="Debug" Class="Android_NotificationIcon72"/>
                 <DeployFile LocalName="Grafiken\72x72\72.png" Configuration="Debug" Class="Android_NotificationIcon72">
                     <Platform Name="Android64">
@@ -1508,6 +1619,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\72x72\72.png" Configuration="Release" Class="Android_NotificationIcon72"/>
+                <DeployFile LocalName="Grafiken\72x72\72.png" Configuration="Release" Class="Android_NotificationIcon72">
+                    <Platform Name="Android">
+                        <RemoteName>ic_notification.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\960x720\960x720.png" Configuration="Debug" Class="Android_SplashImage960"/>
                 <DeployFile LocalName="Grafiken\960x720\960x720.png" Configuration="Debug" Class="Android_SplashImage960">
                     <Platform Name="Android64">
@@ -1516,6 +1633,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\960x720\960x720.png" Configuration="Release" Class="Android_SplashImage960"/>
+                <DeployFile LocalName="Grafiken\960x720\960x720.png" Configuration="Release" Class="Android_SplashImage960">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Grafiken\96x96\96.png" Configuration="Debug" Class="Android_NotificationIcon96"/>
                 <DeployFile LocalName="Grafiken\96x96\96.png" Configuration="Debug" Class="Android_NotificationIcon96">
                     <Platform Name="Android64">
@@ -1524,6 +1647,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Grafiken\96x96\96.png" Configuration="Release" Class="Android_NotificationIcon96"/>
+                <DeployFile LocalName="Grafiken\96x96\96.png" Configuration="Release" Class="Android_NotificationIcon96">
+                    <Platform Name="Android">
+                        <RemoteName>ic_notification.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Res\Theme\styles.xml" Configuration="Debug" Class="File">
                     <Platform Name="Android">
                         <RemoteDir>res\values\</RemoteDir>
@@ -2564,36 +2693,4 @@ $(PostBuildEvent)]]></PostBuildEvent>
     <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
-    <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Android'">
-        <PreBuildEvent/>
-        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-        <PreLinkEvent/>
-        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>Tools\manifestmerge AndroidManifest.merge.xml $(Platform)\$(Config)\AndroidManifest.xml</PostBuildEvent>
-        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Android64'">
-        <PreBuildEvent/>
-        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-        <PreLinkEvent/>
-        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>Tools\manifestmerge AndroidManifest.merge.xml $(Platform)\$(Config)\AndroidManifest.xml</PostBuildEvent>
-        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Android'">
-        <PreBuildEvent/>
-        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-        <PreLinkEvent/>
-        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>Tools\manifestmerge AndroidManifest.merge.xml $(Platform)\$(Config)\AndroidManifest.xml</PostBuildEvent>
-        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Android64'">
-        <PreBuildEvent/>
-        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-        <PreLinkEvent/>
-        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>Tools\manifestmerge AndroidManifest.merge.xml $(Platform)\$(Config)\AndroidManifest.xml</PostBuildEvent>
-        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-    </PropertyGroup>
 </Project>
