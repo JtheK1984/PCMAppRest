@@ -147,11 +147,14 @@ end;
 function CheckServerConnection: Boolean;
 begin
   Result:= False;
-  JSONResult := dmmain.RestRequest(nil,'CheckServer',rmGET) as TJSONObject;
-  bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-  if not bHasError then
-  begin
-    Result:= True;
+  try
+    JSONResult := dmmain.RestRequest(nil,'CheckServer',rmGET) as TJSONObject;
+    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
+    if not bHasError then
+    begin
+      Result:= True;
+    end;
+  except
   end;
 end;
 // Helperfunctions

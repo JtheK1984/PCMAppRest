@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<ActiveMobileDevice>
-		<NoProfile Android64="39061FDJH00CKB" Android="39061FDJH00CKB"/>
+		<NoProfile Android64="39061FDJH00CKB" Android=""/>
 	</ActiveMobileDevice>
 	<Transactions>
     <Transaction>1899.12.30 00:00:00.000.457,E:\Projekte\Mobile\PCMManagerAPP\Sync\PCMAPP.Sync.pas=</Transaction>
@@ -11,21 +11,21 @@
     <Transaction>1899.12.30 00:00:00.000.984,=E:\Projekte\Mobile\PCMManagerAPP\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.062,E:\Projekte\Mobile\PCMManagerAPP\Unit1.pas=E:\Projekte\Mobile\PCMManagerAPP\SQL\PCMAPP.SQL.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.926,=E:\Komponenten\Kastri-master11\Demos\Biometric\FrameDetail\PCMAPP.Gutschein.Barcode.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.268,=E:\Komponenten\Kastri-master11\ThirdParty\Android\play-services-vision-common-17.0.2.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.901,=E:\Komponenten\Kastri-master11\ThirdParty\Android\play-services-vision-common-17.0.2.jar</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.224,=E:\Komponenten\Kastri-master11\Demos\Biometric\Helper\FMX.CalendarHolidayDays.Style.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.472,E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\lifecycle-livedata-core-2.3.1.jar=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.154,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\lifecycle-livedata-core-2.3.1.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.502,E:\Komponenten\Kastri-master11\ThirdParty\Android\play-services-vision-common-17.0.2.jar=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.755,=E:\Komponenten\Kastri-master11\ThirdParty\Android\play-services-vision-17.0.2.jar</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.224,=E:\Komponenten\Kastri-master11\Demos\Biometric\Helper\FMX.CalendarHolidayDays.Style.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.154,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\lifecycle-livedata-core-2.3.1.jar</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.472,E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\lifecycle-livedata-core-2.3.1.jar=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.268,=E:\Komponenten\Kastri-master11\ThirdParty\Android\play-services-vision-common-17.0.2.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.224,=E:\Komponenten\Kastri-master11\ThirdParty\Android\play-services-vision-17.0.2.jar</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.192,=E:\Komponenten\Kastri-master11\Demos\Biometric\DB\PCMAPP.Datamodul.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.331,=E:\Projekte\Mobile\PCMManagerAPP -Rest\lib\libcrypto.so</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.180,=E:\Projekte\Mobile\PCMManagerAPP -Rest\lib\libcrypto.so</Transaction>
     <Transaction>1899.12.30 00:00:00.000.486,E:\Komponenten\Kastri-master11\ThirdParty\Android\play-services-vision-17.0.2.jar=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.192,=E:\Komponenten\Kastri-master11\Demos\Biometric\DB\PCMAPP.Datamodul.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.180,=E:\Projekte\Mobile\PCMManagerAPP -Rest\lib\libcrypto.so</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.569,E:\Projekte\Mobile\PCMManagerAPP -Rest\lib\libcrypto.so=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.755,=E:\Komponenten\Kastri-master11\ThirdParty\Android\play-services-vision-17.0.2.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.250,E:\Projekte\Mobile\PCMManagerAPP\Sync\PCMAPP.Sync.FinanzenAus.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.486,E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\lifecycle-viewmodel-savedstate-2.3.1.jar=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.107,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\lifecycle-viewmodel-savedstate-2.3.1.jar</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.486,E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\lifecycle-viewmodel-savedstate-2.3.1.jar=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.125,E:\Projekte\Mobile\PCMManagerAPP\Frame\PCMAPP.WaitForm.pas=E:\Projekte\Mobile\PCMManagerAPP\Frame\PCMAPP.Wait.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.250,E:\Projekte\Mobile\PCMManagerAPP\Sync\PCMAPP.Sync.kalender.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.333,=E:\Komponenten\Kastri-master11\Demos\Biometric\FrameDetail\PCMAPP.Kontakte.Detail.pas</Transaction>
@@ -34,8 +34,8 @@
     <Transaction>1899.12.30 00:00:00.000.473,=E:\Komponenten\Kastri-master11\Demos\Biometric\Sync\PCMAPP.Sync.RegisterDevice.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.208,=E:\Komponenten\Kastri-master11\Demos\Biometric\Frame\U_Frame_Wait.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.125,E:\Projekte\Mobile\PCMManagerAPP\Frame\PCMAPP.WaitForm.fmx=E:\Projekte\Mobile\PCMManagerAPP\Frame\PCMAPP.Wait.fmx</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.702,=E:\Komponenten\Kastri-master11\Demos\FirebaseCloudMessaging\Android\Debug\dw-kastri-base-2.0.0-dexed.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.743,E:\Komponenten\Kastri-master11\Demos\FirebaseCloudMessaging\Android\Debug\dw-kastri-base-2.0.0-dexed.jar=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.702,=E:\Komponenten\Kastri-master11\Demos\FirebaseCloudMessaging\Android\Debug\dw-kastri-base-2.0.0-dexed.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.255,=E:\Komponenten\Kastri-master11\Demos\Biometric\Sync\PCMAPP.Sync.Config.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.219,E:\Projekte\Mobile\PCMManagerAPP\Sync\PCMAPP.Sync.Config.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.020,=E:\Komponenten\Kastri-master11\Demos\Biometric\Helper\FMX.Calendar.Helpers.pas</Transaction>
@@ -57,13 +57,13 @@
     <Transaction>1899.12.30 00:00:00.000.048,E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\androidx-biometric-1.1.0.R.jar=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.201,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\androidx-biometric-1.1.0.R.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.904,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\fragment-1.3.6.jar</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.569,E:\Projekte\Mobile\PCMManagerAPP -Rest\lib\libcrypto.so=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.331,=E:\Projekte\Mobile\PCMManagerAPP -Rest\lib\libcrypto.so</Transaction>
     <Transaction>1899.12.30 00:00:00.000.239,=E:\Komponenten\Kastri-master11\Demos\Biometric\FrameDetail\PCMAPP.Gutschein.Detail.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.472,E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\lifecycle-livedata-2.3.1.jar=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.091,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\lifecycle-livedata-2.3.1.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.708,=E:\Komponenten\Kastri-master11\Demos\Biometric\FrameDetail\PCMAPP.Einnahmen.Detail.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.326,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\androidx-activity-1.3.1.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.440,E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\androidx-activity-1.3.1.jar=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.326,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\androidx-activity-1.3.1.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.982,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\lifecycle-common-2.3.1.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.145,=E:\Komponenten\Kastri-master11\Demos\Biometric\FrameDetail\PCMApp.Ausgaben.Detail.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.763,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\core-1.5.0-rc02.R.jar</Transaction>
@@ -95,8 +95,8 @@
     <Transaction>1899.12.30 00:00:00.000.552,=E:\Komponenten\Kastri-master11\Demos\Biometric\FrameDetail\PCMAPP.Kalender.Detail.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.067,=E:\Komponenten\Kastri-master11\Demos\Biometric\Sync\PCMAPP.Sync.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.802,E:\Projekte\Mobile\PCMManagerAPP -Rest\lib\libcrypto.so=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.701,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\androidx-savedstate-1.1.0.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.157,E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\androidx-savedstate-1.1.0.jar=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.701,=E:\Projekte\Mobile\PCMManagerApp\ThirdParty\Android\androidx-savedstate-1.1.0.jar</Transaction>
     <Transaction>1899.12.30 00:00:00.000.066,E:\Komponenten\Kastri-master11\Demos\Biometric\PCMAPP.Main.pas=E:\Komponenten\Kastri-master11\Demos\Biometric\MainFrm.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.581,=E:\Projekte\Mobile\PCMManagerAPP -Rest\lib\libssl.so</Transaction>
     <Transaction>1899.12.30 00:00:00.000.590,E:\Projekte\Mobile\PCMManagerAPP -Rest\lib\libssl.so=</Transaction>

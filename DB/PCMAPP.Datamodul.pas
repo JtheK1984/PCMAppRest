@@ -127,6 +127,7 @@ var
   RestRequest: TRESTRequest;
   qry_Work: TFDQuery;
 begin
+  Result:= nil;
   qry_Work:= TFDQuery.Create(nil);
   qry_Work.Connection:= con_PCM;
   qry_Work.SQL.Text := sSQL_SEL_All_AUtologin;
@@ -161,8 +162,11 @@ begin
     begin
       RestRequest.Body.Add(ARequestBody);
     end;
-    RestRequest.Execute;
-    Result:= TJSonObject.ParseJSONValue(RestRequest.Response.JSONText) as TJSONObject;
+    try
+      RestRequest.Execute;
+      Result:= TJSonObject.ParseJSONValue(RestRequest.Response.JSONText) as TJSONObject;
+    except
+    end;
   finally
     RestRequest.Free;
   end;
