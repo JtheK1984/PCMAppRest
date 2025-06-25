@@ -301,7 +301,7 @@ procedure Tfrm_PCMAPP_System.Execute;
     qry_Work.Close;
     {$ENDIF ANDROID}
     {$IFDEF MSWINDOWS}
-    lbl_ProductVersionImageVersion.Text:= 'App-Version: 1.6.0';
+    lbl_ProductVersionImageVersion.Text:= 'App-Version: 1.0.0';
     lbl_ProductVersionImageOSDetail.text:=  'Windows-Version: ' + TOSVersion.ToString;
     lbl_ProductVersionImageDeviceDetail.Text:= 'Geräte-Typ: ' + GetDeviceType;
     lbl_ProductVersionImageProviderDetail.text:= '';
