@@ -330,7 +330,7 @@
         <AUP_BIND_DEVICE_ADMIN>true</AUP_BIND_DEVICE_ADMIN>
         <EL_ApsEnvironment>true</EL_ApsEnvironment>
         <Android_AppId>1:179997971509:android:c21297d07373cf60ad0d7c</Android_AppId>
-        <VerInfo_Keys>package=com.embarcadero.PCMManagerAPP;label=PCM - APP;versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=auto;theme=TitleBar;hardwareAccelerated=true;apiKey=;minSdkVersion=23;targetSdkVersion=35</VerInfo_Keys>
+        <VerInfo_Keys>package=com.embarcadero.PCMManagerAPP;label=PCM - APP;versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=false;theme=TitleBar;hardwareAccelerated=true;apiKey=;minSdkVersion=23;targetSdkVersion=35</VerInfo_Keys>
         <Android_ApiKey>AIzaSyBEBf9yKTznpUuFuZ8epvDUIVKO5QA-hVE</Android_ApiKey>
         <Android_GcmDefaultSenderId>179997971509</Android_GcmDefaultSenderId>
         <Android_ProjectId>pcm-manager</Android_ProjectId>
