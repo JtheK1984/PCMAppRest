@@ -25,7 +25,7 @@
     - ssleay32.dll (DLL für SSL-Verbindungen)
 
 # Erforderliche Komponenten (DELPHI-IDE):
-  - 
+  - Kastri-Master 11
 
 # Erforderliche Scripte (nur für die Buildpipelines in Azure DevOps):
   - PrepareBuild.cmd (Umgebungsvariablen für Delphi anpassen, wird für den Build benötigt)
