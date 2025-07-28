@@ -1,7 +1,6 @@
-echo "Kopiere Datei ins Setupverzeichnis"
-copy /y /v Win32\Release\PCMManagerAPP.exe "e:\Inno\Setupfiles\Programme\PCMManagerAPPRest"
-copy /y /v Win64\Release\PCMManagerAPP.exe "e:\Inno\Setupfiles\Programme\PCMManagerAPPRest_x64"
-copy /y /v Android\Debug\PCMManagerAPP\bin\PCMManagerAPP.apk "e:\Inno\Setupfiles\Programme\PCMManagerAPPRest"
-copy /y /v Android64\Debug\PCMManagerAPP\bin\PCMManagerAPP.apk "e:\Inno\Setupfiles\Programme\PCMManagerAPPRest_x64"
-
-
+echo "Kopiere Datei ins Setupverzeichnis 32-Bit"
+copy /y /v Android\Debug\PCMManagerAPP\bin\PCMManagerAPP.apk "e:\Inno\Setupfiles\Programme\PCMManagerAPP"
+copy /y /v Win32\Release\PCMManagerAPP.exe "e:\Inno\Setupfiles\Programme\PCMManagerAPP"
+echo "Kopiere Datei ins Setupverzeichnis 64-Bit"
+copy /y /v Android64\Debug\PCMManagerAPP\bin\PCMManagerAPP.apk "e:\Inno\Setupfiles\Programme\PCMManagerAPP_x64"
+copy /y /v Win64\Release\PCMManagerAPP.exe "e:\Inno\Setupfiles\Programme\PCMManagerAPP_x64"
