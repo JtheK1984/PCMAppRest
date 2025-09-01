@@ -826,7 +826,7 @@ begin
             if (qry_Work.FieldByName('Passwort').AsString = sPasswort) then
             begin
               dmmain.iUserID := qry_Work.FieldByName('ID_MA_Stammdaten').AsInteger;
-              if CheckServerConnection then
+              if dmmain.bServerAvailable then
               begin
                 Synchronisation(dmmain.iUserID, iServerID, dmmain.wfWaitFrame,false);
               end;
@@ -1823,7 +1823,7 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
         SetServerList;
         if iServerID <> -1 then
         begin
-          if CheckServerConnection then
+          if dmmain.bServerAvailable then
           begin
             if CheckLogin then
             begin
@@ -1924,7 +1924,7 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
               dmmain.iUserID := qry_Work.FieldByName('ID_MA_Stammdaten').AsInteger;
               SetAutoLogin(sBenutzername, sPasswort, dmmain.iUserID, iServerID, True);
               qry_Work.Close;
-              if CheckServerConnection then
+              if dmmain.bServerAvailable then
               begin
                 SaveLogin(sBenutzername, sPasswort,dmmain.iUserID, iServerID,false);
                 Synchronisation(dmmain.iUserID, iServerID, dmmain.wfWaitFrame,false)
@@ -2040,10 +2040,6 @@ begin
   CloseDetailFrame('Beenden', 5);
   if Assigned(dmmain.wfWaitFrame) then
     FreeAndNil(dmmain.wfWaitFrame);
-//  if (dmMain.con_SQL.Connected) AND (CheckServerConnection) then
-//  begin
-//    dmMain.con_SQL.Connected := False;
-//  end;
   Action := TCloseAction.caFree;
 end;
 procedure Tfrm_PCM_Main.FormCreate(Sender: TObject);
@@ -2199,7 +2195,7 @@ begin
   {$ENDIF ANDROID}
   SetServerList;
   if iServerID <> -1 then
-    CheckServerConnection;
+    dmmain.bServerAvailable:= CheckServerConnection;
   qry_Work.SQL.Text := sSQL_SEL_All_AUtologin;
   qry_Work.Open;
   if qry_Work.RecordCount > 0 then
@@ -4299,7 +4295,7 @@ begin
   if not qry_Work.FieldByName('Localaccount').AsBoolean  then
   begin
     dmmain.wfWaitFrame.Execute('Synchronisierung...', 'Synchronisierung', True);
-    if CheckServerConnection then
+    if dmmain.bServerAvailable then
     begin
       TTask.Run(
       Procedure()
