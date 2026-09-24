@@ -46,7 +46,6 @@ object frm_PCMAPP_AusgabenDetail: Tfrm_PCMAPP_AusgabenDetail
           Tag = 6
           Align = Client
           IconTintColor = claWhite
-          Images = frm_PCM_Main.imglst_main
           ImageIndex = 2
           ModalResult = 2
           Size.Width = 48.000000000000000000
@@ -54,14 +53,12 @@ object frm_PCMAPP_AusgabenDetail: Tfrm_PCMAPP_AusgabenDetail
           Size.PlatformDefault = False
           StyleLookup = 'priortoolbutton'
           TabOrder = 1
-          TextSettings.Trimming = None
           OnClick = btn_BackClick
         end
         object btn_Cancel: TButton
           Tag = 6
           Align = Client
           IconTintColor = claWhite
-          Images = frm_PCM_Main.imglst_main
           ImageIndex = 18
           ModalResult = 2
           Size.Width = 48.000000000000000000
@@ -69,7 +66,6 @@ object frm_PCMAPP_AusgabenDetail: Tfrm_PCMAPP_AusgabenDetail
           Size.PlatformDefault = False
           StyleLookup = 'replytoolbutton'
           TabOrder = 0
-          TextSettings.Trimming = None
           Visible = False
           OnClick = btn_CancelClick
         end
@@ -84,7 +80,6 @@ object frm_PCMAPP_AusgabenDetail: Tfrm_PCMAPP_AusgabenDetail
         object btn_Edit: TButton
           Align = Right
           IconTintColor = claWhite
-          Images = frm_PCM_Main.imglst_main
           ImageIndex = 20
           Position.X = 2.000000000000000000
           Size.Width = 48.000000000000000000
@@ -92,7 +87,6 @@ object frm_PCMAPP_AusgabenDetail: Tfrm_PCMAPP_AusgabenDetail
           Size.PlatformDefault = False
           StyleLookup = 'composetoolbuttonbordered'
           TabOrder = 1
-          TextSettings.Trimming = None
           OnClick = btn_EditClick
         end
         object btn_Save: TButton
@@ -104,10 +98,10 @@ object frm_PCMAPP_AusgabenDetail: Tfrm_PCMAPP_AusgabenDetail
           Size.Width = 48.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
-          StyleLookup = 'composetoolbutton'
+          StyleLookup = 'donetoolbutton'
           TabOrder = 0
-          TextSettings.Trimming = None
           Visible = False
+          OnApplyStyleLookup = btn_SaveApplyStyleLookup
           OnClick = btn_SaveClick
         end
       end
@@ -605,7 +599,6 @@ object frm_PCMAPP_AusgabenDetail: Tfrm_PCMAPP_AusgabenDetail
             Size.PlatformDefault = False
             TabOrder = 1
             Text = 'Betrag auf 0 setzen'
-            TextSettings.Trimming = None
             OnClick = btn_BetragNullClick
           end
           object btn_FixBetrag: TButton
@@ -621,7 +614,6 @@ object frm_PCMAPP_AusgabenDetail: Tfrm_PCMAPP_AusgabenDetail
             Size.PlatformDefault = False
             TabOrder = 3
             Text = 'Fixbetrag '#252'bernehmen'
-            TextSettings.Trimming = None
             OnClick = btn_FixBetragClick
           end
         end

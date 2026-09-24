@@ -50,6 +50,8 @@ uses
   System.Devices,
   System.IOUtils,
   System.JSON,
+  System.Generics.Collections,
+  System.Variants,
   System.Math,
   System.Net.HttpClientComponent,
   System.NetEncoding,
@@ -64,7 +66,8 @@ uses
 // Deklarationen Functions
 {$Region Functions}
 // Restfunctions
-function CheckLogin: Boolean;
+function CurrentPCMConnection: TFDConnection;
+function CheckLogin(const AUsername, APassword: string): Boolean;
 function CheckServerConnection: Boolean;
 // Helperfunctions
 function AddZeros(AValue: String; ACount: integer): string;
@@ -116,33 +119,43 @@ procedure SyncBelege_FromServer(const AUserID: Integer; AWaitFrame: TWaitForm);
 procedure SyncGutscheine_FromServer(const AUserID: Integer; AWaitFrame: TWaitForm);
 procedure Synchronisation(const AUserID, AServerID: Integer; AWaitFrame: TWaitForm; bALL: Boolean);
 {$EndRegion Procedures}
-var
-  {$Region uses}
-  joResponseJSON: TJSONObject;
-  joResponseJSONData: TJSONObject;
-  JSONResult: TJSONObject;
-  jaDetails: TJSonArray;
-  icode: integer;
-  sMessage: String;
-  bHasError: boolean;
-  {$EndRegion uses}
 implementation
+uses PCMAPP.ContactSync;
+
+threadvar
+  FThreadPCMConnection: TFDConnection;
+
+function CurrentPCMConnection: TFDConnection;
+begin
+  if FThreadPCMConnection <> nil then
+    Result := FThreadPCMConnection
+  else
+    Result := dmmain.con_PCM;
+end;
+
+procedure CheckSyncResponse(AResponse: TJSONObject; const AOperation: string); forward;
 // Functions
 {$Region Functions}
 // Restfunction
-function CheckLogin: Boolean;
+function CheckLogin(const AUsername, APassword: string): Boolean;
+var
+  LResponse: TJSONObject;
+  LDetails: TJSONArray;
 begin
-  Result:= False;
-  JSONResult := dmmain.RestRequest(nil,'Checklogin',rmGET) as TJSONObject;
-  bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-  if not bHasError then
-  begin
-    jaDetails :=  JSONResult.GetValue<TJSONArray>('Login');
-    for var JSonValue in jaDetails do
+  Result := False;
+  LResponse := dmmain.RestRequest(nil, 'Checklogin', rmGET, AUsername, APassword);
+  try
+    CheckSyncResponse(LResponse, 'LOGIN');
+    LDetails := LResponse.GetValue<TJSONArray>('Login');
+    if LDetails = nil then
+      raise Exception.Create('Login: ung??ltige Serverantwort');
+    for var LValue in LDetails do
     begin
-      JSonValue.TryGetValue<boolean>('Allowed',Result);
-      JSonValue.TryGetValue<Integer>('ID_User',dmmain.iUserID);
+      LValue.TryGetValue<Boolean>('Allowed', Result);
+      LValue.TryGetValue<Integer>('ID_User', dmmain.iUserID);
     end;
+  finally
+    LResponse.Free;
   end;
 end;
 function CheckServerConnection: Boolean;
@@ -362,7 +375,7 @@ var
   qry_BA: TFDQuery;
 begin
   qry_BA:= TFDQuery.Create(nil);
-  qry_BA.Connection:= dmmain.con_PCM;
+  qry_BA.Connection:= CurrentPCMConnection;
 
   qry_BA.SQL.Text:=  'SELECT Count(*) as Anzahl ' +
                               'FROM buchungen zeb ' +
@@ -381,7 +394,7 @@ var
   qry_Work: TFDQuery;
 begin
   qry_Work:= TFDQuery.Create(nil);
-  qry_Work.Connection:= dmmain.con_PCM;
+  qry_Work.Connection:= CurrentPCMConnection;
   qry_Work.SQL.Text:= sSQL_SELECT_COUNT_AUTOLOGIN;
   qry_Work.open;
   Result:= qry_Work.FieldByName('Anzahl').AsInteger;
@@ -393,7 +406,7 @@ var
   qry_Work: TFDQuery;
 begin
   qry_Work:= TFDQuery.Create(nil);
-  qry_Work.Connection:= dmmain.con_PCM;
+  qry_Work.Connection:= CurrentPCMConnection;
   qry_Work.SQL.Text:= sSQL_SELECT_COUNT_LOGIN;
   qry_Work.open;
   Result:= qry_Work.FieldByName('Anzahl').AsInteger;
@@ -405,7 +418,7 @@ var
   qry_Work: TFDQuery;
 begin
   qry_Work:= TFDQuery.Create(nil);
-  qry_Work.Connection:= dmmain.con_PCM;
+  qry_Work.Connection:= CurrentPCMConnection;
   qry_Work.SQL.Text:= sSQL_SELECT_COUNT_Server;
   qry_Work.open;
   Result:= qry_Work.FieldByName('Anzahl').AsInteger;
@@ -435,7 +448,7 @@ var
   qry_FT: TFDQuery;
 begin
   qry_FT:= TFDQuery.Create(nil);
-  qry_FT.Connection:= dmmain.con_PCM;
+  qry_FT.Connection:= CurrentPCMConnection;
   qry_FT.SQL.Text:=  'SELECT IFNULL(SUM((Zeb.SollstundenI / zeft.faktor)),0) as Anzahl ' +
                      'FROM buchungen zeb ' +
                      'LEFT OUTER JOIN Fehltag zeft ON zeft.Kuerzel = zeb.Fehltag ' +
@@ -456,7 +469,7 @@ var
   qry_FT: TFDQuery;
 begin
   qry_FT:= TFDQuery.Create(nil);
-  qry_FT.Connection:= dmmain.con_PCM;
+  qry_FT.Connection:= CurrentPCMConnection;
   qry_FT.SQL.Text:= 'SELECT IFNULL(Sum(if(Feiertag = 2, 0.5,1)),0) AS Anzahl ' +
                     'FROM buchungen zeb ' +
                     'WHERE zeb.Sollstunden = :Zeit and zeb.Datum >= :Von and zeb.Datum <= :Bis AND zeb.feiertag > 0';
@@ -506,7 +519,7 @@ var
   qry_Update: TFDQuery;
 begin
   qry_Update:= TFDQuery.Create(nil);
-  qry_Update.Connection:= dmmain.con_PCM;
+  qry_Update.Connection:= CurrentPCMConnection;
   qry_Update.SQL.Text:= 'Update ' + ATable + ' Set ' + AField + '=:AValue Where ID = :ID';
   qry_Update.ParamByName('Avalue').AsString:= AValue;
   qry_Update.ParamByName('ID').AsInteger:= AID;
@@ -518,7 +531,7 @@ var
   qry_Update: TFDQuery;
 begin
   qry_Update:= TFDQuery.Create(nil);
-  qry_Update.Connection:= dmmain.con_PCM;
+  qry_Update.Connection:= CurrentPCMConnection;
   qry_Update.SQL.Text:= 'Update ' + ATable + ' Set ' + AField + '=:AValue Where ID = :ID';
   qry_Update.ParamByName('Avalue').asMemo:= AValue;
   qry_Update.ParamByName('ID').AsInteger:= AID;
@@ -530,7 +543,7 @@ var
   qry_Update: TFDQuery;
 begin
   qry_Update:= TFDQuery.Create(nil);
-  qry_Update.Connection:= dmmain.con_PCM;
+  qry_Update.Connection:= CurrentPCMConnection;
   qry_Update.SQL.Text:= 'Update ' + ATable + ' Set ' + AField + '=:AValue Where ID = :ID';
   qry_Update.ParamByName('Avalue').AsDateTime:= AValue;
   qry_Update.ParamByName('ID').AsInteger:= AID;
@@ -542,7 +555,7 @@ var
   qry_Update: TFDQuery;
 begin
   qry_Update:= TFDQuery.Create(nil);
-  qry_Update.Connection:= dmmain.con_PCM;
+  qry_Update.Connection:= CurrentPCMConnection;
   qry_Update.SQL.Text:= 'Update ' + ATable + ' Set ' + AField + '=:AValue Where ID = :ID';
   qry_Update.ParamByName('Avalue').AsDate:= AValue;
   qry_Update.ParamByName('ID').AsInteger:= AID;
@@ -554,7 +567,7 @@ var
   qry_Update: TFDQuery;
 begin
   qry_Update:= TFDQuery.Create(nil);
-  qry_Update.Connection:= dmmain.con_PCM;
+  qry_Update.Connection:= CurrentPCMConnection;
   qry_Update.SQL.Text:= 'Update ' + ATable + ' Set ' + AField + '=:AValue Where ID = :ID';
   qry_Update.ParamByName('Avalue').AsBoolean:= AValue;
   qry_Update.ParamByName('ID').AsInteger:= AID;
@@ -566,7 +579,7 @@ var
   qry_Update: TFDQuery;
 begin
   qry_Update:= TFDQuery.Create(nil);
-  qry_Update.Connection:= dmmain.con_PCM;
+  qry_Update.Connection:= CurrentPCMConnection;
   qry_Update.SQL.Text:= 'Update ' + ATable + ' Set ' + AField + '=:AValue Where ID = :ID';
   qry_Update.ParamByName('Avalue').AsInteger:= AValue;
   qry_Update.ParamByName('ID').AsInteger:= AID;
@@ -578,7 +591,7 @@ var
   qry_Update: TFDQuery;
 begin
   qry_Update:= TFDQuery.Create(nil);
-  qry_Update.Connection:= dmmain.con_PCM;
+  qry_Update.Connection:= CurrentPCMConnection;
   qry_Update.SQL.Text:= 'Update ' + ATable + ' Set ' + AField + '=:AValue Where ID = :ID';
   qry_Update.ParamByName('Avalue').AsFloat:= AValue;
   qry_Update.ParamByName('ID').AsInteger:= AID;
@@ -594,7 +607,7 @@ var
   qry_Sync: TFDQuery;
 begin
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   qry_Sync.SQL.Text:= sSQL_SEL_COUNT_login;
   qry_Sync.Open;
   iCount:= qry_Sync.FieldByName('Anzahl').AsInteger;
@@ -623,17 +636,91 @@ end;
 {$EndRegion SaveFunctions}
 // Synch from App to Server
 {$Region ApptoServer}
+type
+  TSentRow = record
+    ID: Integer;
+    ChangedAt: Variant;
+  end;
+
+function CaptureSentRow(AQuery: TFDQuery): TSentRow;
+begin
+  Result.ID := AQuery.FieldByName('ID').AsInteger;
+  Result.ChangedAt := AQuery.FieldByName('Geaendertam').Value;
+end;
+
+procedure CheckSyncResponse(AResponse: TJSONObject; const AOperation: string);
+var
+  LError: TJSONValue;
+begin
+  if AResponse = nil then
+    raise Exception.Create(AOperation + ': keine Serverantwort');
+  LError := AResponse.GetValue('HasError');
+  if not (LError is TJSONBool) then
+    raise Exception.Create(AOperation + ': ung??ltige Serverantwort');
+  if SameText(LError.Value, 'true') then
+    raise Exception.Create(AOperation + ': Server hat die Anfrage abgelehnt');
+end;
+
+procedure ClearSentRows(const ATable: string; ARows: TList<TSentRow>);
+var
+  LRow: TSentRow;
+  LQuery: TFDQuery;
+  LStampWhere: string;
+begin
+  if ARows.Count = 0 then Exit;
+  LQuery := TFDQuery.Create(nil);
+  try
+    LQuery.Connection := CurrentPCMConnection;
+    CurrentPCMConnection.StartTransaction;
+    try
+      for LRow in ARows do
+      begin
+        if VarIsNull(LRow.ChangedAt) or VarIsEmpty(LRow.ChangedAt) then
+          LStampWhere := 'Geaendertam IS NULL'
+        else
+          LStampWhere := 'Geaendertam = :ChangedAt';
+        LQuery.SQL.Text := 'DELETE FROM ' + ATable +
+          ' WHERE ID = :ID AND Deleted = 1 AND ' + LStampWhere;
+        LQuery.ParamByName('ID').AsInteger := LRow.ID;
+        if Pos(':ChangedAt', LStampWhere) > 0 then
+          LQuery.ParamByName('ChangedAt').Value := LRow.ChangedAt;
+        LQuery.ExecSQL;
+        LQuery.SQL.Text := 'UPDATE ' + ATable +
+          ' SET Geaendertam = NULL WHERE ID = :ID AND Deleted = 0 AND ' + LStampWhere;
+        LQuery.ParamByName('ID').AsInteger := LRow.ID;
+        if Pos(':ChangedAt', LStampWhere) > 0 then
+          LQuery.ParamByName('ChangedAt').Value := LRow.ChangedAt;
+        LQuery.ExecSQL;
+      end;
+      CurrentPCMConnection.Commit;
+    except
+      CurrentPCMConnection.Rollback;
+      raise;
+    end;
+  finally
+    LQuery.Free;
+  end;
+end;
+
 procedure SyncConfig_ToServer(const AUserID: Integer; AWaitFrame: TWaitForm);
 var
   qry_SyncConfig_ToServer: TFDQuery;
+  joResponseJSON: TJSONObject;
+  joResponseJSONData: TJSONObject;
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
 begin
+  JSONResult := nil;
+  joResponseJSON := nil;
+  qry_SyncConfig_ToServer := nil;
+  try
   joResponseJSON:= nil;
   joResponseJSONData:= nil;
   jaDetails:= nil;
   if not Assigned(joResponseJSON) then
     joResponseJSON := TJSONObject.Create;
   qry_SyncConfig_ToServer:= TFDQuery.Create(nil);
-  qry_SyncConfig_ToServer.Connection:= dmmain.con_PCM;
+  qry_SyncConfig_ToServer.Connection:= CurrentPCMConnection;
   qry_SyncConfig_ToServer.FetchOptions.Mode:= fmall;
   qry_SyncConfig_ToServer.FetchOptions.RecordCountMode:= cmtotal;
   qry_SyncConfig_ToServer.SQL.Text:= 'SELECT DeviceID, DeviceToken FROM Auto_login';
@@ -662,17 +749,63 @@ begin
     end;
     joResponseJSON.AddPair(TJSONPair.Create('Device', jaDetails));
     JSONResult := dmmain.RestRequest(joResponseJSON,'SetDeviceID', rmPUT) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-    if bHasError then
-      WriteLog('nicht Erfolgreich synchronisiert. ErroCode:' + JSONResult.GetValue<TJSONBool>('ErrorCode').ToString,1,false);
+    CheckSyncResponse(JSONResult, 'GER??TEKENNUNG');
   end;
   qry_SyncConfig_ToServer.Close;
-  FreeandNil(qry_SyncConfig_ToServer);
+  finally
+    qry_SyncConfig_ToServer.Free;
+    JSONResult.Free;
+    joResponseJSON.Free;
+  end;
 end;
+procedure PrepareContactSync(const AUserID: Integer);
+var
+  Response: TJSONObject;
+  Contacts: TJSONArray;
+  ErrorFlag: Boolean;
+  ErrorCode: Integer;
+begin
+  Response := dmmain.RestRequest(nil, 'GetContacts?ID_User=' + IntToStr(AUserID), rmPOST);
+  try
+    ErrorFlag := False;
+    ErrorCode := 0;
+    Response.TryGetValue<Boolean>('HasError', ErrorFlag);
+    Response.TryGetValue<Integer>('ErrorCode', ErrorCode);
+    // This server returns error code 1 for an empty contact list.
+    if ErrorFlag and (ErrorCode = 1) then
+    begin
+      Contacts := TJSONArray.Create;
+      try
+        ReconcileContactIDs(CurrentPCMConnection, Contacts);
+      finally
+        Contacts.Free;
+      end;
+      Exit;
+    end;
+    CheckSyncResponse(Response, 'KONTAKTABGLEICH');
+    Contacts := Response.GetValue<TJSONArray>('Contacts');
+    if Contacts = nil then
+      raise Exception.Create('Kontaktabgleich: Datenliste fehlt');
+    ReconcileContactIDs(CurrentPCMConnection, Contacts);
+  finally
+    Response.Free;
+  end;
+end;
+
 procedure SyncKontakte_ToServer(const AUserID: Integer; bAll: boolean; AWaitFrame: TWaitForm);
 var
   qry_SyncKontakte_ToServer: TFDQuery;
+  LSent: TList<TSentRow>;
+  joResponseJSON: TJSONObject;
+  joResponseJSONData: TJSONObject;
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
 begin
+  JSONResult := nil;
+  joResponseJSON := nil;
+  qry_SyncKontakte_ToServer := nil;
+  LSent := TList<TSentRow>.Create;
+  try
   AWaitFrame.SetWaitMessage('Kontakte werden synchronisiert...', 'Synchronisierung');
   joResponseJSON:= nil;
   joResponseJSONData:= nil;
@@ -681,13 +814,14 @@ begin
     joResponseJSON := TJSONObject.Create;
 
   qry_SyncKontakte_ToServer:= TFDQuery.Create(nil);
-  qry_SyncKontakte_ToServer.Connection:= dmmain.con_PCM;
+  qry_SyncKontakte_ToServer.Connection:= CurrentPCMConnection;
   qry_SyncKontakte_ToServer.FetchOptions.Mode:= fmall;
   qry_SyncKontakte_ToServer.FetchOptions.RecordCountMode:= cmtotal;
   qry_SyncKontakte_ToServer.SQL.Text:= 'SELECT ID, Anrede,Vorname, Nachname, Strasse, PLZ,ort,Telefon, Handy, Email, Geburtsdatum, Geschlecht, Familienstand, Staatsangehoerigkeit, ' +                               'KOnfession, Firma, StrasseFirma, PLZFirma,OrtFirma,TelefonFirma, HandyFirma, Emailfirma, IFNULL(Kontakte_ID,0) AS ID_Kontakt, ID as Bild,  Deleted ' +
                       'FROM Kontakte';
   if not bAll then
       qry_SyncKontakte_ToServer.SQL.Text:= qry_SyncKontakte_ToServer.SQL.Text +  ' WHERE Geaendertam IS NOT NULL';
+  qry_SyncKontakte_ToServer.SQL.Text := StringReplace(qry_SyncKontakte_ToServer.SQL.Text, ' FROM ', ', Geaendertam FROM ', [rfIgnoreCase]);
   qry_SyncKontakte_ToServer.open;
   if qry_SyncKontakte_ToServer.RecordCount > 0 then
   begin
@@ -726,25 +860,37 @@ begin
       joResponseJSONData.AddPair(TJSONPair.Create('Deleted', TJSONBool.Create(qry_SyncKontakte_ToServer.Fieldbyname('Deleted').asBoolean)));
       jaDetails.Add(joResponseJSONData);
       joResponseJSONData:= nil;
+      LSent.Add(CaptureSentRow(qry_SyncKontakte_ToServer));
+
       qry_SyncKontakte_ToServer.Next;
     end;
     joResponseJSON.AddPair(TJSONPair.Create('Contacts', jaDetails));
     JSONResult := dmmain.RestRequest(joResponseJSON,'SetContacts?ID_User='+ IntToStr(AUserID), rmPUT) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-    if bHasError then
-      WriteLog('nicht Erfolgreich synchronisiert. ErroCode:' + JSONResult.GetValue<TJSONBool>('ErrorCode').ToString,1,false);
+    CheckSyncResponse(JSONResult, 'UPLOAD');
   end;
   qry_SyncKontakte_ToServer.Close;
-  qry_SyncKontakte_ToServer.SQL.Text:= 'UPDATE Kontakte SET Geaendertam = null';
-  qry_SyncKontakte_ToServer.ExecSQL;
-  qry_SyncKontakte_ToServer.SQL.Text:= 'Delete FROM Kontakte WHERE DELETED = true';
-  qry_SyncKontakte_ToServer.ExecSQL;
-  FreeAndNil(qry_SyncKontakte_ToServer);
+  ClearSentRows('Kontakte', LSent);
+  finally
+    qry_SyncKontakte_ToServer.Free;
+    JSONResult.Free;
+    joResponseJSON.Free;
+    LSent.Free;
+  end;
 end;
 procedure SyncKalender_ToServer(const AUserID: Integer; bAll: boolean; AWaitFrame: TWaitForm);
 var
   qry_SyncKalender_ToServer: TFDQuery;
+  LSent: TList<TSentRow>;
+  joResponseJSON: TJSONObject;
+  joResponseJSONData: TJSONObject;
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
 begin
+  JSONResult := nil;
+  joResponseJSON := nil;
+  qry_SyncKalender_ToServer := nil;
+  LSent := TList<TSentRow>.Create;
+  try
   AWaitFrame.SetWaitMessage('Kalender werden synchronisiert...', 'Synchronisierung');
   joResponseJSON:= nil;
   joResponseJSONData:= nil;
@@ -752,13 +898,21 @@ begin
   if not Assigned(joResponseJSON) then
     joResponseJSON := TJSONObject.Create;
   qry_SyncKalender_ToServer:= TFDQuery.Create(nil);
-  qry_SyncKalender_ToServer.Connection:= dmmain.con_PCM;
+  qry_SyncKalender_ToServer.Connection:= CurrentPCMConnection;
+  // SQLite may contain text longer than the declared VARCHAR length.
+  qry_SyncKalender_ToServer.FormatOptions.OwnMapRules := True;
+  with qry_SyncKalender_ToServer.FormatOptions.MapRules.Add do
+  begin
+    NameMask := 'TerminText';
+    TargetDataType := dtWideMemo;
+  end;
   qry_SyncKalender_ToServer.FetchOptions.Mode:= fmall;
   qry_SyncKalender_ToServer.FetchOptions.RecordCountMode:= cmtotal;
   qry_SyncKalender_ToServer.SQL.Text:= 'SELECT ID, Caption,EventType,Location,Message as TerminText,Start,Finish,CompleteDay,Reminder,ReminderDate,ifnull(ReminderMinutesBeforeStart,0) as ReminderMinutesBeforeStart, Kalendername,'+
                       'IFNULL(Kalender_ID,0) AS ID_Kalender, Deleted FROM Kalender ';
   if not bAll then
     qry_SyncKalender_ToServer.SQL.Text:= qry_SyncKalender_ToServer.SQL.Text +  ' WHERE Geaendertam IS NOT NULL';
+  qry_SyncKalender_ToServer.SQL.Text := StringReplace(qry_SyncKalender_ToServer.SQL.Text, ' FROM ', ', Geaendertam FROM ', [rfIgnoreCase]);
   qry_SyncKalender_ToServer.open;
   while not qry_SyncKalender_ToServer.eof do
   begin
@@ -786,26 +940,38 @@ begin
         joResponseJSONData.AddPair(TJSONPair.Create('Deleted', TJSONBool.Create(qry_SyncKalender_ToServer.Fieldbyname('Deleted').asBoolean)));
         jaDetails.Add(joResponseJSONData);
         joResponseJSONData:= nil;
+        LSent.Add(CaptureSentRow(qry_SyncKalender_ToServer));
+
         qry_SyncKalender_ToServer.Next;
       end;
       joResponseJSON.AddPair(TJSONPair.Create('Calendar', jaDetails));
-      JSONResult := dmmain.RestRequest(joResponseJSON,'SetCalendar?ID_User='+ IntToStr(AUserID), rmPUT) as TJSONObject;
-      bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-      if bHasError then
-        WriteLog('nicht Erfolgreich synchronisiert. ErroCode:' + JSONResult.GetValue<TJSONBool>('ErrorCode').ToString,1,false);
+      JSONResult := dmmain.RestRequest(joResponseJSON,'SetCalendar?ID_User='+ IntToStr(AUserID) + '&test=false', rmPUT) as TJSONObject;
+    CheckSyncResponse(JSONResult, 'UPLOAD');
     end;
   end;
   qry_SyncKalender_ToServer.Close;
-  qry_SyncKalender_ToServer.SQL.Text:= 'UPDATE Kalender SET Geaendertam = null';
-  qry_SyncKalender_ToServer.ExecSQL;
-  qry_SyncKalender_ToServer.SQL.Text:= 'Delete FROM Kalender WHERE DELETED = true';
-  qry_SyncKalender_ToServer.ExecSQL;
-  FreeAndNil(qry_SyncKalender_ToServer);
+  ClearSentRows('Kalender', LSent);
+  finally
+    qry_SyncKalender_ToServer.Free;
+    JSONResult.Free;
+    joResponseJSON.Free;
+    LSent.Free;
+  end;
 end;
 procedure SyncPasswort_ToServer(const AUserID: Integer; bAll: boolean; AWaitFrame: TWaitForm);
 var
   qry_SyncPasswort_ToServer: TFDQuery;
+  LSent: TList<TSentRow>;
+  joResponseJSON: TJSONObject;
+  joResponseJSONData: TJSONObject;
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
 begin
+  JSONResult := nil;
+  joResponseJSON := nil;
+  qry_SyncPasswort_ToServer := nil;
+  LSent := TList<TSentRow>.Create;
+  try
   AWaitFrame.SetWaitMessage('Passwörter werden synchronisiert...', 'Synchronisierung');
   joResponseJSON:= nil;
   joResponseJSONData:= nil;
@@ -813,7 +979,14 @@ begin
   if not Assigned(joResponseJSON) then
     joResponseJSON := TJSONObject.Create;
   qry_SyncPasswort_ToServer:= TFDQuery.Create(nil);
-  qry_SyncPasswort_ToServer.Connection:= dmmain.con_PCM;
+  qry_SyncPasswort_ToServer.Connection:= CurrentPCMConnection;
+  // SQLite may contain text longer than the declared VARCHAR length.
+  qry_SyncPasswort_ToServer.FormatOptions.OwnMapRules := True;
+  with qry_SyncPasswort_ToServer.FormatOptions.MapRules.Add do
+  begin
+    NameMask := 'link';
+    TargetDataType := dtWideMemo;
+  end;
   qry_SyncPasswort_ToServer.FetchOptions.Mode:= fmall;
   qry_SyncPasswort_ToServer.FetchOptions.RecordCountMode:= cmtotal;
   qry_SyncPasswort_ToServer.SQL.Text:= 'SELECT ID,PWTYP,Bezeichnung,user,password,link,VPN_SharedSecret,' +
@@ -824,6 +997,7 @@ begin
                                        'MAIL_PostausgangsVerschluesselung,IFNULL(passwoerter_ID,0) AS ID_Password, Deleted, WLAN FROM Passwoerter';
   if not bAll then
     qry_SyncPasswort_ToServer.SQL.Text:= qry_SyncPasswort_ToServer.SQL.Text +  ' WHERE Geaendertam IS NOT NULL';
+  qry_SyncPasswort_ToServer.SQL.Text := StringReplace(qry_SyncPasswort_ToServer.SQL.Text, ' FROM ', ', Geaendertam FROM ', [rfIgnoreCase]);
   qry_SyncPasswort_ToServer.open;
   if qry_SyncPasswort_ToServer.RecordCount > 0 then
   begin
@@ -853,25 +1027,37 @@ begin
       joResponseJSONData.AddPair(TJSONPair.Create('Deleted', TJSONBool.Create(qry_SyncPasswort_ToServer.Fieldbyname('Deleted').asBoolean)));
       jaDetails.Add(joResponseJSONData);
       joResponseJSONData:= nil;
+      LSent.Add(CaptureSentRow(qry_SyncPasswort_ToServer));
+
       qry_SyncPasswort_ToServer.Next;
     end;
     joResponseJSON.AddPair(TJSONPair.Create('Passwords', jaDetails));
     JSONResult := dmmain.RestRequest(joResponseJSON,'SetPasswords?ID_User='+ IntToStr(AUserID), rmPUT) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-    if bHasError then
-      WriteLog('nicht Erfolgreich synchronisiert. ErroCode:' + JSONResult.GetValue<TJSONBool>('ErrorCode').ToString,1,false);
+    CheckSyncResponse(JSONResult, 'UPLOAD');
   end;
   qry_SyncPasswort_ToServer.Close;
-  qry_SyncPasswort_ToServer.SQL.Text:= 'UPDATE Passwoerter SET Geaendertam = null';
-  qry_SyncPasswort_ToServer.ExecSQL;
-  qry_SyncPasswort_ToServer.SQL.Text:= 'Delete FROM Passwoerter WHERE DELETED = true';
-  qry_SyncPasswort_ToServer.ExecSQL;
-  FreeAndNil(qry_SyncPasswort_ToServer);
+  ClearSentRows('Passwoerter', LSent);
+  finally
+    qry_SyncPasswort_ToServer.Free;
+    JSONResult.Free;
+    joResponseJSON.Free;
+    LSent.Free;
+  end;
 end;
 procedure SyncSerials_ToServer(const AUserID: Integer; bAll: boolean; AWaitFrame: TWaitForm);
 var
   qry_SyncSerials_ToServer: TFDQuery;
+  LSent: TList<TSentRow>;
+  joResponseJSON: TJSONObject;
+  joResponseJSONData: TJSONObject;
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
 begin
+  JSONResult := nil;
+  joResponseJSON := nil;
+  qry_SyncSerials_ToServer := nil;
+  LSent := TList<TSentRow>.Create;
+  try
   AWaitFrame.SetWaitMessage('Serials werden synchronisiert...', 'Synchronisierung');
   joResponseJSON:= nil;
   joResponseJSONData:= nil;
@@ -879,13 +1065,21 @@ begin
   if not Assigned(joResponseJSON) then
     joResponseJSON := TJSONObject.Create;
   qry_SyncSerials_ToServer:= TFDQuery.Create(nil);
-  qry_SyncSerials_ToServer.Connection:= dmmain.con_PCM;
+  qry_SyncSerials_ToServer.Connection:= CurrentPCMConnection;
+  // SQLite may contain text longer than the declared VARCHAR length.
+  qry_SyncSerials_ToServer.FormatOptions.OwnMapRules := True;
+  with qry_SyncSerials_ToServer.FormatOptions.MapRules.Add do
+  begin
+    NameMask := 'Serial';
+    TargetDataType := dtWideMemo;
+  end;
   qry_SyncSerials_ToServer.FetchOptions.Mode:= fmall;
   qry_SyncSerials_ToServer.FetchOptions.RecordCountMode:= cmtotal;
   qry_SyncSerials_ToServer.SQL.Text:= 'SELECT ID, App,USER,Serial,Bezeichnung, IFNULL(Serials_ID,0) AS ID_Serials, Deleted ' +
                       'FROM Serials';
   if not bAll then
     qry_SyncSerials_ToServer.SQL.Text:= qry_SyncSerials_ToServer.SQL.Text +  ' WHERE Geaendertam IS NOT NULL';
+  qry_SyncSerials_ToServer.SQL.Text := StringReplace(qry_SyncSerials_ToServer.SQL.Text, ' FROM ', ', Geaendertam FROM ', [rfIgnoreCase]);
   qry_SyncSerials_ToServer.open;
 
   if qry_SyncSerials_ToServer.RecordCount > 0 then
@@ -905,25 +1099,37 @@ begin
       joResponseJSONData.AddPair(TJSONPair.Create('Deleted', TJSONBool.Create(qry_SyncSerials_ToServer.Fieldbyname('Deleted').asBoolean)));
       jaDetails.Add(joResponseJSONData);
       joResponseJSONData:= nil;
+      LSent.Add(CaptureSentRow(qry_SyncSerials_ToServer));
+
       qry_SyncSerials_ToServer.Next;
     end;
     joResponseJSON.AddPair(TJSONPair.Create('Serials', jaDetails));
     JSONResult := dmmain.RestRequest(joResponseJSON,'SetSerials?ID_User='+ IntToStr(AUserID), rmPUT) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-    if bHasError then
-      WriteLog('nicht Erfolgreich synchronisiert. ErroCode:' + JSONResult.GetValue<TJSONBool>('ErrorCode').ToString,1,false);
+    CheckSyncResponse(JSONResult, 'UPLOAD');
   end;
   qry_SyncSerials_ToServer.Close;
-  qry_SyncSerials_ToServer.SQL.Text:= 'UPDATE Serials SET Geaendertam = null';
-  qry_SyncSerials_ToServer.ExecSQL;
-  qry_SyncSerials_ToServer.SQL.Text:= 'Delete FROM Serials WHERE DELETED = true';
-  qry_SyncSerials_ToServer.ExecSQL;
-  FreeAndNil(qry_SyncSerials_ToServer);
+  ClearSentRows('Serials', LSent);
+  finally
+    qry_SyncSerials_ToServer.Free;
+    JSONResult.Free;
+    joResponseJSON.Free;
+    LSent.Free;
+  end;
 end;
 procedure SyncFinanzenEin_ToServer(const AUserID: Integer; bAll: boolean; AWaitFrame: TWaitForm);
 var
   qry_Sync: TFDQuery;
+  LSent: TList<TSentRow>;
+  joResponseJSON: TJSONObject;
+  joResponseJSONData: TJSONObject;
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
 begin
+  JSONResult := nil;
+  joResponseJSON := nil;
+  qry_Sync := nil;
+  LSent := TList<TSentRow>.Create;
+  try
   AWaitFrame.SetWaitMessage('Einnahmen werden synchronisiert...', 'Synchronisierung');
   joResponseJSON:= nil;
   joResponseJSONData:= nil;
@@ -931,13 +1137,14 @@ begin
   if not Assigned(joResponseJSON) then
     joResponseJSON := TJSONObject.Create;
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   qry_Sync.FetchOptions.Mode:= fmall;
   qry_Sync.FetchOptions.RecordCountMode:= cmtotal;
   qry_Sync.SQL.Text:= 'SELECT ID, Quelle,Betrag, Bezeichnung, IFNULL(Finanzen_Einnahmen_ID,0) AS ID_Einnahmen, Deleted, FixBetrag ' +
                              'FROM FinanzenEinnahmen';
   if not bAll then
     qry_Sync.SQL.Text:= qry_Sync.SQL.Text +  ' WHERE Geaendertam IS NOT NULL';
+  qry_Sync.SQL.Text := StringReplace(qry_Sync.SQL.Text, ' FROM ', ', Geaendertam FROM ', [rfIgnoreCase]);
   qry_Sync.open;
   if qry_Sync.RecordCount > 0 then
   begin
@@ -956,25 +1163,37 @@ begin
       joResponseJSONData.AddPair(TJSONPair.Create('Deleted', TJSONBool.Create(qry_Sync.Fieldbyname('Deleted').asBoolean)));
       jaDetails.Add(joResponseJSONData);
       joResponseJSONData:= nil;
+      LSent.Add(CaptureSentRow(qry_Sync));
+
       qry_Sync.Next;
     end;
     joResponseJSON.AddPair(TJSONPair.Create('Receipts', jaDetails));
     JSONResult := dmmain.RestRequest(joResponseJSON,'SetReceipts?ID_User='+ IntToStr(AUserID), rmPUT) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-    if bHasError then
-      WriteLog('nicht Erfolgreich synchronisiert. ErroCode:' + JSONResult.GetValue<TJSONBool>('ErrorCode').ToString,1,false);
+    CheckSyncResponse(JSONResult, 'UPLOAD');
   end;
   qry_Sync.Close;
-  qry_Sync.SQL.Text:= 'UPDATE FinanzenEinnahmen SET Geaendertam = null';
-  qry_Sync.ExecSQL;
-  qry_Sync.SQL.Text:= 'Delete FROM FinanzenEinnahmen WHERE DELETED = true';
-  qry_Sync.ExecSQL;
-  FreeAndNil(qry_Sync);
+  ClearSentRows('FinanzenEinnahmen', LSent);
+  finally
+    qry_Sync.Free;
+    JSONResult.Free;
+    joResponseJSON.Free;
+    LSent.Free;
+  end;
 end;
 procedure SyncFinanzenAus_ToServer(const AUserID: Integer; bAll: boolean; AWaitFrame: TWaitForm);
 var
   qry_Sync: TFDQuery;
+  LSent: TList<TSentRow>;
+  joResponseJSON: TJSONObject;
+  joResponseJSONData: TJSONObject;
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
 begin
+  JSONResult := nil;
+  joResponseJSON := nil;
+  qry_Sync := nil;
+  LSent := TList<TSentRow>.Create;
+  try
   AWaitFrame.SetWaitMessage('Ausgaben werden synchronisiert...', 'Synchronisierung');
   joResponseJSON:= nil;
   joResponseJSONData:= nil;
@@ -982,13 +1201,14 @@ begin
   if not Assigned(joResponseJSON) then
     joResponseJSON := TJSONObject.Create;
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   qry_Sync.FetchOptions.Mode:= fmall;
   qry_Sync.FetchOptions.RecordCountMode:= cmtotal;
   qry_Sync.SQL.Text:= 'SELECT ID, Name,Beschreibung,Kontonummer,Bankleitzahl,Betrag,Fixkosten,Gueltig_Monat,Gueltig_Jahr,Verwendungszweck, IFNULL(Finanzen_Ausgaben_ID,0) AS ID_Ausgaben, Deleted, FixBetrag ' +
                       'FROM FinanzenAusgaben';
   if not bAll then
     qry_Sync.SQL.Text:= qry_Sync.SQL.Text +  ' WHERE Geaendertam IS NOT NULL';
+  qry_Sync.SQL.Text := StringReplace(qry_Sync.SQL.Text, ' FROM ', ', Geaendertam FROM ', [rfIgnoreCase]);
   qry_Sync.open;
   if qry_Sync.RecordCount > 0 then
   begin
@@ -1013,25 +1233,37 @@ begin
       joResponseJSONData.AddPair(TJSONPair.Create('Deleted', TJSONBool.Create(qry_Sync.Fieldbyname('Deleted').asBoolean)));
       jaDetails.Add(joResponseJSONData);
       joResponseJSONData:= nil;
+      LSent.Add(CaptureSentRow(qry_Sync));
+
       qry_Sync.Next;
     end;
     joResponseJSON.AddPair(TJSONPair.Create('Expenditure', jaDetails));
     JSONResult := dmmain.RestRequest(joResponseJSON,'SetExpenditure?ID_User='+ IntToStr(AUserID), rmPUT) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-    if bHasError then
-      WriteLog('nicht Erfolgreich synchronisiert. ErroCode:' + JSONResult.GetValue<TJSONBool>('ErrorCode').ToString,1,false);
+    CheckSyncResponse(JSONResult, 'UPLOAD');
   end;
   qry_Sync.Close;
-  qry_Sync.SQL.Text:= 'UPDATE FinanzenAusgaben SET Geaendertam = null';
-  qry_Sync.ExecSQL;
-  qry_Sync.SQL.Text:= 'Delete FROM FinanzenAusgaben WHERE DELETED = true';
-  qry_Sync.ExecSQL;
-  FreeAndNil(qry_Sync);
+  ClearSentRows('FinanzenAusgaben', LSent);
+  finally
+    qry_Sync.Free;
+    JSONResult.Free;
+    joResponseJSON.Free;
+    LSent.Free;
+  end;
 end;
 procedure SyncBelege_ToServer(const AUserID: Integer; bAll: boolean; AWaitFrame: TWaitForm);
 var
   qry_Sync: TFDQuery;
+  LSent: TList<TSentRow>;
+  joResponseJSON: TJSONObject;
+  joResponseJSONData: TJSONObject;
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
 begin
+  JSONResult := nil;
+  joResponseJSON := nil;
+  qry_Sync := nil;
+  LSent := TList<TSentRow>.Create;
+  try
   AWaitFrame.SetWaitMessage('Belege werden synchronisiert...', 'Synchronisierung');
   joResponseJSON:= nil;
   joResponseJSONData:= nil;
@@ -1039,13 +1271,14 @@ begin
   if not Assigned(joResponseJSON) then
     joResponseJSON := TJSONObject.Create;
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   qry_Sync.FetchOptions.Mode:= fmall;
   qry_Sync.FetchOptions.RecordCountMode:= cmtotal;
   qry_Sync.SQL.Text:= 'SELECT ID, Nummer,Datum,Aussteller,Betrag,Kategorie,Monat,Jahr,'+
                       'IFNULL(Belege_ID,0) AS ID_Belege, Deleted FROM Belege ';
   if not bAll then
     qry_Sync.SQL.Text:= qry_Sync.SQL.Text +  ' WHERE Geaendertam IS NOT NULL';
+  qry_Sync.SQL.Text := StringReplace(qry_Sync.SQL.Text, ' FROM ', ', Geaendertam FROM ', [rfIgnoreCase]);
   qry_Sync.open;
   if qry_Sync.RecordCount > 0 then
   begin
@@ -1067,25 +1300,37 @@ begin
       joResponseJSONData.AddPair(TJSONPair.Create('Deleted', TJSONBool.Create(qry_Sync.Fieldbyname('Deleted').asBoolean)));
       jaDetails.Add(joResponseJSONData);
       joResponseJSONData:= nil;
+      LSent.Add(CaptureSentRow(qry_Sync));
+
       qry_Sync.Next;
     end;
     joResponseJSON.AddPair(TJSONPair.Create('Vouchers', jaDetails));
     JSONResult := dmmain.RestRequest(joResponseJSON,'SetVouchers?ID_User='+ IntToStr(AUserID), rmPUT) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-    if bHasError then
-      WriteLog('nicht Erfolgreich synchronisiert. ErroCode:' + JSONResult.GetValue<TJSONBool>('ErrorCode').ToString,1,false);
+    CheckSyncResponse(JSONResult, 'UPLOAD');
   end;
   qry_Sync.Close;
-  qry_Sync.SQL.Text:= 'UPDATE Belege SET Geaendertam = null';
-  qry_Sync.ExecSQL;
-  qry_Sync.SQL.Text:= 'Delete FROM Belege WHERE DELETED = true';
-  qry_Sync.ExecSQL;
-  FreeAndNil(qry_Sync);
+  ClearSentRows('Belege', LSent);
+  finally
+    qry_Sync.Free;
+    JSONResult.Free;
+    joResponseJSON.Free;
+    LSent.Free;
+  end;
 end;
 procedure SyncGutscheine_ToServer(const AUserID: Integer; bAll: boolean; AWaitFrame: TWaitForm);
 var
   qry_Sync: TFDQuery;
+  LSent: TList<TSentRow>;
+  joResponseJSON: TJSONObject;
+  joResponseJSONData: TJSONObject;
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
 begin
+  JSONResult := nil;
+  joResponseJSON := nil;
+  qry_Sync := nil;
+  LSent := TList<TSentRow>.Create;
+  try
   AWaitFrame.SetWaitMessage('Gutscheine werden synchronisiert...', 'Synchronisierung');
   joResponseJSON:= nil;
   joResponseJSONData:= nil;
@@ -1093,13 +1338,14 @@ begin
   if not Assigned(joResponseJSON) then
     joResponseJSON := TJSONObject.Create;
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   qry_Sync.FetchOptions.Mode:= fmall;
   qry_Sync.FetchOptions.RecordCountMode:= cmtotal;
   qry_Sync.SQL.Text:= 'SELECT ID,Nummer,Bezeichnung,Wert,RestWert,Datum,AbfragePin,'+
                       'IFNULL(Gutschein_ID,0) AS ID_Gutschein, Deleted FROM Gutschein ';
   if not bAll then
     qry_Sync.SQL.Text:= qry_Sync.SQL.Text +  ' WHERE Geaendertam IS NOT NULL';
+  qry_Sync.SQL.Text := StringReplace(qry_Sync.SQL.Text, ' FROM ', ', Geaendertam FROM ', [rfIgnoreCase]);
   qry_Sync.open;
   if qry_Sync.RecordCount > 0 then
   begin
@@ -1120,20 +1366,22 @@ begin
       joResponseJSONData.AddPair(TJSONPair.Create('Deleted', TJSONBool.Create(qry_Sync.Fieldbyname('Deleted').asBoolean)));
       jaDetails.Add(joResponseJSONData);
       joResponseJSONData:= nil;
+      LSent.Add(CaptureSentRow(qry_Sync));
+
       qry_Sync.Next;
     end;
     joResponseJSON.AddPair(TJSONPair.Create('Giftcards', jaDetails));
     JSONResult := dmmain.RestRequest(joResponseJSON,'SetGiftcards?ID_User='+ IntToStr(AUserID), rmPUT) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
-    if bHasError then
-      WriteLog('nicht Erfolgreich synchronisiert. ErroCode:' + JSONResult.GetValue<TJSONBool>('ErrorCode').ToString,1,false);
+    CheckSyncResponse(JSONResult, 'UPLOAD');
   end;
   qry_Sync.Close;
-  qry_Sync.SQL.Text:= 'UPDATE Belege SET Geaendertam = null';
-  qry_Sync.ExecSQL;
-  qry_Sync.SQL.Text:= 'Delete FROM Belege WHERE DELETED = true';
-  qry_Sync.ExecSQL;
-  FreeAndNil(qry_Sync);
+  ClearSentRows('Gutschein', LSent);
+  finally
+    qry_Sync.Free;
+    JSONResult.Free;
+    joResponseJSON.Free;
+    LSent.Free;
+  end;
 
 
 
@@ -1144,7 +1392,7 @@ begin
 //  if not Assigned(joResponseJSON) then
 //    joResponseJSON := TJSONObject.Create;
 //  qry_Sync:= TFDQuery.Create(nil);
-//  qry_Sync.Connection:= dmmain.con_PCM;
+//  qry_Sync.Connection:= CurrentPCMConnection;
 //  qry_Sync.FetchOptions.Mode:= fmall;
 //  qry_Sync.FetchOptions.RecordCountMode:= cmtotal;
 //  qry_Sync.SQL.Text:= 'SELECT ID,Nummer,Bezeichnung,Wert,RestWert,Datum,AbfragePin,'+
@@ -1168,6 +1416,9 @@ end;
 {$Region ServertoApp}
 procedure SyncKontakte_FromServer(AUserID: Integer; AWaitFrame: TWaitForm);
 var
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
+  bHasError: Boolean;
   qry_Sync: TFDQuery;
   iSyncID: Integer;
   iKontakte_ID: integer;
@@ -1193,15 +1444,20 @@ var
   sMobile_business: String;
   sMail_business: String;
 begin
+  JSONResult := nil;
   AWaitFrame.SetWaitMessage('Kontakte werden synchronisiert...', 'Synchronisierung');
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   try
     JSONResult := dmmain.RestRequest(nil,'GetContacts?ID_User='+ IntToStr(AUserID),rmPOST) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
+    CheckSyncResponse(JSONResult, 'DOWNLOAD');
+    bHasError := False;
     if not bHasError then
     begin
       jaDetails :=  JSONResult.GetValue<TJSONArray>('Contacts');
+      if jaDetails = nil then
+        raise Exception.Create('DOWNLOAD: Datenliste fehlt');
+      ReconcileContactIDs(CurrentPCMConnection, jaDetails);
       for var JSonValue in jaDetails do
       begin
         JSonValue.TryGetValue<Integer>('ID',iKontakte_ID);
@@ -1228,33 +1484,38 @@ begin
         JSonValue.TryGetValue<String>('Mail_business',sMail_business);
 
 
-        qry_Sync.SQL.Text:= 'SELECT ID FROM Kontakte WHERE Kontakte_ID = :Kontakte_ID';
+        qry_Sync.SQL.Text:= 'SELECT ID, Geaendertam FROM Kontakte WHERE Kontakte_ID = :Kontakte_ID';
         qry_Sync.ParamByName('Kontakte_ID').AsInteger := iKontakte_ID;
         qry_Sync.open;
+        if (not qry_Sync.IsEmpty) and (not qry_Sync.FieldByName('Geaendertam').IsNull) then
+        begin
+          qry_Sync.Close;
+          Continue;
+        end;
         if qry_Sync.RecordCount > 0 then
         begin
           iSyncID:= qry_Sync.FieldByName('ID').AsInteger;
           if sBirthday<> '' then UpdateFieldValues_TDate('Geburtsdatum','Kontakte',StrToDate(sBirthday),iSyncID);
-          if sCompany <> '' then UpdateFieldValues_String('Firma','Kontakte',sCompany,iSyncID);
-          if sPhone_private <> '' then UpdateFieldValues_String('Telefon','Kontakte',sPhone_private,iSyncID);
-          if sMobile_private <> '' then UpdateFieldValues_String('Handy','Kontakte',sMobile_private,iSyncID);
-          if sPhone_business <> '' then UpdateFieldValues_String('TelefonFirma','Kontakte',sPhone_business,iSyncID);
-          if smobile_business <> '' then UpdateFieldValues_String('HandyFirma','Kontakte',smobile_business,iSyncID);
-          if sMail_private <> '' then UpdateFieldValues_String('Email','Kontakte',sMail_private,iSyncID);
-          if sMail_business <> '' then UpdateFieldValues_String('EmailFirma','Kontakte',sMail_business,iSyncID);
+          if JSonValue.TryGetValue<string>('Company', sCompany) then UpdateFieldValues_String('Firma','Kontakte',sCompany,iSyncID);
+          if JSonValue.TryGetValue<string>('Phone_private', sPhone_private) then UpdateFieldValues_String('Telefon','Kontakte',sPhone_private,iSyncID);
+          if JSonValue.TryGetValue<string>('Mobile_private', sMobile_private) then UpdateFieldValues_String('Handy','Kontakte',sMobile_private,iSyncID);
+          if JSonValue.TryGetValue<string>('Phone_business', sPhone_business) then UpdateFieldValues_String('TelefonFirma','Kontakte',sPhone_business,iSyncID);
+          if JSonValue.TryGetValue<string>('Mobile_business', smobile_business) then UpdateFieldValues_String('HandyFirma','Kontakte',smobile_business,iSyncID);
+          if JSonValue.TryGetValue<string>('Mail_private', sMail_private) then UpdateFieldValues_String('Email','Kontakte',sMail_private,iSyncID);
+          if JSonValue.TryGetValue<string>('Mail_business', sMail_business) then UpdateFieldValues_String('EmailFirma','Kontakte',sMail_business,iSyncID);
           if sStreet_private <> '' then	UpdateFieldValues_String('Strasse','Kontakte',sStreet_private,iSyncID);
-          if sPostalcode_private <> '' then UpdateFieldValues_String('PLZ','Kontakte',sPostalcode_private,iSyncID);
-          if sPlace_private <> '' then UpdateFieldValues_String('Ort','Kontakte',sPlace_private,iSyncID);
-          if sStreet_business <> '' then UpdateFieldValues_String('StrasseFirma','Kontakte',sStreet_business,iSyncID);
+          if JSonValue.TryGetValue<string>('Postalcode_private', sPostalcode_private) then UpdateFieldValues_String('PLZ','Kontakte',sPostalcode_private,iSyncID);
+          if JSonValue.TryGetValue<string>('Place_private', sPlace_private) then UpdateFieldValues_String('Ort','Kontakte',sPlace_private,iSyncID);
+          if JSonValue.TryGetValue<string>('Street_business', sStreet_business) then UpdateFieldValues_String('StrasseFirma','Kontakte',sStreet_business,iSyncID);
           if sPostalcode_business <> '' then	UpdateFieldValues_String('PLZFirma','Kontakte',sPostalcode_business,iSyncID);
           if sPlace_business <> '' then	UpdateFieldValues_String('OrtFirma','Kontakte',sPlace_business,iSyncID);
-          if sSalutation <> '' then UpdateFieldValues_String('Anrede','Kontakte',sSalutation,iSyncID);
-          if sGender <> '' then UpdateFieldValues_String('Geschlecht','Kontakte',sGender,iSyncID);
+          if JSonValue.TryGetValue<string>('Salutation', sSalutation) then UpdateFieldValues_String('Anrede','Kontakte',sSalutation,iSyncID);
+          if JSonValue.TryGetValue<string>('Gender', sGender) then UpdateFieldValues_String('Geschlecht','Kontakte',sGender,iSyncID);
           if sMaritalstatus<> '' then	UpdateFieldValues_String('Familienstand','Kontakte',sMaritalstatus,iSyncID);
-          if sNationality <> '' then UpdateFieldValues_String('Staatsangehoerigkeit','Kontakte',sNationality,iSyncID);
-          if sDenomination <> '' then UpdateFieldValues_String('Konfession','Kontakte',sDenomination,iSyncID);
+          if JSonValue.TryGetValue<string>('Nationality', sNationality) then UpdateFieldValues_String('Staatsangehoerigkeit','Kontakte',sNationality,iSyncID);
+          if JSonValue.TryGetValue<string>('Denomination', sDenomination) then UpdateFieldValues_String('Konfession','Kontakte',sDenomination,iSyncID);
           if sName <> '' then	UpdateFieldValues_String('Vorname','Kontakte',sName,iSyncID);
-          if sSurname <> '' then UpdateFieldValues_String('Nachname','Kontakte',sSurname,iSyncID);
+          if JSonValue.TryGetValue<string>('Surname', sSurname) then UpdateFieldValues_String('Nachname','Kontakte',sSurname,iSyncID);
           if iKontakte_ID <> -1 then UpdateFieldValues_Integer('Kontakte_ID','Kontakte',iKontakte_ID,iSyncID);
   //        if bmPicture <> nil then
   //        begin
@@ -1301,11 +1562,15 @@ begin
       end;
     end;
   except
-    on e:exception do
+    on e:Exception do
     begin
-      WriteLog(e.Message,0,false);
+      JSONResult.Free;
+      qry_Sync.Free;
+      WriteLog(e.Message, 2, False);
+      raise;
     end;
   end;
+  JSONResult.Free;
   qry_Sync.Close;
   qry_Sync.SQL.Text:= 'Update Kontakte set Geburtsdatum = NULL Where Geburtsdatum = :Datum';
   qry_Sync.ParamByName('Datum').AsDate:= StrToDate('30.12.1899');
@@ -1314,6 +1579,10 @@ begin
 end;
 procedure SyncKalender_FromServer(const AUserID:Integer; AWaitFrame: TWaitForm);
 var
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
+  bHasError: Boolean;
+  sMessage: string;
   dFinishUpdate: TDateTime;
   dNewFinishUpdate: TDateTime;
   dNewReminderDateUpdate: TDateTime;
@@ -1347,15 +1616,19 @@ var
   iID_Calenderapp: integer;
   sReccurrencetext: String;
 begin
+  JSONResult := nil;
   AWaitFrame.SetWaitMessage('Kalender werden synchronisiert...', 'Synchronisierung');
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   try
     JSONResult := dmmain.RestRequest(nil,'GetCalendar?ID_User='+ IntToStr(AUserID),rmPOST) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
+    CheckSyncResponse(JSONResult, 'DOWNLOAD');
+    bHasError := False;
     if not bHasError then
     begin
       jaDetails :=  JSONResult.GetValue<TJSONArray>('Calendar');
+      if jaDetails = nil then
+        raise Exception.Create('DOWNLOAD: Datenliste fehlt');
       for var JSonValue in jaDetails do
       begin
         JSonValue.TryGetValue<Integer>('ID',iKalender_ID);
@@ -1373,9 +1646,14 @@ begin
         JSonValue.TryGetValue<integer>('ID_Calenderapp',iID_Calenderapp);
         JSonValue.TryGetValue<string>('Reccurrencetext',sReccurrencetext);
 
-        qry_Sync.SQL.Text:= 'SELECT ID FROM kalender WHERE Kalender_ID = :ID_Kalender_App';
+        qry_Sync.SQL.Text:= 'SELECT ID, Geaendertam FROM kalender WHERE Kalender_ID = :ID_Kalender_App';
         qry_Sync.ParamByName('ID_Kalender_App').asInteger := iKalender_ID;
         qry_Sync.open;
+        if (not qry_Sync.IsEmpty) and (not qry_Sync.FieldByName('Geaendertam').IsNull) then
+        begin
+          qry_Sync.Close;
+          Continue;
+        end;
         if qry_Sync.RecordCount = 0 then
         begin
           qry_Sync.SQL.Text := 'INSERT INTO kalender (Kalender_ID,EventType,Caption,Location,Message,Start,Finish,CompleteDay,Reminder,' +
@@ -1421,11 +1699,15 @@ begin
       end;
     end;
   except
-    on e:exception do
+    on e:Exception do
     begin
-      WriteLog(e.Message,0,false);
+      JSONResult.Free;
+      qry_Sync.Free;
+      WriteLog(e.Message, 2, False);
+      raise;
     end;
   end;
+  JSONResult.Free;
   qry_Sync.Close;
   qry_Sync.SQL.text:='DELETE FROM Kalender WHERE Date(start) < DATE() and (Kalendername like ''Müll%'' or Kalendername like ''Feiertage %'')';
   qry_Sync.ExecSQL;
@@ -1434,7 +1716,7 @@ begin
   while not qry_Sync.Eof do
   begin
     qry_Synch1:= TFDQuery.Create(nil);
-    qry_Synch1.Connection:= dmmain.con_PCM;
+    qry_Synch1.Connection:= CurrentPCMConnection;
     iID := qry_Sync.FieldByName('ID').asInteger;
     DecodeDate(Date(), wJahrCur,wMonatCUr,wTagCur);
     wJahrCur := wJahrCur + 1;
@@ -1460,6 +1742,9 @@ begin
 end;
 procedure SyncPasswort_FromServer(const AUserID:Integer; AWaitFrame: TWaitForm);
 var
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
+  bHasError: Boolean;
   qry_Sync: TFDQuery;
   iSyncID: integer;
   iPasswort_ID: integer;
@@ -1480,15 +1765,19 @@ var
   sPasswordtype: String;
   sWlankey: String;
 begin
+  JSONResult := nil;
   AWaitFrame.SetWaitMessage('Passwörter werden synchronisiert...', 'Synchronisierung');
   qry_Sync:= TFDQuery.Create(nil); // fehler
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   try
     JSONResult := dmmain.RestRequest(nil,'GetPasswords?ID_User='+ IntToStr(AUserID),rmPOST) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
+    CheckSyncResponse(JSONResult, 'DOWNLOAD');
+    bHasError := False;
     if not bHasError then
     begin
       jaDetails :=  JSONResult.GetValue<TJSONArray>('Passwords');
+      if jaDetails = nil then
+        raise Exception.Create('DOWNLOAD: Datenliste fehlt');
       for var JSonValue in jaDetails do
       begin
         JSonValue.TryGetValue<Integer>('ID',iPasswort_ID);
@@ -1510,9 +1799,14 @@ begin
         JSonValue.TryGetValue<string>('Wlankey',sWlankey);
 
 
-        qry_Sync.SQL.Text:= 'SELECT ID FROM Passwoerter WHERE passwoerter_ID = :passwoerter_ID';
+        qry_Sync.SQL.Text:= 'SELECT ID, Geaendertam FROM Passwoerter WHERE passwoerter_ID = :passwoerter_ID';
         qry_Sync.ParamByName('passwoerter_ID').AsInteger := iPasswort_ID;
         qry_Sync.open;
+        if (not qry_Sync.IsEmpty) and (not qry_Sync.FieldByName('Geaendertam').IsNull) then
+        begin
+          qry_Sync.Close;
+          Continue;
+        end;
         if qry_Sync.RecordCount = 0 then
         begin
          qry_Sync.SQL.Text := 'INSERT INTO passwoerter (passwoerter_ID,Bezeichnung,user,password,link,VPN_SharedSecret,'+
@@ -1548,37 +1842,44 @@ begin
         end
         else begin
           iSyncID:= qry_Sync.FieldByName('ID').AsInteger;
-          if sUser <> '' then UpdateFieldValues_String('User','passwoerter',sUser,iSyncID);
-          if sPasswordname <> '' then UpdateFieldValues_String('Bezeichnung','passwoerter',sPasswordname,iSyncID);
-          if sPassword <> '' then UpdateFieldValues_String('PASSWORD','passwoerter',sPassword,iSyncID);
-          if sLink <> '' then UpdateFieldValues_String('link','passwoerter',slink,iSyncID);
-          if sWlankey <> '' then UpdateFieldValues_String('WLAN','passwoerter',sWlankey,iSyncID);
-          if sVPN_SharedSecret <> '' then UpdateFieldValues_String('VPN_SharedSecret','passwoerter',sVPN_SharedSecret,iSyncID);
-          if sAPP_IP <> '' then UpdateFieldValues_String('APP_IP','passwoerter',sAPP_IP,iSyncID);
+          if JSonValue.TryGetValue<string>('User', sUser) then UpdateFieldValues_String('User','passwoerter',sUser,iSyncID);
+          if JSonValue.TryGetValue<string>('Passwordname', sPasswordname) then UpdateFieldValues_String('Bezeichnung','passwoerter',sPasswordname,iSyncID);
+          if JSonValue.TryGetValue<string>('Password', sPassword) then UpdateFieldValues_String('PASSWORD','passwoerter',sPassword,iSyncID);
+          if JSonValue.TryGetValue<string>('Link', sLink) then UpdateFieldValues_String('link','passwoerter',slink,iSyncID);
+          if JSonValue.TryGetValue<string>('Wlankey', sWlankey) then UpdateFieldValues_String('WLAN','passwoerter',sWlankey,iSyncID);
+          if JSonValue.TryGetValue<string>('VPN_SharedSecret', sVPN_SharedSecret) then UpdateFieldValues_String('VPN_SharedSecret','passwoerter',sVPN_SharedSecret,iSyncID);
+          if JSonValue.TryGetValue<string>('APP_IP', sAPP_IP) then UpdateFieldValues_String('APP_IP','passwoerter',sAPP_IP,iSyncID);
           if IntToStr(iAPP_Port) <> '' then UpdateFieldValues_Integer('APP_Port','passwoerter',iAPP_Port,iSyncID);
-          if sAPP_Encryption <> '' then UpdateFieldValues_String('APP_Verschluesselung','passwoerter',sAPP_Encryption,iSyncID);
-          if sIncomingmail_Server <> '' then UpdateFieldValues_String('MAIL_Posteingangsserver','passwoerter',sIncomingmail_Server,iSyncID);
+          if JSonValue.TryGetValue<string>('APP_Encryption', sAPP_Encryption) then UpdateFieldValues_String('APP_Verschluesselung','passwoerter',sAPP_Encryption,iSyncID);
+          if JSonValue.TryGetValue<string>('Incomingmail_Server', sIncomingmail_Server) then UpdateFieldValues_String('MAIL_Posteingangsserver','passwoerter',sIncomingmail_Server,iSyncID);
           if IntToStr(iIncomingmail_Port) <> '' then UpdateFieldValues_Integer('MAIL_PosteingangsPort','passwoerter',iIncomingmail_Port,iSyncID);
-          if sIncomingmail_Encryption <> '' then UpdateFieldValues_String('MAIL_PosteingangsVerschluesselung','passwoerter',sIncomingmail_Encryption,iSyncID);
-          if sOutgoingmail_Server <> '' then UpdateFieldValues_String('MAIL_Postausgangsserver','passwoerter',sOutgoingmail_Server,iSyncID);
+          if JSonValue.TryGetValue<string>('Incomingmail_Encryption', sIncomingmail_Encryption) then UpdateFieldValues_String('MAIL_PosteingangsVerschluesselung','passwoerter',sIncomingmail_Encryption,iSyncID);
+          if JSonValue.TryGetValue<string>('Outgoingmail_Server', sOutgoingmail_Server) then UpdateFieldValues_String('MAIL_Postausgangsserver','passwoerter',sOutgoingmail_Server,iSyncID);
           if IntToStr(iOutgoingmail_Port) <> '' then UpdateFieldValues_Integer('MAIL_PostausgangsPort','passwoerter',iOutgoingmail_Port,iSyncID);
-          if sOutgoingmail_Encryption <> '' then UpdateFieldValues_String('MAIL_PostausgangsVerschluesselung','passwoerter',sOutgoingmail_Encryption,iSyncID);
-          if sPasswordtype <> '' then UpdateFieldValues_String('PWTyp','passwoerter',sPasswordtype,iSyncID);
+          if JSonValue.TryGetValue<string>('Outgoingmail_Encryption', sOutgoingmail_Encryption) then UpdateFieldValues_String('MAIL_PostausgangsVerschluesselung','passwoerter',sOutgoingmail_Encryption,iSyncID);
+          if JSonValue.TryGetValue<string>('Passwordtype', sPasswordtype) then UpdateFieldValues_String('PWTyp','passwoerter',sPasswordtype,iSyncID);
           if IntToStr(iPasswort_ID) <> '' then UpdateFieldValues_Integer('passwoerter_ID','passwoerter',iPasswort_ID,iSyncID);
         end;
       end;
     end;
   except
-    on e:exception do
+    on e:Exception do
     begin
-      WriteLog(e.Message,0,false);
+      JSONResult.Free;
+      qry_Sync.Free;
+      WriteLog(e.Message, 2, False);
+      raise;
     end;
   end;
+  JSONResult.Free;
   qry_Sync.Close;
   FreeAndNil(qry_Sync);
 end;
 procedure SyncSerials_FromServer(const AUserID: Integer; AWaitFrame: TWaitForm);
 var
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
+  bHasError: Boolean;
   qry_Sync: TFDQuery;
   iSyncID: integer;
   iSerial_ID: integer;
@@ -1587,15 +1888,19 @@ var
   sSerialkey: String;
   sSerialType: String;
 begin
+  JSONResult := nil;
   AWaitFrame.SetWaitMessage('Serials werden synchronisiert...', 'Synchronisierung');
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   try
     JSONResult := dmmain.RestRequest(nil,'GetSerials?ID_User='+ IntToStr(AUserID),rmPOST) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
+    CheckSyncResponse(JSONResult, 'DOWNLOAD');
+    bHasError := False;
     if not bHasError then
     begin
       jaDetails :=  JSONResult.GetValue<TJSONArray>('Serials');
+      if jaDetails = nil then
+        raise Exception.Create('DOWNLOAD: Datenliste fehlt');
       for var JSonValue in jaDetails do
       begin
         JSonValue.TryGetValue<Integer>('ID',iSerial_ID);
@@ -1603,9 +1908,14 @@ begin
         JSonValue.TryGetValue<string>('User',sUser);
         JSonValue.TryGetValue<string>('Serialkey',sSerialkey);
         JSonValue.TryGetValue<string>('SerialType',sSerialType);
-        qry_Sync.SQL.Text:= 'SELECT ID FROM Serials WHERE Serials_ID = :Serials_ID';
+        qry_Sync.SQL.Text:= 'SELECT ID, Geaendertam FROM Serials WHERE Serials_ID = :Serials_ID';
         qry_Sync.ParamByName('Serials_ID').asInteger := iSerial_ID;
         qry_Sync.open;
+        if (not qry_Sync.IsEmpty) and (not qry_Sync.FieldByName('Geaendertam').IsNull) then
+        begin
+          qry_Sync.Close;
+          Continue;
+        end;
         if qry_Sync.RecordCount = 0 then
         begin
           qry_Sync.SQL.Text := 'INSERT INTO Serials (Serials_ID,App,USER,Serial,Bezeichnung) VALUES ' +
@@ -1628,16 +1938,23 @@ begin
       end;
     end;
   except
-    on e:exception do
+    on e:Exception do
     begin
-      WriteLog(e.Message,0,false);
+      JSONResult.Free;
+      qry_Sync.Free;
+      WriteLog(e.Message, 2, False);
+      raise;
     end;
   end;
+  JSONResult.Free;
   qry_Sync.Close;
   FreeAndNil(qry_Sync);
 end;
 procedure SyncFinanzenEin_FromServer(const AUserID: Integer; AWaitFrame: TWaitForm);
 var
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
+  bHasError: Boolean;
   qry_Sync: TFDQuery;
   iSyncID: integer;
   iFinanzEin_ID: integer;
@@ -1646,15 +1963,19 @@ var
   sDescription: String;
   fFixedamount: double;
 begin
+  JSONResult := nil;
   AWaitFrame.SetWaitMessage('Einnahmen werden synchronisiert...', 'Synchronisierung');
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   try
     JSONResult := dmmain.RestRequest(nil,'GetReceipts?ID_User='+ IntToStr(AUserID),rmPOST) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
+    CheckSyncResponse(JSONResult, 'DOWNLOAD');
+    bHasError := False;
     if not bHasError then
     begin
       jaDetails :=  JSONResult.GetValue<TJSONArray>('Receipts');
+      if jaDetails = nil then
+        raise Exception.Create('DOWNLOAD: Datenliste fehlt');
       for var JSonValue in jaDetails do
       begin
         JSonValue.TryGetValue<Integer>('ID',iFinanzEin_ID);
@@ -1662,9 +1983,14 @@ begin
         JSonValue.TryGetValue<Float64>('Amount',fAmount);
         JSonValue.TryGetValue<string>('Description',sDescription);
         JSonValue.TryGetValue<Float64>('Fixedamount',fFixedamount);
-        qry_Sync.SQL.Text:= 'SELECT ID FROM FinanzenEinnahmen WHERE Finanzen_Einnahmen_ID = :Finanzen_Einnahmen_ID';
+        qry_Sync.SQL.Text:= 'SELECT ID, Geaendertam FROM FinanzenEinnahmen WHERE Finanzen_Einnahmen_ID = :Finanzen_Einnahmen_ID';
         qry_Sync.ParamByName('Finanzen_Einnahmen_ID').AsInteger:=  iFinanzEin_ID;
         qry_Sync.open;
+        if (not qry_Sync.IsEmpty) and (not qry_Sync.FieldByName('Geaendertam').IsNull) then
+        begin
+          qry_Sync.Close;
+          Continue;
+        end;
         if qry_Sync.RecordCount = 0 then
         begin
         qry_Sync.SQL.Text := 'INSERT INTO FinanzenEinnahmen (Finanzen_Einnahmen_ID,Quelle,Betrag, Bezeichnung,FixBetrag) VALUES (:Finanzen_Einnahmen_ID,:Quelle,:Betrag, :Bezeichnung,:FixBetrag)';
@@ -1686,16 +2012,23 @@ begin
       end;
     end;
   except
-    on e:exception do
+    on e:Exception do
     begin
-      WriteLog(e.Message,0,false);
+      JSONResult.Free;
+      qry_Sync.Free;
+      WriteLog(e.Message, 2, False);
+      raise;
     end;
   end;
+  JSONResult.Free;
   qry_Sync.Close;
   FreeAndNil(qry_Sync);
 end;
 procedure SyncFinanzenAus_FromServer(const AUserID: Integer; AWaitFrame: TWaitForm);
 var
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
+  bHasError: Boolean;
   qry_Sync: TFDQuery;
   iSyncID: Integer;
   iID_Expenditure: integer;
@@ -1710,15 +2043,19 @@ var
   sUse: String;
   fFixedamount: double;
 begin
+  JSONResult := nil;
   AWaitFrame.SetWaitMessage('Ausgaben werden synchronisiert...', 'Synchronisierung');
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   try
     JSONResult := dmmain.RestRequest(nil,'GetExpenditure?ID_User='+ IntToStr(AUserID),rmPOST) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
+    CheckSyncResponse(JSONResult, 'DOWNLOAD');
+    bHasError := False;
     if not bHasError then
     begin
       jaDetails :=  JSONResult.GetValue<TJSONArray>('Expenditure');
+      if jaDetails = nil then
+        raise Exception.Create('DOWNLOAD: Datenliste fehlt');
       for var JSonValue in jaDetails do
       begin
         JSonValue.TryGetValue<Integer>('ID',iID_Expenditure);
@@ -1732,9 +2069,14 @@ begin
         JSonValue.TryGetValue<Integer>('Validyear',iValidyear);
         JSonValue.TryGetValue<string>('Use',sUse);
         JSonValue.TryGetValue<Float64>('Fixedamount',fFixedamount);
-        qry_Sync.SQL.Text:= 'SELECT ID FROM FinanzenAusgaben WHERE Finanzen_Ausgaben_ID = :Finanzen_Ausgaben_ID';
+        qry_Sync.SQL.Text:= 'SELECT ID, Geaendertam FROM FinanzenAusgaben WHERE Finanzen_Ausgaben_ID = :Finanzen_Ausgaben_ID';
         qry_Sync.ParamByName('Finanzen_Ausgaben_ID').AsInteger := iID_Expenditure;
         qry_Sync.open;
+        if (not qry_Sync.IsEmpty) and (not qry_Sync.FieldByName('Geaendertam').IsNull) then
+        begin
+          qry_Sync.Close;
+          Continue;
+        end;
         qry_Sync.open;
         if qry_Sync.RecordCount = 0 then
         begin
@@ -1770,16 +2112,23 @@ begin
       end;
     end;
   except
-    on e:exception do
+    on e:Exception do
     begin
-      WriteLog(e.Message,0,false);
+      JSONResult.Free;
+      qry_Sync.Free;
+      WriteLog(e.Message, 2, False);
+      raise;
     end;
   end;
+  JSONResult.Free;
   qry_Sync.Close;
   FreeAndNil(qry_Sync);
 end;
 procedure SyncBelege_FromServer(const AUserID: Integer; AWaitFrame: TWaitForm);
 var
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
+  bHasError: Boolean;
   qry_SyncBelege_FromServer: TFDQuery;
   iSyncID: integer;
   iID_Vouchers: integer;
@@ -1791,15 +2140,19 @@ var
   iMonth: integer;
   iYear: integer;
 begin
+  JSONResult := nil;
   AWaitFrame.SetWaitMessage('Belege werden synchronisiert...', 'Synchronisierung');
   qry_SyncBelege_FromServer:= TFDQuery.Create(nil);
-  qry_SyncBelege_FromServer.Connection:= dmmain.con_PCM;
+  qry_SyncBelege_FromServer.Connection:= CurrentPCMConnection;
   try
     JSONResult := dmmain.RestRequest(nil,'GetVouchers?ID_User='+ IntToStr(AUserID),rmPOST) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
+    CheckSyncResponse(JSONResult, 'DOWNLOAD');
+    bHasError := False;
     if not bHasError then
     begin
       jaDetails :=  JSONResult.GetValue<TJSONArray>('Vouchers');
+      if jaDetails = nil then
+        raise Exception.Create('DOWNLOAD: Datenliste fehlt');
       for var JSonValue in jaDetails do
       begin
         JSonValue.TryGetValue<Integer>('ID',iID_Vouchers);
@@ -1810,9 +2163,14 @@ begin
         JSonValue.TryGetValue<Integer>('Categorie',iCategorie);
         JSonValue.TryGetValue<Integer>('Month',iMonth);
         JSonValue.TryGetValue<Integer>('Year',iYear);
-        qry_SyncBelege_FromServer.SQL.Text:= 'SELECT ID FROM Belege WHERE Belege_ID = :Finanzen_Belege_ID';
+        qry_SyncBelege_FromServer.SQL.Text:= 'SELECT ID, Geaendertam FROM Belege WHERE Belege_ID = :Finanzen_Belege_ID';
         qry_SyncBelege_FromServer.ParamByName('Finanzen_Belege_ID').AsInteger := iID_Vouchers;
         qry_SyncBelege_FromServer.open;
+        if (not qry_SyncBelege_FromServer.IsEmpty) and (not qry_SyncBelege_FromServer.FieldByName('Geaendertam').IsNull) then
+        begin
+          qry_SyncBelege_FromServer.Close;
+          Continue;
+        end;
         qry_SyncBelege_FromServer.open;
         if qry_SyncBelege_FromServer.RecordCount = 0 then
         begin
@@ -1841,16 +2199,23 @@ begin
       end;
     end;
   except
-    on e:exception do
+    on e:Exception do
     begin
-      WriteLog(e.Message,0,false);
+      JSONResult.Free;
+      qry_SyncBelege_FromServer.Free;
+      WriteLog(e.Message, 2, False);
+      raise;
     end;
   end;
+  JSONResult.Free;
   qry_SyncBelege_FromServer.Close;
   FreeAndNil(qry_SyncBelege_FromServer);
 end;
 procedure SyncGutscheine_FromServer(const AUserID: Integer; AWaitFrame: TWaitForm);
 var
+  JSONResult: TJSONObject;
+  jaDetails: TJSONArray;
+  bHasError: Boolean;
   qry_Sync: TFDQuery;
   iSyncID: integer;
   iID_Giftcards: integer;
@@ -1861,15 +2226,19 @@ var
   fRemaining_value: double;
   sPincode: string;
 begin
+  JSONResult := nil;
   AWaitFrame.SetWaitMessage('Gutscheine werden synchronisiert...', 'Synchronisierung');
   qry_Sync:= TFDQuery.Create(nil);
-  qry_Sync.Connection:= dmmain.con_PCM;
+  qry_Sync.Connection:= CurrentPCMConnection;
   try
     JSONResult := dmmain.RestRequest(nil,'GetGiftCards?ID_User='+ IntToStr(AUserID),rmPOST) as TJSONObject;
-    bHasError:= StrToBool(JSONResult.GetValue<TJSONBool>('HasError').ToString);
+    CheckSyncResponse(JSONResult, 'DOWNLOAD');
+    bHasError := False;
     if not bHasError then
     begin
       jaDetails :=  JSONResult.GetValue<TJSONArray>('Giftcards');
+      if jaDetails = nil then
+        raise Exception.Create('DOWNLOAD: Datenliste fehlt');
       for var JSonValue in jaDetails do
       begin
         JSonValue.TryGetValue<Integer>('ID',iID_Giftcards);
@@ -1880,9 +2249,14 @@ begin
         JSonValue.TryGetValue<Float64>('Remaining_value',fRemaining_value);
         JSonValue.TryGetValue<string>('Pincode',sPincode);
 
-        qry_Sync.SQL.Text:= 'SELECT ID FROM gutschein WHERE gutschein_ID = :Finanzen_Gutscheine_ID';
+        qry_Sync.SQL.Text:= 'SELECT ID, Geaendertam FROM gutschein WHERE gutschein_ID = :Finanzen_Gutscheine_ID';
         qry_Sync.ParamByName('Finanzen_Gutscheine_ID').AsInteger := iID_Giftcards;
         qry_Sync.open;
+        if (not qry_Sync.IsEmpty) and (not qry_Sync.FieldByName('Geaendertam').IsNull) then
+        begin
+          qry_Sync.Close;
+          Continue;
+        end;
         qry_Sync.open;
         if qry_Sync.RecordCount = 0 then
         begin
@@ -1909,11 +2283,15 @@ begin
       end;
     end;
   except
-    on e:exception do
+    on e:Exception do
     begin
-      WriteLog(e.Message,0,false);
+      JSONResult.Free;
+      qry_Sync.Free;
+      WriteLog(e.Message, 2, False);
+      raise;
     end;
   end;
+  JSONResult.Free;
   qry_Sync.Close;
   FreeAndNil(qry_Sync);
 end;
@@ -1921,83 +2299,64 @@ end;
 // Synch
 {$Region Synch}
 procedure Synchronisation(const AUserID, AServerID: Integer; AWaitFrame: TWaitForm; bALL: Boolean);
+var
+  LErrors: TStringList;
+  LConnection: TFDConnection;
 begin
-  //Kontakte Synchronisieren
+  LErrors := TStringList.Create;
+  LConnection := TFDConnection.Create(nil);
+  TMonitor.Enter(dmmain);
   try
-    SyncKontakte_ToServer(AUserID,bAll,AWaitFrame);
-  except
-  end;
-  try
-    SyncKontakte_FromServer(AUserID,AWaitFrame);
-  except
-  end;
-  try
-    //Kalender synchronisieren
-    SyncKalender_ToServer(AUserID,bAll,AWaitFrame);
-  except
-  end;
-  try
-    Synckalender_FromServer(AUserID,AWaitFrame);
-  except
-  end;
-  try
-    //Passwörter
-    SyncPasswort_ToServer(AUserID,bAll,AWaitFrame);
-  except
-  end;
-  try
-    SyncPasswort_FromServer(AUserID,AWaitFrame);
-  except
-  end;
-  try
-    // Serials
-    SyncSerials_ToServer(AUserID,bAll,AWaitFrame);
-  except
-  end;
-  try
-    SyncSerials_FromServer(AUserID,AWaitFrame);
-  except
-  end;
-  try
-    // Einnahmen
-    SyncFinanzenEin_ToServer(AUserID,bAll,AWaitFrame);
-  except
-  end;
-  try
-    SyncFinanzenEin_FromServer(AUserID,AWaitFrame);
-  except
-  end;
-  try
-    // Ausgaben
-    SyncFinanzenAus_ToServer(AUserID,bAll,AWaitFrame);
-  except
-  end;
-  try
-    SyncFinanzenAus_FromServer(AUserID,AWaitFrame);
-  except
-  end;
-  try
-    // Belege
-    SyncBelege_ToServer(AUserID,bAll,AWaitFrame);
-  except
-  end;
-  try
-    SyncBelege_FromServer(AUserID,AWaitFrame);
-  except
-  end;
-  try
-    // Gutscheine
-    SyncGutscheine_ToServer(AUserID,bAll,AWaitFrame);
-  except
-  end;
-  try
-    SyncGutscheine_FromServer(AUserID,AWaitFrame);
-  except
-  end;
-  try
-    // Login Synchronisieren
-    SyncConfig_ToServer(AUserID,AWaitFrame);
-  except
+    try
+    LConnection.Params.Assign(dmmain.con_PCM.Params);
+    LConnection.LoginPrompt := False;
+    LConnection.Connected := True;
+    FThreadPCMConnection := LConnection;
+      try
+        PrepareContactSync(AUserID);
+        SyncKontakte_ToServer(AUserID,bAll,AWaitFrame);
+        SyncKontakte_FromServer(AUserID,AWaitFrame);
+      except on E: Exception do LErrors.Add('Kontakte: ' + E.Message); end;
+      try
+        SyncKalender_ToServer(AUserID,bAll,AWaitFrame);
+        SyncKalender_FromServer(AUserID,AWaitFrame);
+      except on E: Exception do LErrors.Add('Kalender: ' + E.Message); end;
+      try
+        SyncPasswort_ToServer(AUserID,bAll,AWaitFrame);
+        SyncPasswort_FromServer(AUserID,AWaitFrame);
+      except on E: Exception do LErrors.Add('Passwörter: ' + E.Message); end;
+      try
+        SyncSerials_ToServer(AUserID,bAll,AWaitFrame);
+        SyncSerials_FromServer(AUserID,AWaitFrame);
+      except on E: Exception do LErrors.Add('Seriennummern: ' + E.Message); end;
+      try
+        SyncFinanzenEin_ToServer(AUserID,bAll,AWaitFrame);
+        SyncFinanzenEin_FromServer(AUserID,AWaitFrame);
+      except on E: Exception do LErrors.Add('Einnahmen: ' + E.Message); end;
+      try
+        SyncFinanzenAus_ToServer(AUserID,bAll,AWaitFrame);
+        SyncFinanzenAus_FromServer(AUserID,AWaitFrame);
+      except on E: Exception do LErrors.Add('Ausgaben: ' + E.Message); end;
+      try
+        SyncBelege_ToServer(AUserID,bAll,AWaitFrame);
+        SyncBelege_FromServer(AUserID,AWaitFrame);
+      except on E: Exception do LErrors.Add('Belege: ' + E.Message); end;
+      try
+        SyncGutscheine_ToServer(AUserID,bAll,AWaitFrame);
+        SyncGutscheine_FromServer(AUserID,AWaitFrame);
+      except on E: Exception do LErrors.Add('Gutscheine: ' + E.Message); end;
+      try
+        SyncConfig_ToServer(AUserID,AWaitFrame);
+      except on E: Exception do LErrors.Add('Ger??tekennung: ' + E.Message); end;
+      if LErrors.Count > 0 then
+        raise Exception.Create('Synchronisierung fehlgeschlagen: ' + LErrors.Text);
+    finally
+      FThreadPCMConnection := nil;
+      LConnection.Free;
+      TMonitor.Exit(dmmain);
+    end;
+  finally
+    LErrors.Free;
   end;
 end;
 {$EndRegion Synch}
@@ -2008,7 +2367,7 @@ procedure BerechneMonat(AMonat,AJahr: integer);
   	qry_MW: TFDQuery;
 	begin
     qry_MW:= TFDQuery.Create(nil);
-    qry_MW.Connection:= dmmain.con_PCM;
+    qry_MW.Connection:= CurrentPCMConnection;
     qry_MW.SQL.Text:= 'SELECT Count(*) as Anzahl From Monatswerte Where Monat = :Monat and Jahr = :Jahr and ID_Benutzer = :ID';
     qry_MW.ParamByName('monat').AsInteger:= AMonat;
     qry_MW.ParamByName('jahr').AsInteger:= AJahr;
@@ -2074,7 +2433,7 @@ procedure BerechneMonat(AMonat,AJahr: integer);
 	  qry_MA: TFDQuery;
 	begin
     qry_MA:= TFDQuery.Create(nil);
-    qry_MA.Connection:= dmmain.con_PCM;
+    qry_MA.Connection:= CurrentPCMConnection;
     qry_MA.SQL.Text:= 'Select aktuelleMehrarbeit From Monatswerte Where ID_Benutzer = :ID and Jahr = :Jahr and Monat = :Monat';
     qry_MA.ParamByName('ID').AsInteger:= dmmain.iUserID;
     qry_MA.ParamByName('Jahr').AsInteger:= AJahr;
@@ -2089,7 +2448,7 @@ procedure BerechneMonat(AMonat,AJahr: integer);
 	  qry_UL: TFDQuery;
 	begin
     qry_UL:= TFDQuery.Create(nil);
-    qry_UL.Connection:= dmmain.con_PCM;
+    qry_UL.Connection:= CurrentPCMConnection;
     qry_UL.SQL.Text:= 'Select Resturlaub From Monatswerte Where ID_Benutzer = :ID and Jahr = :Jahr and Monat = :Monat';
     qry_UL.ParamByName('ID').AsInteger:= dmmain.iUserID;
     qry_UL.ParamByName('Jahr').AsInteger:= AJahr;
@@ -2104,7 +2463,7 @@ procedure BerechneMonat(AMonat,AJahr: integer);
   	qry_UL: TFDQuery;
 	begin
     qry_UL:= TFDQuery.Create(nil);
-    qry_UL.Connection:= dmmain.con_PCM;
+    qry_UL.Connection:= CurrentPCMConnection;
     qry_UL.SQL.Text:= 'Select Resturlaub From Monatswerte Where ID_Benutzer = :ID and Jahr = :Jahr and Monat = :Monat';
     qry_UL.ParamByName('ID').AsInteger:= dmmain.iUserID;
     qry_UL.ParamByName('Jahr').AsInteger:= AJahr;
@@ -2147,7 +2506,7 @@ begin
   fULgen:= GetFehltagSum(1,1,1,StartOfAMonth(AJahr,AMonat) ,EndOfAMonth(AJahr,AMonat));
   fJahresAnspruch:= 30;
   qry_Work1:= TFDQuery.Create(nil);
-  qry_Work1.Connection:= dmmain.con_PCM;
+  qry_Work1.Connection:= CurrentPCMConnection;
   qry_Work1.SQL.Text:= 'SELECT OffsetResturlaubJahr,OffsetResturlaub From kontakte';
   qry_Work1.Open;
   fOffsetResturlaub:= qry_Work1.FieldByName('OffsetResturlaub').AsFloat;
@@ -2204,9 +2563,9 @@ var
   qry_Calc,qry_Calc2: TFDQuery;
 begin
   qry_Calc:= TFDQuery.Create(nil);
-  qry_Calc.Connection:= dmmain.con_PCM;
+  qry_Calc.Connection:= CurrentPCMConnection;
   qry_Calc2:= TFDQuery.Create(nil);
-  qry_Calc2.Connection:= dmmain.con_PCM;
+  qry_Calc2.Connection:= CurrentPCMConnection;
   if ATag = 0 then
   begin
     qry_Calc.SQL.Text:= 'SELECT ze_b.*, ze_FT.* FROM buchungen ze_B ' +
@@ -2331,10 +2690,10 @@ var
 begin
   qry_TabellenInfo := TFDQuery.Create(nil);
   try
-    qry_TabellenInfo.Connection := dmmain.con_PCM;
+    qry_TabellenInfo.Connection := CurrentPCMConnection;
     qry_LoescheTabelle := TFDQuery.Create(nil);
     try
-      qry_LoescheTabelle.Connection := dmmain.con_PCM;
+      qry_LoescheTabelle.Connection := CurrentPCMConnection;
       qry_TabellenInfo.Open('SELECT name FROM sqlite_master WHERE type = ''table''');
       while not qry_TabellenInfo.Eof do
       begin
@@ -2372,7 +2731,7 @@ var
   qry_ErzeugeTabelle: TFDQuery;
 begin
   qry_ErzeugeTabelle:= TFDQuery.Create(nil);
-  qry_ErzeugeTabelle.Connection:= dmmain.con_PCM;
+  qry_ErzeugeTabelle.Connection:= CurrentPCMConnection;
   qry_ErzeugeTabelle.SQL.text:= sSQL_SELECT_USERVERSION_PRAGMASYSTEM;
   qry_ErzeugeTabelle.Open;
   iDatenBankVersion := qry_ErzeugeTabelle.FieldByName('user_Version').AsInteger;
@@ -2380,17 +2739,17 @@ begin
   FreeAndNil(qry_ErzeugeTabelle);
   if iDatenBankVersion < 1 then
   begin
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_SERVER);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_Login);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_Autologin);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_LastBooking);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_SynchBooking);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_Buchungen);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_Fehltag);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_Fehltage);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_Monatswerte);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_Kontakte);
-    dmmain.con_PCM.ExecSQL(sSQL_UPDATE_USERVERSION_PRAGMASYSTEM + IntToStr(iDatenBankVersion + 1));
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_SERVER);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_Login);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_Autologin);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_LastBooking);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_SynchBooking);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_Buchungen);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_Fehltag);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_Fehltage);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_Monatswerte);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_Kontakte);
+    CurrentPCMConnection.ExecSQL(sSQL_UPDATE_USERVERSION_PRAGMASYSTEM + IntToStr(iDatenBankVersion + 1));
   end;
 end;
 procedure CreateDatabasePCMAPP;
@@ -2399,7 +2758,7 @@ var
   qry_ErzeugeTabelle: TFDQuery;
 begin
   qry_ErzeugeTabelle:= TFDQuery.Create(nil);
-  qry_ErzeugeTabelle.Connection:= dmmain.con_PCM;
+  qry_ErzeugeTabelle.Connection:= CurrentPCMConnection;
   qry_ErzeugeTabelle.SQL.text:= ssQL_SEL_PRAGMA_SYSTEM;
   qry_ErzeugeTabelle.Open;
   iDatenBankVersion := qry_ErzeugeTabelle.FieldByName('user_Version').AsInteger;
@@ -2407,30 +2766,30 @@ begin
   FreeAndNil(qry_ErzeugeTabelle);
   if iDatenBankVersion < 1 then
   begin
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_ServerAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_LoginAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_AutologinAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_KontakteAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_KalenderAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_PasswordsAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_SerialsAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_EinnahmenAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_AusgabenAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_BelegeAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_GutscheinAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_CalAboAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_CREATE_TABLE_TempCalAPP);
-    dmmain.con_PCM.ExecSQL(sSQL_UPDATE_USERVERSION_PRAGMASYSTEM + IntToStr(iDatenBankVersion + 1));
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_ServerAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_LoginAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_AutologinAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_KontakteAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_KalenderAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_PasswordsAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_SerialsAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_EinnahmenAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_AusgabenAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_BelegeAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_GutscheinAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_CalAboAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_CREATE_TABLE_TempCalAPP);
+    CurrentPCMConnection.ExecSQL(sSQL_UPDATE_USERVERSION_PRAGMASYSTEM + IntToStr(iDatenBankVersion + 1));
   end;
 end;
 procedure DeleteAllTables;
 begin
-  dmmain.con_PCM.ExecSQL(sSQL_UPDATE_WRITABLE_SCHEMA_PRAGMASYSTEM + '1');
-  dmmain.con_PCM.ExecSQL(sSQL_DELETE_ALL_TABLES_SYSTEM);
-  dmmain.con_PCM.ExecSQL(sSQL_UPDATE_WRITABLE_SCHEMA_PRAGMASYSTEM + '0');
-  dmmain.con_PCM.ExecSQL(sSQL_UPDATE_USERVERSION_PRAGMASYSTEM + '0');
-  dmmain.con_PCM.Connected := False;
-  dmmain.con_PCM.Connected := True;
+  CurrentPCMConnection.ExecSQL(sSQL_UPDATE_WRITABLE_SCHEMA_PRAGMASYSTEM + '1');
+  CurrentPCMConnection.ExecSQL(sSQL_DELETE_ALL_TABLES_SYSTEM);
+  CurrentPCMConnection.ExecSQL(sSQL_UPDATE_WRITABLE_SCHEMA_PRAGMASYSTEM + '0');
+  CurrentPCMConnection.ExecSQL(sSQL_UPDATE_USERVERSION_PRAGMASYSTEM + '0');
+  CurrentPCMConnection.Connected := False;
+  CurrentPCMConnection.Connected := True;
 end;
 procedure WriteLog(AMessage: String; ATyp: Integer; ANewFile: boolean);
 var
@@ -2447,7 +2806,7 @@ var
   iLog: integer;
 begin
   qry_Log:= TFDQuery.Create(nil);
-  qry_Log.Connection:= dmmain.con_PCM;
+  qry_Log.Connection:= CurrentPCMConnection;
   qry_Log.SQL.text:= 'Select ifnull(Log,1) AS Log From Auto_login';
   qry_Log.Open;
   if qry_Log.RecordCount = 0 then

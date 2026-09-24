@@ -66,6 +66,7 @@ type
     te_Von: TTimeEdit;
     vsbx_KalenderDetailView: TVertScrollBox;
     vsbx_Main: TVertScrollBox;
+    procedure btn_SaveApplyStyleLookup(Sender: TObject);
     procedure btn_BackClick(Sender: TObject);
     procedure btn_CancelClick(Sender: TObject);
     procedure btn_EditClick(Sender: TObject);
@@ -138,6 +139,17 @@ begin
     20160: Result:= 24 ;
   end;
 end;
+procedure Tfrm_PCMAPP_KalenderDetail.btn_SaveApplyStyleLookup(Sender: TObject);
+var
+  LGlyph: TGlyph;
+begin
+  // Reapply after each StyleBook change; keep the existing light/dark image index.
+  if btn_Save.FindStyleResource<TGlyph>('glyphstyle', LGlyph) then
+  begin
+    LGlyph.Margins.Rect := TRectF.Create(0, 0, 0, 0);
+    LGlyph.Align := TAlignLayout.Center;
+  end;
+end;
 procedure Tfrm_PCMAPP_KalenderDetail.CalcContentBoundsProc(Sender: TObject; var ContentBounds: TRectF);
 begin
   if bNeedOffset and (dBounds.Top > 0) then
@@ -200,30 +212,19 @@ begin
   cbx_Reminderbefore.itemindex:= GetReminder(qry_Kalender.FieldByName('ReminderMinutesBeforeStart').AsInteger);
   dtDateTimeVon:= qry_Kalender.FieldByName('Start').AsDateTime;
   dtDateTimeBis:= qry_Kalender.FieldByName('Finish').AsDateTime;
-  if qry_Kalender.FieldByName('CompleteDay').AsBoolean then
-  begin
-    if ((Copy(DateTimeToStr(dtDateTimeVon),13,5) = '00:00') and (Copy(DateTimeToStr(dtDateTimeBis),13,5) = '00:00')) or ((Copy(DateTimeToStr(dtDateTimeVon),13,5) = '') and (Copy(DateTimeToStr(dtDateTimeBis),13,5) = '')) then
-    begin
-      chkbx_CompleteDay.IsChecked:= true;
-      dtp_von.Format:= 'dd.mm.yyyy';
-      dtp_Bis.Format:= 'dd.mm.yyyy';
-      dtp_von.DateTime:= dtDateTimeVon;
-      dtp_Bis.DateTime :=dtDateTimeBis;
-      te_von.Visible:= false;
-      te_Bis.Visible:= false;
-    end;
-  end
-  else begin
-    chkbx_CompleteDay.IsChecked:= false;
-    dtp_von.Format:= 'dd.mm.yyyy';
-    dtp_Bis.Format:= 'dd.mm.yyyy';
-    dtp_von.DateTime:= dtDateTimeVon;
-    dtp_Bis.DateTime:= dtDateTimeBis;
-    te_von.Visible:= true;
-    te_Bis.Visible:= true;
-    te_von.Time:= dtDateTimeVon;
-    te_Bis.Time:= dtDateTimeBis;
-  end;
+  chkbx_CompleteDay.IsChecked := qry_Kalender.FieldByName('CompleteDay').AsBoolean;
+  dtp_von.Format := 'dd.mm.yyyy';
+  dtp_Bis.Format := 'dd.mm.yyyy';
+  dtp_von.DateTime := dtDateTimeVon;
+  dtp_Bis.DateTime := dtDateTimeBis;
+  if chkbx_CompleteDay.IsChecked and
+    (DateOf(dtDateTimeBis) > DateOf(dtDateTimeVon)) then
+    // Saving all-day events stores the day AFTER the last included day.
+    dtp_Bis.DateTime := IncDay(DateOf(dtDateTimeBis), -1);
+  te_von.Time := TimeOf(dtDateTimeVon);
+  te_Bis.Time := TimeOf(dtDateTimeBis);
+  te_von.Visible := not chkbx_CompleteDay.IsChecked;
+  te_Bis.Visible := not chkbx_CompleteDay.IsChecked;
   cbx_Terminart.Itemindex:= qry_Kalender.FieldByName('EventType').asInteger;
   if qry_Kalender.FieldByName('Reminder').AsBoolean = True then
   begin
@@ -579,36 +580,19 @@ begin
     cbx_Reminderbefore.itemindex:= GetReminder(qry_Kalender.FieldByName('ReminderMinutesBeforeStart').AsInteger);
     dtDateTimeVon:= qry_Kalender.FieldByName('Start').asDateTime;
     dtDateTimeBis:= qry_Kalender.FieldByName('Finish').AsDateTime;
-     if qry_Kalender.FieldByName('CompleteDay').asBoolean then
-    begin
-      if ((Copy(DateTimeToStr(dtDateTimeVon),13,5) = '00:00') and (Copy(DateTimeToStr(dtDateTimeBis),13,5) = '00:00')) or ((Copy(DateTimeToStr(dtDateTimeVon),13,5) = '') and (Copy(DateTimeToStr(dtDateTimeBis),13,5) = '')) then
-      begin
-        chkbx_CompleteDay.IsChecked:= true;
-        dtp_von.Format:= 'dd.mm.yyyy';
-        dtp_Bis.Format:= 'dd.mm.yyyy';
-        dtp_von.DateTime:= dtDateTimeVon;
-        if qry_Kalender.FieldByName('Finish').AsDateTime - qry_Kalender.FieldByName('Start').AsDateTime  = 1 then
-          dtp_Bis.DateTime:= dtDateTimeVon
-        else
-          dtp_Bis.DateTime :=dtDateTimeBis;
-        te_von.Visible:= false;
-        te_Bis.Visible:= false;
-      end;
-    end
-    else begin
-      chkbx_CompleteDay.IsChecked:= false;
-      dtp_von.Format:= 'dd.mm.yyyy';
-      dtp_Bis.Format:= 'dd.mm.yyyy';
-      dtp_von.DateTime:= dtDateTimeVon;
-      if qry_Kalender.FieldByName('Finish').AsDateTime - qry_Kalender.FieldByName('Start').AsDateTime  = 1 then
-        dtp_Bis.DateTime:= dtDateTimeVon
-      else
-        dtp_Bis.DateTime :=dtDateTimeBis;
-      te_von.Visible:= true;
-      te_Bis.Visible:= true;
-      te_von.Time:= dtDateTimeVon;
-      te_Bis.Time:= dtDateTimeBis;
-    end;
+  chkbx_CompleteDay.IsChecked := qry_Kalender.FieldByName('CompleteDay').AsBoolean;
+  dtp_von.Format := 'dd.mm.yyyy';
+  dtp_Bis.Format := 'dd.mm.yyyy';
+  dtp_von.DateTime := dtDateTimeVon;
+  dtp_Bis.DateTime := dtDateTimeBis;
+  if chkbx_CompleteDay.IsChecked and
+    (DateOf(dtDateTimeBis) > DateOf(dtDateTimeVon)) then
+    // Saving all-day events stores the day AFTER the last included day.
+    dtp_Bis.DateTime := IncDay(DateOf(dtDateTimeBis), -1);
+  te_von.Time := TimeOf(dtDateTimeVon);
+  te_Bis.Time := TimeOf(dtDateTimeBis);
+  te_von.Visible := not chkbx_CompleteDay.IsChecked;
+  te_Bis.Visible := not chkbx_CompleteDay.IsChecked;
     cbx_Terminart.Itemindex:= qry_Kalender.FieldByName('EventType').asInteger;
     if qry_Kalender.FieldByName('Reminder').AsBoolean = True then
     begin

@@ -111,21 +111,26 @@ begin
     sPrevContact,sCurrContact: string;
     ANumber: Integer;
   begin
-    rec_ContactsProgressbar.Visible:= true;
-    try
+    TThread.Synchronize(nil, procedure begin
+      rec_ContactsProgressbar.Visible:= true;
       frm_PCM_Main.btn_BackSystem.Enabled := false;
       frm_PCM_Main.btn_Synchronisation.Enabled:= false;
+    end);
+    try
+      try
       FreeAndNil(FContacts);
       FContacts := TAddressBookContacts.Create(True);
-      adrbk_Contacts.AllContacts(FContacts);
+      TThread.Synchronize(nil, procedure begin adrbk_Contacts.AllContacts(FContacts); end);
       FAllContacts := FContacts;
-      lv_Contacts.Items.Clear;
-      lv_Contacts.PullRefreshWait := True;
-      pgbr_ProgressAnimation.Inverse := False;
-      pgbr_ProgressAnimation.Enabled := True;
-      pgbr_ProgressAnimation.Start;
-      pgbr_Progress.Value := 0;
-      pgbr_Progress.Max := FContacts.Count;
+      TThread.Synchronize(nil, procedure begin
+        lv_Contacts.Items.Clear;
+        lv_Contacts.PullRefreshWait := True;
+        pgbr_ProgressAnimation.Inverse := False;
+        pgbr_ProgressAnimation.Enabled := True;
+        pgbr_ProgressAnimation.Start;
+        pgbr_Progress.Value := 0;
+        pgbr_Progress.Max := FContacts.Count;
+      end);
       Index := 0;
       sPrevContact:='';
       ANumber:= 0;
@@ -253,20 +258,20 @@ begin
             for i := 0 to Contact.Phones.Count - 1 do
             begin
               try
-                if (Contact.Phones.ExtractAt(i).LabelText = 'Mobil') or (Contact.Phones.ExtractAt(i).LabelText = 'Sonstige') or
-                   (Contact.Phones.ExtractAt(i).LabelText = 'MOBILE') or (Contact.Phones.ExtractAt(i).LabelText = 'OTHER')
+                if (Contact.Phones[i].LabelText = 'Mobil') or (Contact.Phones[i].LabelText = 'Sonstige') or
+                   (Contact.Phones[i].LabelText = 'MOBILE') or (Contact.Phones[i].LabelText = 'OTHER')
                 then
                 begin
-                  sMobil:= Contact.Phones.ExtractAt(i).Number
+                  sMobil:= Contact.Phones[i].Number
                 end;
-                if (Contact.Phones.ExtractAt(i).LabelText = 'Zuhause') or (Contact.Phones.ExtractAt(i).LabelText = 'HOME') then
+                if (Contact.Phones[i].LabelText = 'Zuhause') or (Contact.Phones[i].LabelText = 'HOME') then
                 begin
-                  sPrivat:= Contact.Phones.ExtractAt(i).Number
+                  sPrivat:= Contact.Phones[i].Number
                 end;
-                if (Contact.Phones.ExtractAt(i).LabelText = 'Hauptnummer') or (Contact.Phones.ExtractAt(i).LabelText = 'Arbeit') or
-                   (Contact.Phones.ExtractAt(i).LabelText = 'MAIN') or (Contact.Phones.ExtractAt(i).LabelText = 'WORK') then
+                if (Contact.Phones[i].LabelText = 'Hauptnummer') or (Contact.Phones[i].LabelText = 'Arbeit') or
+                   (Contact.Phones[i].LabelText = 'MAIN') or (Contact.Phones[i].LabelText = 'WORK') then
                 begin
-                  sTelefonFirma:= Contact.Phones.ExtractAt(i).Number
+                  sTelefonFirma:= Contact.Phones[i].Number
                 end;
               except
               end;
@@ -275,16 +280,16 @@ begin
             for i := 0 to Contact.EMails.Count - 1 do
             begin
               try
-                if (Contact.EMails.ExtractAt(i).LabelText = 'Start') or (Contact.EMails.ExtractAt(i).LabelText = 'Weitere') or
-                   (Contact.EMails.ExtractAt(i).LabelText = 'HOME') or (Contact.EMails.ExtractAt(i).LabelText = 'OTHER') then
+                if (Contact.EMails[i].LabelText = 'Start') or (Contact.EMails[i].LabelText = 'Weitere') or
+                   (Contact.EMails[i].LabelText = 'HOME') or (Contact.EMails[i].LabelText = 'OTHER') then
                 begin
 
 
-                  sMailPrivat:= Contact.EMails.ExtractAt(i).Email;
+                  sMailPrivat:= Contact.EMails[i].Email;
                 end;
-                if (Contact.EMails.ExtractAt(i).LabelText = 'Ausführen') or (Contact.EMails.ExtractAt(i).LabelText = 'WORK') then
+                if (Contact.EMails[i].LabelText = 'Ausführen') or (Contact.EMails[i].LabelText = 'WORK') then
                 begin
-                  sMailFirma:= Contact.EMails.ExtractAt(i).Email;
+                  sMailFirma:= Contact.EMails[i].Email;
                 end;
               except
               end;
@@ -293,18 +298,18 @@ begin
             for i := 0 to Contact.Addresses.Count - 1 do
             begin
               try
-                if (Contact.Addresses.ExtractAt(i).LabelText = 'Start') or (Contact.Addresses.ExtractAt(i).LabelText = 'Weitere') or
-                   (Contact.Addresses.ExtractAt(i).LabelText = 'HOME') or (Contact.Addresses.ExtractAt(i).LabelText = 'OTHER') then
+                if (Contact.Addresses[i].LabelText = 'Start') or (Contact.Addresses[i].LabelText = 'Weitere') or
+                   (Contact.Addresses[i].LabelText = 'HOME') or (Contact.Addresses[i].LabelText = 'OTHER') then
                 begin
-                  sStrasse:= Contact.Addresses.ExtractAt(i).Street;
-                  sPLZ:= Contact.Addresses.ExtractAt(i).ZIP;
-                  sOrt:= Contact.Addresses.ExtractAt(i).City;
+                  sStrasse:= Contact.Addresses[i].Street;
+                  sPLZ:= Contact.Addresses[i].ZIP;
+                  sOrt:= Contact.Addresses[i].City;
                 end;
-                if (Contact.Addresses.ExtractAt(i).LabelText = 'Ausführen') or (Contact.Addresses.ExtractAt(i).LabelText = 'WORK') then
+                if (Contact.Addresses[i].LabelText = 'Ausführen') or (Contact.Addresses[i].LabelText = 'WORK') then
                 begin
-                  sStrasseFirma:= Contact.Addresses.ExtractAt(i).Street;
-                  sPLZFirma:= Contact.Addresses.ExtractAt(i).ZIP;
-                  sOrtFirma:= Contact.Addresses.ExtractAt(i).City;
+                  sStrasseFirma:= Contact.Addresses[i].Street;
+                  sPLZFirma:= Contact.Addresses[i].ZIP;
+                  sOrtFirma:= Contact.Addresses[i].City;
                 end;
               except
               end;
@@ -527,19 +532,25 @@ begin
 //          Inc(Index);
         end);
       end;
-      lv_Contacts.PullRefreshWait := False;
-      pgbr_ProgressAnimation.Inverse := True;
-      pgbr_ProgressAnimation.Start;
-      dmmain.wfWaitFrame.HideFW;
     except
-      dmmain.wfWaitFrame.HideFW;
-      rec_ContactsProgressbar.Visible:= false;
+      on E: Exception do
+        TThread.Synchronize(nil,
+          procedure begin ShowMessage('Kontaktimport: ' + E.Message); end);
     end;
-    frm_PCM_Main.btn_BackSystem.Enabled:= true;
-    frm_PCM_Main.btn_Synchronisation.Enabled:= true;
-    frm_PCM_Main.bKontakte:= false;
-    rec_ContactsProgressbar.Visible:= false;
-    frm_PCM_Main.btn_BackSystemClick(Self);
+  finally
+    TThread.Synchronize(nil,
+      procedure
+      begin
+        lv_Contacts.PullRefreshWait := False;
+        pgbr_ProgressAnimation.Enabled := False;
+        frm_PCM_Main.btn_BackSystem.Enabled := True;
+        frm_PCM_Main.btn_Synchronisation.Enabled := True;
+        frm_PCM_Main.bKontakte := False;
+        rec_ContactsProgressbar.Visible := False;
+        frm_PCM_Main.btn_BackSystemClick(Self);
+      end);
+    dmmain.wfWaitFrame.HideFW;
+  end;
   end);
 end;
 procedure Tfrm_PCMAPP_ImportKontakte.LocationPermissionRequestResult(Sender: TObject; const APermissions:TClassicStringDynArray; const APostRationaleProc: TProc);

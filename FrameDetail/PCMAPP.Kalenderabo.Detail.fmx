@@ -45,7 +45,6 @@ object frm_PCMAPP_CalAboDetail: Tfrm_PCMAPP_CalAboDetail
           Tag = 6
           Align = Client
           IconTintColor = claWhite
-          Images = frm_PCM_Main.imglst_main
           ImageIndex = 18
           ModalResult = 2
           Size.Width = 48.000000000000000000
@@ -53,7 +52,6 @@ object frm_PCMAPP_CalAboDetail: Tfrm_PCMAPP_CalAboDetail
           Size.PlatformDefault = False
           StyleLookup = 'replytoolbutton'
           TabOrder = 0
-          TextSettings.Trimming = None
           Visible = False
           OnClick = btn_CancelClick
         end
@@ -61,7 +59,6 @@ object frm_PCMAPP_CalAboDetail: Tfrm_PCMAPP_CalAboDetail
           Tag = 6
           Align = Client
           IconTintColor = claWhite
-          Images = frm_PCM_Main.imglst_main
           ImageIndex = 2
           ModalResult = 2
           Size.Width = 50.000000000000000000
@@ -69,7 +66,6 @@ object frm_PCMAPP_CalAboDetail: Tfrm_PCMAPP_CalAboDetail
           Size.PlatformDefault = False
           StyleLookup = 'priortoolbutton'
           TabOrder = 1
-          TextSettings.Trimming = None
           OnClick = btn_BackClick
         end
       end
@@ -83,7 +79,6 @@ object frm_PCMAPP_CalAboDetail: Tfrm_PCMAPP_CalAboDetail
         object btn_Edit: TButton
           Align = Right
           IconTintColor = claWhite
-          Images = frm_PCM_Main.imglst_main
           ImageIndex = 20
           Position.X = 2.000000000000000000
           Size.Width = 48.000000000000000000
@@ -91,20 +86,17 @@ object frm_PCMAPP_CalAboDetail: Tfrm_PCMAPP_CalAboDetail
           Size.PlatformDefault = False
           StyleLookup = 'composetoolbuttonbordered'
           TabOrder = 1
-          TextSettings.Trimming = None
           OnClick = btn_EditClick
         end
         object btn_Save: TButton
           Align = Right
-          Images = frm_PCM_Main.imglst_main
           ImageIndex = 22
           Position.X = 2.000000000000000000
           Size.Width = 48.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
-          StyleLookup = 'composetoolbuttonbordered'
+          StyleLookup = 'donetoolbutton'
           TabOrder = 0
-          TextSettings.Trimming = None
           Visible = False
           OnClick = btn_SaveClick
         end

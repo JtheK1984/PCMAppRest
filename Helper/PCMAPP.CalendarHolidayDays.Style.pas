@@ -48,6 +48,33 @@ implementation
 uses
   System.SysUtils, System.DateUtils, System.Math, System.Types, FMX.Presentation.Factory, FMX.Controls, FMX.Presentation.Style, FMX.Types, FMX.Objects, FMX.Graphics, PCMAPP.Calendar.Helpers;
 
+type
+  TCalendarDayHighlight = class(TCircle)
+  protected
+    procedure Paint; override;
+  end;
+
+procedure TCalendarDayHighlight.Paint;
+var
+  DayItem: TListBoxItem;
+  State: TCanvasSaveState;
+begin
+  inherited;
+  if not (Parent is TListBoxItem) then
+    Exit;
+  DayItem := TListBoxItem(Parent);
+  State := Canvas.SaveState;
+  try
+    Canvas.Font.Assign(DayItem.ResultingTextSettings.Font);
+    Canvas.Fill.Kind := TBrushKind.Solid;
+    Canvas.Fill.Color := DayItem.ResultingTextSettings.FontColor;
+    Canvas.FillText(LocalRect, DayItem.Text, False, AbsoluteOpacity, [],
+      TTextAlign.Center, TTextAlign.Center);
+  finally
+    Canvas.RestoreState(State);
+  end;
+end;
+
 { TStyledCalendarWithHolidayDays }
 
 
@@ -55,7 +82,13 @@ procedure TStyledCalendarWithHolidayDays.CreateBackground(ADayItem: TListBoxItem
 var
   Hightlight: TCircle;
 begin
-  Hightlight := TCircle.Create(nil);
+  if ADayItem = nil then
+    Exit;
+
+  // Build the day text style before inserting the circle behind it.
+  // FMX inserts a newly applied style at child index 0.
+  ADayItem.ApplyStyleLookup;
+  Hightlight := TCalendarDayHighlight.Create(nil);
   Hightlight.Name := 'HightlightBackground';
   Hightlight.HitTest := False;
   Hightlight.Align := TAlignLayout.Contents;

@@ -60,6 +60,7 @@ type
     tb_Main: TRectangle;
     vsbx_GutscheinDetailView: TVertScrollBox;
     vsbx_Main: TVertScrollBox;
+    procedure btn_SaveApplyStyleLookup(Sender: TObject);
     procedure btn_BackClick(Sender: TObject);
     procedure btn_BarcodeFromImageClick(Sender: TObject);
     procedure btn_BarcodeFromKameraClick(Sender: TObject);
@@ -119,6 +120,17 @@ uses
 // HELPER FUNCTIONS                                                           //
 ////////////////////////////////////////////////////////////////////////////////
 {$Region Helperfunctions}
+procedure Tfrm_PCMAPP_GutscheinDetail.btn_SaveApplyStyleLookup(Sender: TObject);
+var
+  LGlyph: TGlyph;
+begin
+  // Reapply after each StyleBook change; keep the existing light/dark image index.
+  if btn_Save.FindStyleResource<TGlyph>('glyphstyle', LGlyph) then
+  begin
+    LGlyph.Margins.Rect := TRectF.Create(0, 0, 0, 0);
+    LGlyph.Align := TAlignLayout.Center;
+  end;
+end;
 function Tfrm_PCMAPP_GutscheinDetail.GenSymbol: TZintSymbol;
 var
   sEAN: string;

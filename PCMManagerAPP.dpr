@@ -24,8 +24,9 @@ uses
   PCMAPP.Passwort.Detail in 'FrameDetail\PCMAPP.Passwort.Detail.pas' {frm_PCMAPP_PasswortDetail},
   PCMAPP.Serial.Detail in 'FrameDetail\PCMAPP.Serial.Detail.pas' {frm_PCMAPP_SerialDetail},
   PCMAPP.Ical in 'Helper\PCMAPP.Ical.pas',
-  PCMAPP.SQL in 'SQL\PCMAPP.SQL.pas',
-  PCMApp.Funktionen in 'Helper\PCMApp.Funktionen.pas';
+  PCMAPP.SQL in 'SQL\PCMAPP.SQL.pas' {$R *.res},
+  PCMApp.Funktionen in 'Helper\PCMApp.Funktionen.pas',
+  PCMAPP.ContactSync in 'PCMAPP.ContactSync.pas';
 
 {$R *.res}
 

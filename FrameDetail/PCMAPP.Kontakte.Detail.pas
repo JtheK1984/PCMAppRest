@@ -121,6 +121,7 @@ type
     procedure btn_BackClick(Sender: TObject);
     procedure btn_CancelClick(Sender: TObject);
     procedure btn_EditClick(Sender: TObject);
+    procedure btn_SaveApplyStyleLookup(Sender: TObject);
     procedure btn_SaveClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -399,6 +400,17 @@ begin
   btn_Cancel.Visible:= true;
   btn_Edit.Visible:= false;
   btn_save.Visible:= true;
+end;
+procedure Tfrm_PCMAPP_KontakteDetail.btn_SaveApplyStyleLookup(Sender: TObject);
+var
+  LGlyph: TGlyph;
+begin
+  // Reapply after each StyleBook change; keep the existing light/dark image index.
+  if btn_Save.FindStyleResource<TGlyph>('glyphstyle', LGlyph) then
+  begin
+    LGlyph.Margins.Rect := TRectF.Create(0, 0, 0, 0);
+    LGlyph.Align := TAlignLayout.Center;
+  end;
 end;
 procedure Tfrm_PCMAPP_KontakteDetail.btn_SaveClick(Sender: TObject);
 begin

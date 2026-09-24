@@ -765,9 +765,22 @@ uses
 // HELPER FUNCTIONS                                                           //
 ////////////////////////////////////////////////////////////////////////////////
 {$Region Helperfunctions}
+procedure ShowLoginMessage(const AMessage: string);
+begin
+  if TThread.CurrentThread.ThreadID = MainThreadID then
+    ShowMessage(AMessage)
+  else
+    TThread.Synchronize(nil,
+      procedure begin ShowMessage(AMessage); end);
+end;
+
 procedure Tfrm_PCM_Main.AfterLogin(AFirstStart: Boolean);
 begin
-  ShowStartPage;
+  if TThread.CurrentThread.ThreadID = MainThreadID then
+    ShowStartPage
+  else
+    TThread.Synchronize(nil,
+      procedure begin ShowStartPage; end);
 end;
 procedure Tfrm_PCM_Main.AutoLogin(sBenutzername, sPasswort: String);
 var
@@ -783,6 +796,8 @@ begin
     TTask.Run(
     procedure()
     begin
+      try
+        try
       qry_Work.SQL.Text := sSQL_SEL_All_AUtologin;
       qry_Work.Open;
       bLocalaccount:= qry_Work.FieldByName('Localaccount').AsBoolean;
@@ -828,7 +843,11 @@ begin
               dmmain.iUserID := qry_Work.FieldByName('ID_MA_Stammdaten').AsInteger;
               if dmmain.bServerAvailable then
               begin
-                Synchronisation(dmmain.iUserID, iServerID, dmmain.wfWaitFrame,false);
+                try
+                  Synchronisation(dmmain.iUserID, iServerID, dmmain.wfWaitFrame,false);
+                except
+                  on E: Exception do ShowLoginMessage('Synchronisierung: ' + E.Message);
+                end;
               end;
               qry_Work.Close;
               qry_Work.SQL.Text := sSQL_SEL_ALL_Login_Where_IDBenutzerIDServer;
@@ -869,7 +888,12 @@ begin
         end;
 
       end;
-      dmmain.wfWaitFrame.HideFW;
+      except
+          on E: Exception do ShowLoginMessage('Login: ' + E.Message);
+        end;
+      finally
+        dmmain.wfWaitFrame.HideFW;
+      end;
     end);
 end;
 procedure Tfrm_PCM_Main.BerechneModulFinanzen;
@@ -1782,18 +1806,21 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
         end);
     end;
     {$EndIF ANDROID}
+    sBenutzername := edt_Benutzername.Text;
+    sPasswort := edt_Passwort.Text;
+    btn_Login.Enabled := False;
     dmmain.wfWaitFrame.Execute('Erstes Login...', 'Login', True);
     TTask.Run(
     procedure ()
     begin
+      try
+        try
       qry_Work.SQL.Text := sSQL_SEL_All_AUtologin;
       qry_Work.Open;
       bLocalaccount:= qry_Work.FieldByName('Localaccount').AsBoolean;
       slocalBenutzername:= qry_Work.FieldByName('Benutzername').AsString;
       slocalPasswort:= qry_Work.FieldByName('Passwort').AsString;
       qry_Work.Close;
-      sBenutzername := edt_Benutzername.Text;
-      sPasswort := edt_Passwort.Text;
       if bLocalaccount then
       begin
         if (sBenutzername = slocalBenutzername) and (sPasswort = slocalPasswort) then
@@ -1825,7 +1852,7 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
         begin
           if dmmain.bServerAvailable then
           begin
-            if CheckLogin then
+            if CheckLogin(sBenutzername, sPasswort) then
             begin
               bFirstLogin:= true;
               SetAutoLogin(sBenutzername, sPasswort, dmmain.iUserID, iServerID, true);
@@ -1835,7 +1862,11 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
               qry_Work_Sub.ParamByName('ID_Server').AsInteger := iServerID;
               qry_Work_Sub.ExecSQL;
               SaveLogin(sBenutzername, sPasswort,dmmain.iUserID, iServerID,true);
-              Synchronisation(dmmain.iUserID, iServerID, dmmain.wfWaitFrame,false);
+              try
+                  Synchronisation(dmmain.iUserID, iServerID, dmmain.wfWaitFrame,false);
+                except
+                  on E: Exception do ShowLoginMessage('Synchronisierung: ' + E.Message);
+                end;
               AfterLogin(True);
             end else
             begin
@@ -1863,7 +1894,13 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
           end);
         end;
       end;
-      dmmain.wfWaitFrame.HideFW;
+      except
+          on E: Exception do ShowLoginMessage('Login: ' + E.Message);
+        end;
+      finally
+        dmmain.wfWaitFrame.HideFW;
+        TThread.Queue(nil, procedure begin btn_Login.Enabled := True; end);
+      end;
     end);
   end;
   procedure Login;
@@ -1874,18 +1911,21 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
     sBenutzername: String;
     sPasswort: String;
   begin
+    sBenutzername := edt_Benutzername.Text;
+    sPasswort := edt_Passwort.Text;
+    btn_Login.Enabled := False;
     dmmain.wfWaitFrame.Execute('Login...', 'Login',True);
     TTask.Run(
     procedure ()
     begin
+      try
+        try
       qry_Work.SQL.Text := sSQL_SEL_All_AUtologin;
       qry_Work.Open;
       bLocalaccount:= qry_Work.FieldByName('Localaccount').AsBoolean;
       slocalBenutzername:= qry_Work.FieldByName('Benutzername').AsString;
       slocalPasswort:= qry_Work.FieldByName('Passwort').AsString;
       qry_Work.Close;
-      sBenutzername := edt_Benutzername.Text;
-      sPasswort := edt_Passwort.Text;
       if bLocalaccount then
       begin
         if (sBenutzername = slocalBenutzername) and (sPasswort = slocalPasswort) then
@@ -1898,11 +1938,11 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
         else
         begin
           if (sBenutzername = slocalBenutzername) and (sPasswort <> slocalPasswort) then
-            ShowMessage('Passwort stimmt nicht überein.');
+            ShowLoginMessage('Passwort stimmt nicht überein.');
           if (sBenutzername <> slocalBenutzername) and (sPasswort = slocalPasswort) then
-            ShowMessage('Benutzer stimmt nicht überein.');
+            ShowLoginMessage('Benutzer stimmt nicht überein.');
           if (sBenutzername <> slocalBenutzername) and (sPasswort <> slocalPasswort) then
-            ShowMessage('Benutzer und Passwort stimmen nicht überein.');
+            ShowLoginMessage('Benutzer und Passwort stimmen nicht überein.');
         end;
       end
       else
@@ -1910,8 +1950,6 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
         SetServerList;
         if iServerID <> -1 then
         begin
-          sBenutzername :=  edt_Benutzername.Text;
-          sPasswort := edt_Passwort.Text;
           qry_Work.Close;
           qry_Work.SQL.Text := sSQL_SEL_ALL_Login_Where_BenutzerIDServer;
           qry_Work.ParamByName('User').AsString := sBenutzername;
@@ -1927,7 +1965,11 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
               if dmmain.bServerAvailable then
               begin
                 SaveLogin(sBenutzername, sPasswort,dmmain.iUserID, iServerID,false);
-                Synchronisation(dmmain.iUserID, iServerID, dmmain.wfWaitFrame,false)
+                try
+                  Synchronisation(dmmain.iUserID, iServerID, dmmain.wfWaitFrame,false);
+                except
+                  on E: Exception do ShowLoginMessage('Synchronisierung: ' + E.Message);
+                end
               end;
               try
   //              SynchRestCal(wfWaitFrame);
@@ -1942,18 +1984,24 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
               AfterLogin(False);
             end else
             begin
-              ShowMessage('Benutzername oder Passwort falsch. Bitte geben Sie ein gültiges Login ein.');
+              ShowLoginMessage('Benutzername oder Passwort falsch. Bitte geben Sie ein gültiges Login ein.');
             end;
           end else
           begin
-            ShowMessage('Benutzername oder Passwort falsch. Bitte geben Sie ein gültiges Login ein.');
+            ShowLoginMessage('Benutzername oder Passwort falsch. Bitte geben Sie ein gültiges Login ein.');
           end;
         end else
         begin
-          ShowMessage('Es wurde noch kein Server konfiguriert. Bitte Server unter Einstellungen konfigurieren.');
+          ShowLoginMessage('Es wurde noch kein Server konfiguriert. Bitte Server unter Einstellungen konfigurieren.');
         end;
       end;
-      dmmain.wfWaitFrame.HideFW;
+      except
+          on E: Exception do ShowLoginMessage('Login: ' + E.Message);
+        end;
+      finally
+        dmmain.wfWaitFrame.HideFW;
+        TThread.Queue(nil, procedure begin btn_Login.Enabled := True; end);
+      end;
     end);
 //    LoginTask.Start;
   end;
@@ -4290,26 +4338,34 @@ end;
 {$Region More}
 procedure Tfrm_PCM_Main.btn_SynchronisationClick(Sender: TObject);
 begin
-  qry_Work.SQL.Text:= sSQL_SEL_All_AUtologin;
+  qry_Work.SQL.Text := sSQL_SEL_All_AUtologin;
   qry_Work.Open;
-  if not qry_Work.FieldByName('Localaccount').AsBoolean  then
-  begin
-    dmmain.wfWaitFrame.Execute('Synchronisierung...', 'Synchronisierung', True);
-    if dmmain.bServerAvailable then
-    begin
-      TTask.Run(
-      Procedure()
-      begin
-        TThread.Synchronize(nil,
-        procedure()
-        begin
-          Synchronisation(dmmain.iUserID, iServerID, dmmain.wfWaitFrame,true);
-          dmmain.wfWaitFrame.HideFW;
-        end);
-      end)
-    end;
+  try
+    if qry_Work.FieldByName('Localaccount').AsBoolean then Exit;
+  finally
+    qry_Work.Close;
   end;
-  qry_Work.Close;
+  if not dmmain.bServerAvailable then
+  begin
+    ShowMessage('Der Server ist nicht erreichbar.');
+    Exit;
+  end;
+  btn_Synchronisation.Enabled := False;
+  dmmain.wfWaitFrame.Execute('Synchronisierung...', 'Synchronisierung', True);
+  TTask.Run(
+    procedure
+    begin
+      try
+        try
+          Synchronisation(dmmain.iUserID, iServerID, dmmain.wfWaitFrame, True);
+        except
+          on E: Exception do ShowLoginMessage(E.Message);
+        end;
+      finally
+        dmmain.wfWaitFrame.HideFW;
+        TThread.Queue(nil, procedure begin btn_Synchronisation.Enabled := True; end);
+      end;
+    end);
 end;
 procedure Tfrm_PCM_Main.lstbxitm_1OptionenClick(Sender: TObject);
 begin

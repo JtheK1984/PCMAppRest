@@ -47,6 +47,7 @@ type
     tb_Main: TRectangle;
     vsbx_BelegeDetailView: TVertScrollBox;
     vsbx_main: TVertScrollBox;
+    procedure btn_SaveApplyStyleLookup(Sender: TObject);
     procedure btn_BackClick(Sender: TObject);
     procedure btn_CancelClick(Sender: TObject);
     procedure btn_EditClick(Sender: TObject);
@@ -85,6 +86,17 @@ uses  PCMAPP.Datamodul,
 // HELPER FUNCTIONS                                                           //
 ////////////////////////////////////////////////////////////////////////////////
 {$Region Helperfunctions}
+procedure Tfrm_PCMAPP_BelegeDetail.btn_SaveApplyStyleLookup(Sender: TObject);
+var
+  LGlyph: TGlyph;
+begin
+  // Reapply after each StyleBook change; keep the existing light/dark image index.
+  if btn_Save.FindStyleResource<TGlyph>('glyphstyle', LGlyph) then
+  begin
+    LGlyph.Margins.Rect := TRectF.Create(0, 0, 0, 0);
+    LGlyph.Align := TAlignLayout.Center;
+  end;
+end;
 procedure Tfrm_PCMAPP_BelegeDetail.CalcContentBoundsProc(Sender: TObject; var ContentBounds: TRectF);
 begin
   if bNeedOffset and (dBounds.Top > 0) then

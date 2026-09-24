@@ -101,6 +101,7 @@ type
     vsbx_main: TVertScrollBox;
     vsbx_PasswortDetailView: TVertScrollBox;
     edt_PassClear: TEdit;
+    procedure btn_SaveApplyStyleLookup(Sender: TObject);
     procedure btn_BackClick(Sender: TObject);
     procedure btn_CancelClick(Sender: TObject);
     procedure btn_EditClick(Sender: TObject);
@@ -148,6 +149,17 @@ uses  PCMAPP.Datamodul,
 // HELPER FUNCTIONS                                                           //
 ////////////////////////////////////////////////////////////////////////////////
 {$Region Helperfunctions}
+procedure Tfrm_PCMAPP_PasswortDetail.btn_SaveApplyStyleLookup(Sender: TObject);
+var
+  LGlyph: TGlyph;
+begin
+  // Reapply after each StyleBook change; keep the existing light/dark image index.
+  if btn_Save.FindStyleResource<TGlyph>('glyphstyle', LGlyph) then
+  begin
+    LGlyph.Margins.Rect := TRectF.Create(0, 0, 0, 0);
+    LGlyph.Align := TAlignLayout.Center;
+  end;
+end;
 function Tfrm_PCMAPP_PasswortDetail.EnDecrypt(AInput: String; AEncrypt: boolean) : String;
 var
   Rijndael: TLbRijndael;
@@ -193,144 +205,33 @@ begin
   vsbx_main.RealignContent;
 end;
 procedure Tfrm_PCMAPP_PasswortDetail.SetCompVisible;
+var
+  PasswordType: string;
+  IsApp, IsMail, IsVPN, IsWLAN: Boolean;
 begin
-  case cbx_Typ.itemindex of
-  // APP
-  0:
-    begin
-      lo_WLAN.Visible:= false;
-      lo_VPNShared.Visible:= false;
-      lo_MAIL_Posteingangsserver.Visible:= false;
-      lo_MAIL_PosteingangsPort.Visible:= false;
-      lo_MAIL_PosteingangsVerschluesselung.Visible:= false;
-      lo_MAIL_Postausgangsserver.Visible:= false;
-      lo_MAIL_PostausgangsPort.Visible:= false;
-      lo_MAIL_PostausgangsVerschluesselung.Visible:= false;
-      lo_VPNAPP.Visible:= true;
-      lo_APP_Verschluesselung.Visible:= true;
-      lo_APP_Port.Visible:= true;
-    end;
-  // Arbeit
-  1:
-    begin
-      lo_WLAN.Visible:= false;
-      lo_VPNShared.Visible:= false;
-      lo_MAIL_Posteingangsserver.Visible:= false;
-      lo_MAIL_PosteingangsPort.Visible:= false;
-      lo_MAIL_PosteingangsVerschluesselung.Visible:= false;
-      lo_MAIL_Postausgangsserver.Visible:= false;
-      lo_MAIL_PostausgangsPort.Visible:= false;
-      lo_MAIL_PostausgangsVerschluesselung.Visible:= false;
-      lo_VPNAPP.Visible:= false;
-      lo_APP_Verschluesselung.Visible:= false;
-      lo_APP_Port.Visible:= false;
-    end;
-  // Banking
-  2:
-    begin
-      lo_WLAN.Visible:= false;
-      lo_VPNShared.Visible:= false;
-      lo_MAIL_Posteingangsserver.Visible:= false;
-      lo_MAIL_PosteingangsPort.Visible:= false;
-      lo_MAIL_PosteingangsVerschluesselung.Visible:= false;
-      lo_MAIL_Postausgangsserver.Visible:= false;
-      lo_MAIL_PostausgangsPort.Visible:= false;
-      lo_MAIL_PostausgangsVerschluesselung.Visible:= false;
-      lo_VPNAPP.Visible:= false;
-      lo_APP_Verschluesselung.Visible:= false;
-      lo_APP_Port.Visible:= false;
-    end;
-  // E-Mail
-  3:
-    begin
-      lo_WLAN.Visible:= false;
-      lo_VPNShared.Visible:= false;
-      lo_VPNAPP.Visible:= false;
-      lo_APP_Verschluesselung.Visible:= false;
-      lo_APP_Port.Visible:= false;
-      lo_MAIL_Posteingangsserver.Visible:= true;
-      lo_MAIL_PosteingangsPort.Visible:= true;
-      lo_MAIL_PosteingangsVerschluesselung.Visible:= true;
-      lo_MAIL_Postausgangsserver.Visible:= true;
-      lo_MAIL_PostausgangsPort.Visible:= true;
-      lo_MAIL_PostausgangsVerschluesselung.Visible:= true;
-    end;
-  // Internet
-  4:
-    begin
-      lo_WLAN.Visible:= false;
-      lo_VPNShared.Visible:= false;
-      lo_VPNAPP.Visible:= false;
-      lo_APP_Verschluesselung.Visible:= false;
-      lo_APP_Port.Visible:= false;
-      lo_MAIL_Posteingangsserver.Visible:= false;
-      lo_MAIL_PosteingangsPort.Visible:= false;
-      lo_MAIL_PosteingangsVerschluesselung.Visible:= false;
-      lo_MAIL_Postausgangsserver.Visible:= false;
-      lo_MAIL_PostausgangsPort.Visible:= false;
-      lo_MAIL_PostausgangsVerschluesselung.Visible:= false;
-    end;
-  // Sonstige
-  5:
-    begin
-      lo_WLAN.Visible:= false;
-      lo_VPNShared.Visible:= false;
-      lo_MAIL_Posteingangsserver.Visible:= false;
-      lo_MAIL_PosteingangsPort.Visible:= false;
-      lo_MAIL_PosteingangsVerschluesselung.Visible:= false;
-      lo_MAIL_Postausgangsserver.Visible:= false;
-      lo_MAIL_PostausgangsPort.Visible:= false;
-      lo_MAIL_PostausgangsVerschluesselung.Visible:= false;
-      lo_VPNAPP.Visible:= false;
-      lo_APP_Verschluesselung.Visible:= false;
-      lo_APP_Port.Visible:= false;
-    end;
-  // VPN
-  6:
-    begin
-      lo_WLAN.Visible:= false;
-      lo_VPNShared.Visible:= true;
-      lo_MAIL_Posteingangsserver.Visible:= false;
-      lo_MAIL_PosteingangsPort.Visible:= false;
-      lo_MAIL_PosteingangsVerschluesselung.Visible:= false;
-      lo_MAIL_Postausgangsserver.Visible:= false;
-      lo_MAIL_PostausgangsPort.Visible:= false;
-      lo_MAIL_PostausgangsVerschluesselung.Visible:= false;
-      lo_VPNAPP.Visible:= true;
-      lo_APP_Verschluesselung.Visible:= false;
-      lo_APP_Port.Visible:= false;
-    end;
-  // Windows
-  7:
-    begin
-      lo_WLAN.Visible:= false;
-      lo_VPNShared.Visible:= false;
-      lo_MAIL_Posteingangsserver.Visible:= false;
-      lo_MAIL_PosteingangsPort.Visible:= false;
-      lo_MAIL_PosteingangsVerschluesselung.Visible:= false;
-      lo_MAIL_Postausgangsserver.Visible:= false;
-      lo_MAIL_PostausgangsPort.Visible:= false;
-      lo_MAIL_PostausgangsVerschluesselung.Visible:= false;
-      lo_VPNAPP.Visible:= false;
-      lo_APP_Verschluesselung.Visible:= false;
-      lo_APP_Port.Visible:= false;
-    end;
-  // W-Lan Router
-  8:
-    begin
-      lo_WLAN.Visible:= true;
-      lo_VPNShared.Visible:= false;
-      lo_MAIL_Posteingangsserver.Visible:= false;
-      lo_MAIL_PosteingangsPort.Visible:= false;
-      lo_MAIL_PosteingangsVerschluesselung.Visible:= false;
-      lo_MAIL_Postausgangsserver.Visible:= false;
-      lo_MAIL_PostausgangsPort.Visible:= false;
-      lo_MAIL_PostausgangsVerschluesselung.Visible:= false;
-      lo_VPNAPP.Visible:= false;
-      lo_APP_Verschluesselung.Visible:= false;
-      lo_APP_Port.Visible:= false;
-    end;
-  end;
+  PasswordType := '';
+  if (cbx_Typ.ItemIndex >= 0) and (cbx_Typ.ItemIndex < cbx_Typ.Items.Count) then
+    PasswordType := UpperCase(Trim(cbx_Typ.Items[cbx_Typ.ItemIndex]));
+
+  // Match type names, not positions: the list also contains Arbeit/Privat variants.
+  IsApp := (PasswordType = 'APP') or (Pos('APP ', PasswordType) = 1);
+  IsMail := PasswordType = 'E-MAIL';
+  IsVPN := (PasswordType = 'VPN') or (Pos('VPN ', PasswordType) = 1);
+  IsWLAN := (PasswordType = 'W-LAN / ROUTER') or
+    (PasswordType = 'W-LAN ROUTER') or (PasswordType = 'WLAN');
+
+  // Assign every section, including when no type is selected.
+  lo_WLAN.Visible := IsWLAN;
+  lo_VPNShared.Visible := IsVPN;
+  lo_VPNAPP.Visible := IsApp or IsVPN;
+  lo_APP_Verschluesselung.Visible := IsApp;
+  lo_APP_Port.Visible := IsApp;
+  lo_MAIL_Posteingangsserver.Visible := IsMail;
+  lo_MAIL_PosteingangsPort.Visible := IsMail;
+  lo_MAIL_PosteingangsVerschluesselung.Visible := IsMail;
+  lo_MAIL_Postausgangsserver.Visible := IsMail;
+  lo_MAIL_PostausgangsPort.Visible := IsMail;
+  lo_MAIL_PostausgangsVerschluesselung.Visible := IsMail;
 end;
 procedure Tfrm_PCMAPP_PasswortDetail.UpdateKBBounds;
 var
@@ -395,7 +296,7 @@ begin
     edt_MAIL_PostausgangsserverConfig.text:= qry_Passwort.FieldByName('MAIL_Postausgangsserver').asString;
     edt_MAIL_PostausgangsPortConfig.value:= qry_Passwort.FieldByName('MAIL_PostausgangsPort').asInteger;
     edt_MAIL_PostausgangsVerschluesselungConfig.text:= qry_Passwort.FieldByName('MAIL_PostausgangsVerschluesselung').asString;
-    cbx_Typ.Itemindex := cbx_Typ.Items.IndexOf(qry_Passwort.FieldByName('PWTyp').asString);
+    cbx_Typ.Itemindex := cbx_Typ.Items.IndexOf(Trim(qry_Passwort.FieldByName('PWTyp').asString));
     qry_Passwort.Close;
     SetCompVisible;
     edt_Target.Enabled:= false;
@@ -682,7 +583,7 @@ begin
   edt_MAIL_PostausgangsserverConfig.text:= qry_Passwort.FieldByName('MAIL_Postausgangsserver').asString;
   edt_MAIL_PostausgangsPortConfig.value:= qry_Passwort.FieldByName('MAIL_PostausgangsPort').asInteger;
   edt_MAIL_PostausgangsVerschluesselungConfig.text:= qry_Passwort.FieldByName('MAIL_PostausgangsVerschluesselung').asString;
-  cbx_Typ.Itemindex := cbx_Typ.Items.IndexOf(qry_Passwort.FieldByName('PWTyp').asString);
+  cbx_Typ.Itemindex := cbx_Typ.Items.IndexOf(Trim(qry_Passwort.FieldByName('PWTyp').asString));
   SetCompVisible;
   img_Passwordvis.Visible:= true;
   img_Passwordnotvis.Visible:= false;
