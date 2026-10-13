@@ -531,7 +531,7 @@ begin
   																									'(ID INTEGER PRIMARY KEY AUTOINCREMENT,' +
 	  																								'Bezeichnung VARCHAR(101),' +
 		  																							'user VARCHAR(101),' +
-			  																						'password VARCHAR(101),' +
+                                                    'password VARCHAR(8192),' +
 				  																					'link VARCHAR(101),' +
 					  																				'VPN_SharedSecret VARCHAR(101),' +
 						  																			'APP_IP VARCHAR(101),'+

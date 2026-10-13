@@ -265,8 +265,8 @@ procedure Tfrm_PCMAPP_KalenderDetail.btn_EditClick(Sender: TObject);
 begin
   te_von.enabled:= true;
   te_Bis.enabled:= true;
-  te_von.Visible:= true;
-  te_Bis.Visible:= true;
+  te_von.Visible := not chkbx_CompleteDay.IsChecked;
+  te_Bis.Visible := not chkbx_CompleteDay.IsChecked;
   dtp_von.enabled:= true;
   dtp_Bis.enabled:= true;
   chkbx_CompleteDay.enabled:= true;
@@ -326,7 +326,6 @@ begin
     24: iMinutes:= 20160;
   end;
 
-  dtDateTime:= IncMinute(dtp_von.DateTime,iMinutes);
   if chkbx_CompleteDay.IsChecked then
   begin
     dtStart:= StrToDateTimeDef(DateTostr(dtp_von.date) + ' 00:00',-1);
@@ -336,6 +335,7 @@ begin
     dtStart:= StrToDateTimeDef(DateTostr(dtp_von.date) + ' ' + TimeTostr(te_von.Time),-1);
     dtFinish:= StrToDateTimeDef(DateTostr(dtp_Bis.date) + ' ' + TimeTostr(te_Bis.Time),-1);
   end;
+  dtDateTime := IncMinute(dtStart, -iMinutes);
   if dtStart > dtFinish then
   begin
     ShowMessage('Das Beginndatum darf nicht größer als das Endedatum sein.');

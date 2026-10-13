@@ -168,7 +168,10 @@ begin
     Client.ConnectionTimeout := 5000;  // 10 Sekunden für Verbindung
     Client.ResponseTimeout := 10000;    // 15 Sekunden auf Antwort warten
     Response := Client.Head('https://' +  dmMain.sHostname +':' + dmmain.sPort + '/PCM/api/v1/');
-    Result := (Response.StatusCode = 200) or  (Response.StatusCode = 500);
+    // Authentication is checked by CheckLogin. An HTTP auth challenge proves
+    // reachability and must not force the app into offline mode before login.
+    Result := (Response.StatusCode = 200) or (Response.StatusCode = 401) or
+      (Response.StatusCode = 403) or (Response.StatusCode = 500);
   except
     Result := False;
   end;
