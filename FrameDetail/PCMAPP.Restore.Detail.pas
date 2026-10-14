@@ -3,6 +3,7 @@ unit PCMAPP.Restore.Detail;
 interface
 
 uses
+  PCMAPP.BackgroundTasks,
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FMX.DialogService.Async,
@@ -130,7 +131,7 @@ begin
   begin
     if AResult = mrYes then
     begin
-      TTask.Run(
+      RunAppTask(
       procedure
       begin
         ProgressBar1.Min:= 0;

@@ -3,6 +3,7 @@ unit PCMAPP.Main;
 interface
 
 uses
+  PCMAPP.BackgroundTasks,
   {$Region Uses}
   {$IFDEF ANDROID}
   Androidapi.AppGlue,
@@ -658,6 +659,8 @@ type
     procedure Button2Click(Sender: TObject);
     procedure btn_KalenderFilterClick(Sender: TObject);
  private
+    FClosing: Boolean;
+    FCloseTimer: TTimer;
     { Private-Deklarationen }
     {$IFDEF ANDROID}
     baBiometric: TBiometricAuth;
@@ -675,6 +678,7 @@ type
     iServerID: integer;
     iTouchPosX: Single;
     iTouchPosY: Single;
+    procedure CloseWhenIdle(Sender: TObject);
   public
     { Public-Deklarationen }
     {$IFDEF ANDROID}
@@ -797,7 +801,7 @@ begin
     btn_CloseApp.Visible:= true;
     {$ENDIF MSWINDOWS}
     dmmain.wfWaitFrame.Execute('Auto Login...', 'Login', True);
-    TTask.Run(
+    RunAppTask(
     procedure()
     begin
       try
@@ -1814,7 +1818,7 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
     sPasswort := edt_Passwort.Text;
     btn_Login.Enabled := False;
     dmmain.wfWaitFrame.Execute('Erstes Login...', 'Login', True);
-    TTask.Run(
+    RunAppTask(
     procedure ()
     begin
       try
@@ -1919,7 +1923,7 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
     sPasswort := edt_Passwort.Text;
     btn_Login.Enabled := False;
     dmmain.wfWaitFrame.Execute('Login...', 'Login',True);
-    TTask.Run(
+    RunAppTask(
     procedure ()
     begin
       try
@@ -2090,13 +2094,38 @@ end;
 // FORM FUNCTIONS                                                             //
 ////////////////////////////////////////////////////////////////////////////////
 {$Region Formfunctions}
+procedure Tfrm_PCM_Main.CloseWhenIdle(Sender: TObject);
+begin
+  if AppTasksIdle then
+  begin
+    FCloseTimer.Enabled := False;
+    Close;
+  end;
+end;
+
 procedure Tfrm_PCM_Main.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  CloseDetailFrame('Beenden', 5);
-  if Assigned(dmmain.wfWaitFrame) then
+  BeginAppShutdown;
+  if not FClosing then
+  begin
+    FClosing := True;
+    FCloseTimer := TTimer.Create(Self);
+    FCloseTimer.Interval := 100;
+    FCloseTimer.OnTimer := CloseWhenIdle;
+    FCloseTimer.Enabled := True;
+    Action := TCloseAction.caNone;
+    Exit;
+  end;
+  if not AppTasksIdle then
+  begin
+    Action := TCloseAction.caNone;
+    Exit;
+  end;
+  if Assigned(dmmain) and Assigned(dmmain.wfWaitFrame) then
     FreeAndNil(dmmain.wfWaitFrame);
   Action := TCloseAction.caFree;
 end;
+
 procedure Tfrm_PCM_Main.FormCreate(Sender: TObject);
 begin
   FormatSettings.LongTimeFormat:= 'HH:mm:ss';
@@ -2416,7 +2445,7 @@ begin
 end;
 procedure Tfrm_PCM_Main.btn_CloseAppClick(Sender: TObject);
 begin
-  Application.Terminate;
+  Close;
 end;
 procedure Tfrm_PCM_Main.btn_SearchClick(Sender: TObject);
 begin
@@ -2689,7 +2718,7 @@ begin
   mv_Menu.HideMaster;
   itags:= 1;
   dmmain.wfWaitFrame.Execute('Kontakte laden...', 'Kontakte', True);
-  TTask.Run(
+  RunAppTask(
   procedure()
   begin
     TThread.Synchronize(nil,
@@ -2719,7 +2748,7 @@ procedure Tfrm_PCM_Main.lstbxitm_103KalenderClick(Sender: TObject);
 begin
   mv_Menu.HideMaster;
   itags:= 2;
-  TTask.Run(
+  RunAppTask(
     procedure()
     begin
       TThread.Synchronize(nil,
@@ -2983,7 +3012,7 @@ end;
 procedure Tfrm_PCM_Main.lv_KontaktePullRefresh(Sender: TObject);
 begin
   dmmain.wfWaitFrame.Execute('Kontakte synchronisieren...', 'Kontakte', True);
-  TTask.Run(
+  RunAppTask(
   Procedure()
   begin
     TThread.Synchronize(nil,
@@ -3171,7 +3200,7 @@ end;
 procedure Tfrm_PCM_Main.lv_KalenderPullRefresh(Sender: TObject);
 begin
   dmmain.wfWaitFrame.Execute('Kalender synchronisieren...', 'Kalender', True);
-  TTask.Run(
+  RunAppTask(
   Procedure()
   begin
     TThread.Synchronize(nil,
@@ -3632,7 +3661,7 @@ end;
 procedure Tfrm_PCM_Main.lv_PasswortPullRefresh(Sender: TObject);
 begin
   dmmain.wfWaitFrame.Execute('Passwörter synchronisieren...', 'Passwörter', True);
-  TTask.Run(
+  RunAppTask(
   Procedure()
   begin
     TThread.Synchronize(nil,
@@ -3729,7 +3758,7 @@ end;
 procedure Tfrm_PCM_Main.lv_SerialsPullRefresh(Sender: TObject);
 begin
   dmmain.wfWaitFrame.Execute('Serials synchronisieren...', 'Serials', True);
-  TTask.Run(
+  RunAppTask(
   Procedure()
   begin
     TThread.Synchronize(nil,
@@ -3846,7 +3875,7 @@ end;
   procedure Tfrm_PCM_Main.lv_EinnahmenPullRefresh(Sender: TObject);
   begin
     dmmain.wfWaitFrame.Execute('Einnahmen synchronisieren...', 'Finanzen', True);
-    TTask.Run(
+    RunAppTask(
     Procedure()
     begin
       TThread.Synchronize(nil,
@@ -3959,7 +3988,7 @@ end;
   procedure Tfrm_PCM_Main.lv_AusgabenPullRefresh(Sender: TObject);
   begin
     dmmain.wfWaitFrame.Execute('Ausgaben synchronisieren...', 'Finanzen', True);
-    TTask.Run(
+    RunAppTask(
     Procedure()
     begin
       TThread.Synchronize(nil,
@@ -4054,7 +4083,7 @@ end;
   procedure Tfrm_PCM_Main.lv_BelegePullRefresh(Sender: TObject);
   begin
     dmmain.wfWaitFrame.Execute('Belege synchronisieren...', 'Belege', True);
-    TTask.Run(
+    RunAppTask(
     Procedure()
     begin
       TThread.Synchronize(nil,
@@ -4274,7 +4303,7 @@ end;
 procedure Tfrm_PCM_Main.lv_GutscheinPullRefresh(Sender: TObject);
 begin
   dmmain.wfWaitFrame.Execute('Gutscheine synchronisieren...', 'Gutscheine', True);
-  TTask.Run(
+  RunAppTask(
   Procedure()
   begin
     TThread.Synchronize(nil,
@@ -4395,7 +4424,7 @@ begin
   end;
   btn_Synchronisation.Enabled := False;
   dmmain.wfWaitFrame.Execute('Synchronisierung...', 'Synchronisierung', True);
-  TTask.Run(
+  RunAppTask(
     procedure
     begin
       try
@@ -4463,7 +4492,7 @@ begin
 end;
 procedure Tfrm_PCM_Main.lstbxitm_3BeendenClick(Sender: TObject);
 begin
-  Application.Terminate;
+  Close;
 end;
 {$EndRegion More}
 {$EndRegion Modulgrids}
