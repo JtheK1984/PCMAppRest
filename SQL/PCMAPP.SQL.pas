@@ -515,7 +515,7 @@ begin
 										  															'EventType integer,' +
 											  														'Caption VARCHAR(255),' +
 												  													'Location VARCHAR(255),' +
-													  												'Message VARCHAR(255),' +
+                                                 'Message TEXT,' +
 														  											'Start DateTime,' +
 															  										'Finish DateTime,'+
 																  									'CompleteDay Boolean,' +
