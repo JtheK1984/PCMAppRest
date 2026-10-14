@@ -17,6 +17,7 @@ uses
   Data.SqlExpr,
   DBXCompressionFilter,
   FireDAC.Comp.Client,
+  FireDAC.Comp.UI,
   FireDAC.Comp.DataSet,
   FireDAC.DApt,
   FireDAC.DApt.Intf,
@@ -79,6 +80,7 @@ type
   {$Region Types}
   Tdmmain = class(TDataModule)
     con_PCM: TFDConnection;
+    FDGUIxWaitCursor: TFDGUIxWaitCursor;
     con_Restore: TFDConnection;
     locsens_Location: TLocationSensor;
     physdrvlnk: TFDPhysSQLiteDriverLink;
@@ -118,6 +120,7 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 uses
   {$Region Uses}
+  PCMAPP.CalendarFields,
   PCMAPP.Funktionen,
   PCMAPP.Main,
   PCMAPP.SQL;
@@ -147,6 +150,10 @@ begin
       begin
         LUsername := LQuery.FieldByName('Benutzername').AsString;
         LPassword := LQuery.FieldByName('Passwort').AsString;
+      end
+      else begin
+        LUsername := frm_PCM_Main.edt_Benutzername.text;
+        LPassword := frm_PCM_Main.edt_Passwort.text;
       end;
     finally
       LQuery.Free;
@@ -197,6 +204,7 @@ begin
 end;
 procedure Tdmmain.con_PCMBeforeConnect(Sender: TObject);
 begin
+  ConfigureCalendarFields(con_PCM);
   con_PCM.Params.Values['Database'] := TPath.Combine(TPath.GetDocumentsPath, 'PCMApp.s3db');
 end;
 procedure Tdmmain.DataModuleCreate(Sender: TObject);
