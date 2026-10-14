@@ -32,6 +32,7 @@ type
     procedure DrawRect(const AParams : TZintDrawRectParams); override;
     procedure DrawHexagon(const AParams : TZintDrawHexagonParams); override;
     procedure DrawRing(const AParams : TZintDrawRingParams); override;
+    procedure DrawRingFull(const AParams : TZintDrawRingParams); override;
     procedure DrawText(const AParams: TZintDrawTextParams); override;
     function CalcTextHeight(const AParams : TZintCalcTextHeightParams) : Single; override;
     function CalcTextWidth(const AParams : TZintCalcTextWidthParams) : Single; override;
@@ -117,6 +118,19 @@ begin
                         AParams.y-radius,
                         AParams.x + radius,
                         AParams.y + radius),1);
+end;
+
+procedure TZintCanvasRenderTarget.DrawRingFull(const AParams: TZintDrawRingParams);
+var
+  HalfRadius: Single;
+begin
+  // Dot modules use OuterRadius as their diameter, matching SVG/VCL rendering.
+  HalfRadius := AParams.OuterRadius / 2;
+  FCanvas.Fill.Kind := TBrushKind.Solid;
+  FCanvas.Fill.Color := FFGColor;
+  FCanvas.Stroke.Kind := TBrushKind.None;
+  FCanvas.FillEllipse(RectF(AParams.X - HalfRadius, AParams.Y - HalfRadius,
+    AParams.X + HalfRadius, AParams.Y + HalfRadius), 1);
 end;
 
 procedure TZintCanvasRenderTarget.DrawStart;

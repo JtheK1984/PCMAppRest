@@ -136,7 +136,6 @@ var
   LJSON: TJSONValue;
   LUsername, LPassword: string;
 begin
-  Result := nil;
   LUsername := AUsername;
   LPassword := APassword;
   if LUsername = '' then
