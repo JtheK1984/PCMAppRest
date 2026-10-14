@@ -2010,6 +2010,8 @@ procedure Tfrm_PCM_Main.btn_LoginClick(Sender: TObject);
 //    LoginTask.Start;
   end;
 begin
+  if iServerID <> -1 then
+    dmmain.bServerAvailable:= CheckServerConnection;
   qry_Work.Close;
   qry_Work.SQL.Text := sSQL_SEL_ALL_Login_Where_Benutzer;
   qry_Work.ParamByName('User').AsString := edt_Benutzername.Text;

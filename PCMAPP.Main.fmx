@@ -1372,7 +1372,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                             AutoSize = True
                             StyledSettings = [Family, FontColor]
                             Size.Width = 100.000000000000000000
-                            Size.Height = 15.000000000000000000
+                            Size.Height = 14.666667938232420000
                             Size.PlatformDefault = False
                             TextSettings.Font.StyleExt = {00070000000000000004000000}
                             TextSettings.FontColor = claAliceblue
@@ -1386,7 +1386,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               Margins.Right = 10.000000000000000000
                               Margins.Bottom = -5.000000000000000000
                               Position.X = 10.000000000000000000
-                              Position.Y = 17.000000000000000000
+                              Position.Y = 16.666667938232420000
                               Size.Width = 80.000000000000000000
                               Size.Height = 3.000000000000000000
                               Size.PlatformDefault = False
@@ -1737,7 +1737,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                             AutoSize = True
                             StyledSettings = [Family, FontColor]
                             Size.Width = 100.000000000000000000
-                            Size.Height = 15.000000000000000000
+                            Size.Height = 14.666667938232420000
                             Size.PlatformDefault = False
                             TextSettings.Font.StyleExt = {00070000000000000004000000}
                             TextSettings.FontColor = claAliceblue
@@ -1751,7 +1751,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               Margins.Right = 10.000000000000000000
                               Margins.Bottom = -5.000000000000000000
                               Position.X = 10.000000000000000000
-                              Position.Y = 17.000000000000000000
+                              Position.Y = 16.666667938232420000
                               Size.Width = 80.000000000000000000
                               Size.Height = 3.000000000000000000
                               Size.PlatformDefault = False
@@ -2070,7 +2070,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               AutoSize = True
                               StyledSettings = [Family, FontColor]
                               Size.Width = 100.000000000000000000
-                              Size.Height = 15.000000000000000000
+                              Size.Height = 14.666667938232420000
                               Size.PlatformDefault = False
                               TextSettings.Font.StyleExt = {00070000000000000004000000}
                               TextSettings.FontColor = claAliceblue
@@ -2084,7 +2084,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                                 Margins.Right = 10.000000000000000000
                                 Margins.Bottom = -5.000000000000000000
                                 Position.X = 10.000000000000000000
-                                Position.Y = 17.000000000000000000
+                                Position.Y = 16.666667938232420000
                                 Size.Width = 80.000000000000000000
                                 Size.Height = 3.000000000000000000
                                 Size.PlatformDefault = False
@@ -2374,7 +2374,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               AutoSize = True
                               StyledSettings = [Family, FontColor]
                               Size.Width = 100.000000000000000000
-                              Size.Height = 15.000000000000000000
+                              Size.Height = 14.666667938232420000
                               Size.PlatformDefault = False
                               TextSettings.Font.StyleExt = {00070000000000000004000000}
                               TextSettings.FontColor = claAliceblue
@@ -2388,7 +2388,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                                 Margins.Right = 10.000000000000000000
                                 Margins.Bottom = -5.000000000000000000
                                 Position.X = 10.000000000000000000
-                                Position.Y = 17.000000000000000000
+                                Position.Y = 16.666667938232420000
                                 Size.Width = 80.000000000000000000
                                 Size.Height = 3.000000000000000000
                                 Size.PlatformDefault = False
@@ -2671,7 +2671,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                             StyledSettings = [Family, FontColor]
                             Position.Y = 38.000000000000000000
                             Size.Width = 98.000000000000000000
-                            Size.Height = 15.000000000000000000
+                            Size.Height = 14.666667938232420000
                             Size.PlatformDefault = False
                             TextSettings.Font.StyleExt = {00070000000000000004000000}
                             TextSettings.FontColor = claAliceblue
@@ -2685,7 +2685,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               Margins.Right = 10.000000000000000000
                               Margins.Bottom = -5.000000000000000000
                               Position.X = 10.000000000000000000
-                              Position.Y = 17.000000000000000000
+                              Position.Y = 16.666667938232420000
                               Size.Width = 78.000000000000000000
                               Size.Height = 3.000000000000000000
                               Size.PlatformDefault = False
@@ -2698,7 +2698,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                             Align = Top
                             StyledSettings = [Family, Style, FontColor]
                             Margins.Bottom = 25.000000000000000000
-                            Position.Y = 53.000000000000000000
+                            Position.Y = 52.666667938232420000
                             Size.Width = 98.000000000000000000
                             Size.Height = 23.000000000000000000
                             Size.PlatformDefault = False
@@ -3113,7 +3113,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               AutoSize = True
                               StyledSettings = [Family, FontColor]
                               Size.Width = 100.000000000000000000
-                              Size.Height = 15.000000000000000000
+                              Size.Height = 14.666667938232420000
                               Size.PlatformDefault = False
                               TextSettings.Font.StyleExt = {00070000000000000004000000}
                               TextSettings.FontColor = claAliceblue
@@ -3127,7 +3127,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                                 Margins.Right = 10.000000000000000000
                                 Margins.Bottom = -5.000000000000000000
                                 Position.X = 10.000000000000000000
-                                Position.Y = 17.000000000000000000
+                                Position.Y = 16.666667938232420000
                                 Size.Width = 80.000000000000000000
                                 Size.Height = 3.000000000000000000
                                 Size.PlatformDefault = False
@@ -3412,7 +3412,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               AutoSize = True
                               StyledSettings = [Family, FontColor]
                               Size.Width = 100.000000000000000000
-                              Size.Height = 15.000000000000000000
+                              Size.Height = 14.666667938232420000
                               Size.PlatformDefault = False
                               TextSettings.Font.StyleExt = {00070000000000000004000000}
                               TextSettings.FontColor = claAliceblue
@@ -3426,7 +3426,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                                 Margins.Right = 10.000000000000000000
                                 Margins.Bottom = -5.000000000000000000
                                 Position.X = 10.000000000000000000
-                                Position.Y = 17.000000000000000000
+                                Position.Y = 16.666667938232420000
                                 Size.Width = 80.000000000000000000
                                 Size.Height = 3.000000000000000000
                                 Size.PlatformDefault = False
@@ -3586,7 +3586,7 @@ object frm_PCM_Main: Tfrm_PCM_Main
                 ExplicitSize.cy = 49.000000000000000000
                 object cal_Calendar: TCalendar
                   Align = Top
-                  Date = 46289.000000000000000000
+                  Date = 46309.000000000000000000
                   FirstDayOfWeek = dowMonday
                   Size.Width = 616.000000000000000000
                   Size.Height = 300.000000000000000000
@@ -5214,8 +5214,8 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               Size.Height = 498.000000000000000000
                               Size.PlatformDefault = False
                               TabOrder = 2
-                              Viewport.Width = 240.000000000000000000
-                              Viewport.Height = 498.000000000000000000
+                              Viewport.Width = 232.000000000000000000
+                              Viewport.Height = 490.000000000000000000
                             end
                             object mem_FinanzenEinDetailBetrag: TMemo
                               Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
@@ -5235,8 +5235,8 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               Size.Height = 498.000000000000000000
                               Size.PlatformDefault = False
                               TabOrder = 0
-                              Viewport.Width = 344.000000000000000000
-                              Viewport.Height = 498.000000000000000000
+                              Viewport.Width = 336.000000000000000000
+                              Viewport.Height = 490.000000000000000000
                             end
                             object ln_FinanzenEinDetailGesamt: TLine
                               Align = Bottom
@@ -5357,8 +5357,8 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               Size.Height = 498.000000000000000000
                               Size.PlatformDefault = False
                               TabOrder = 2
-                              Viewport.Width = 240.000000000000000000
-                              Viewport.Height = 498.000000000000000000
+                              Viewport.Width = 232.000000000000000000
+                              Viewport.Height = 490.000000000000000000
                             end
                             object mem_FinanzenAusVarDetailBetrag: TMemo
                               Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
@@ -5378,8 +5378,8 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               Size.Height = 498.000000000000000000
                               Size.PlatformDefault = False
                               TabOrder = 0
-                              Viewport.Width = 344.000000000000000000
-                              Viewport.Height = 498.000000000000000000
+                              Viewport.Width = 336.000000000000000000
+                              Viewport.Height = 490.000000000000000000
                             end
                             object ln_FinanzenAusVarDetail: TLine
                               Align = Bottom
@@ -5500,8 +5500,8 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               Size.Height = 498.000000000000000000
                               Size.PlatformDefault = False
                               TabOrder = 2
-                              Viewport.Width = 240.000000000000000000
-                              Viewport.Height = 498.000000000000000000
+                              Viewport.Width = 232.000000000000000000
+                              Viewport.Height = 490.000000000000000000
                             end
                             object mem_FinanzenfixDetailBetrag: TMemo
                               Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
@@ -5521,8 +5521,8 @@ object frm_PCM_Main: Tfrm_PCM_Main
                               Size.Height = 498.000000000000000000
                               Size.PlatformDefault = False
                               TabOrder = 0
-                              Viewport.Width = 344.000000000000000000
-                              Viewport.Height = 498.000000000000000000
+                              Viewport.Width = 336.000000000000000000
+                              Viewport.Height = 490.000000000000000000
                             end
                             object ln_FinanzenAusFixDetail: TLine
                               Align = Bottom

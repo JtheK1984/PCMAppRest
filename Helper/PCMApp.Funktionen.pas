@@ -120,7 +120,8 @@ procedure SyncGutscheine_FromServer(const AUserID: Integer; AWaitFrame: TWaitFor
 procedure Synchronisation(const AUserID, AServerID: Integer; AWaitFrame: TWaitForm; bALL: Boolean);
 {$EndRegion Procedures}
 implementation
-uses PCMAPP.ContactSync;
+uses
+  PCMAPP.CalendarFields, PCMAPP.ContactSync;
 
 threadvar
   FThreadPCMConnection: TFDConnection;
@@ -2312,6 +2313,7 @@ begin
   try
     try
     LConnection.Params.Assign(dmmain.con_PCM.Params);
+    ConfigureCalendarFields(LConnection);
     LConnection.LoginPrompt := False;
     LConnection.Connected := True;
     FThreadPCMConnection := LConnection;
