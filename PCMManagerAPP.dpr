@@ -3,6 +3,7 @@ program PCMManagerAPP;
 
 
 uses
+  PCMAPP.BackgroundTasks in 'Helper\PCMAPP.BackgroundTasks.pas',
   PCMAPP.CalendarFields in 'Helper\PCMAPP.CalendarFields.pas',
   System.StartUpCopy,
   FMX.Forms,

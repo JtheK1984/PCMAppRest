@@ -3,6 +3,7 @@ unit PCMAPP.Import.Kontakte;
 interface
 
 uses
+  PCMAPP.BackgroundTasks,
   {$Region uses}
   {$IFDEF ANDROID}
   Androidapi.JNI.Os,
@@ -103,7 +104,7 @@ end;
 procedure Tfrm_PCMAPP_ImportKontakte.FillContactsList;
 begin
   dmmain.wfWaitFrame.Execute('Kontakte laden...', 'Kontakte aus Telefon', True);
-  TTask.Run(
+  RunAppTask(
   procedure()
   var
     Contact: TAddressBookContact;
